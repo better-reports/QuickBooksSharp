@@ -1,0 +1,31 @@
+name: Build Test Publish
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      env:
+        QUICKBOOKS_SHARP_REFRESH_TOKEN: ${{ secrets.QUICKBOOKS_SHARP_REFRESH_TOKEN }}
+      run: dotnet test --no-restore --verbosity normal
+    - name: Publish to nuget
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push QuickBooksSharp/bin/Release/*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k $NUGET_API_KEY
