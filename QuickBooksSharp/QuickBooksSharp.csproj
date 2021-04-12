@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Better Reports</Authors>
+    <Company>Better Reports</Company>
+    <Product>Client for QuickBooks Online API</Product>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
