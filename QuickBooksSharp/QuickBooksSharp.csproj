@@ -4,10 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
     <Authors>Better Reports</Authors>
     <Company>Better Reports</Company>
-    <Product>Client for QuickBooks Online API</Product>
+    <Product></Product>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
+    <Description>Modern .NET Client for QuickBooks Online API</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
