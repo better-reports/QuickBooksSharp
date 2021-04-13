@@ -14,11 +14,11 @@ namespace QuickBooksSharp
         private const string TOKEN_ENDPOINT_URL = "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer";
         private const string REVOKE_TOKEN_ENDPOINT_URL = "https://developer.api.intuit.com/v2/oauth2/tokens/revoke";
 
-        public string GenerateAuthorizationPromptUrl(string clientId, string redirectUrl, string state)
+        public string GenerateAuthorizationPromptUrl(string clientId, string[] scopes, string redirectUrl, string state)
         {
             return new Url("https://appcenter.intuit.com/connect/oauth2")
                         .SetQueryParam("client_id", clientId)
-                        .SetQueryParam("scope", "com.intuit.quickbooks.accounting")
+                        .SetQueryParam("scope", string.Join(' ', scopes))
                         .SetQueryParam("redirect_uri", redirectUrl)
                         .SetQueryParam("response_type", "code")
                         .SetQueryParam("state", state)
