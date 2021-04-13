@@ -18,7 +18,7 @@ namespace QuickBooksSharp.Tests
         [TestMethod]
         public void GenerateAuthorizationPromptUrl_Works()
         {
-            string url = _service.GenerateAuthorizationPromptUrl(TestHelper.ClientId, TestHelper.RedirectUri, Guid.NewGuid().ToString());
+            string url = _service.GenerateAuthorizationPromptUrl(TestHelper.ClientId, new[] { "com.intuit.quickbooks.accounting" }, TestHelper.RedirectUri, Guid.NewGuid().ToString());
             Assert.IsNotNull(url);
         }
 

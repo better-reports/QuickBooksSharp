@@ -14,7 +14,7 @@ namespace QuickBooksSharp
         private const string TOKEN_ENDPOINT_URL = "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer";
         private const string REVOKE_TOKEN_ENDPOINT_URL = "https://developer.api.intuit.com/v2/oauth2/tokens/revoke";
 
-        public string GenerateAuthorizationPromptUrl(string clientId, string[] scopes, string redirectUrl, string state)
+        public string GenerateAuthorizationPromptUrl(string clientId, IEnumerable<string> scopes, string redirectUrl, string state)
         {
             return new Url("https://appcenter.intuit.com/connect/oauth2")
                         .SetQueryParam("client_id", clientId)
