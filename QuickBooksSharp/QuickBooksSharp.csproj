@@ -16,4 +16,8 @@
     <PackageReference Include="Flurl" Version="3.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
 </Project>
