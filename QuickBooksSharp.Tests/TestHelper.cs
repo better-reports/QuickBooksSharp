@@ -19,5 +19,7 @@ namespace QuickBooksSharp.Tests
         /// Used to run other tests
         /// </summary>
         public static string RefreshToken = Environment.GetEnvironmentVariable("QUICKBOOKS_SHARP_REFRESH_TOKEN", EnvironmentVariableTarget.User);
+
+        public static long RealmId = long.Parse(Environment.GetEnvironmentVariable("QUICKBOOKS_SHARP_REALMID", EnvironmentVariableTarget.User));
     }
 }

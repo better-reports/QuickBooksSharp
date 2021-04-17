@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flurl;
+using System;
 
 namespace QuickBooksSharp
 {
@@ -6,7 +7,7 @@ namespace QuickBooksSharp
     {
         protected readonly QuickBooksHttpClient _client;
 
-        protected readonly Uri _serviceUri;
+        protected readonly Url _serviceUrl;
 
         public const int MinorVersion = 56;
 
@@ -15,9 +16,8 @@ namespace QuickBooksSharp
             _client = new QuickBooksHttpClient(accessToken);
             string serviceBaseUrl = useSandbox ? "https://sandbox-quickbooks.api.intuit.com" : "https://quickbooks.api.intuit.com";
 
-            _serviceUri = new Uri($"{serviceBaseUrl}/v3/company/{realmId}/{pathAfterRealmId}");
-
-            //TODO use MinorVersion
+            _serviceUrl = new Url($"{serviceBaseUrl}/v3/company/{realmId}/{pathAfterRealmId}")
+                                .SetQueryParam("minorversion", MinorVersion);
         }
     }
 }

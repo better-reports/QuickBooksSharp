@@ -35,10 +35,9 @@ namespace QuickBooksSharp.Tests
 
 
         [TestMethod]
-        [Ignore("Requires manual input of refresh token")]
         public async Task RefreshOAuthTokenAsync_Works()
         {
-            var token = await _service.RefreshOAuthTokenAsync(TestHelper.ClientId, TestHelper.ClientSecret, "<ENTER_REFRESH_TOKEN>");
+            var token = await _service.RefreshOAuthTokenAsync(TestHelper.ClientId, TestHelper.ClientSecret, TestHelper.RefreshToken);
             Assert.IsNotNull(token.access_token);
             Assert.IsTrue(token.expires_in > TimeSpan.Zero);
             Assert.IsNotNull(token.refresh_token);

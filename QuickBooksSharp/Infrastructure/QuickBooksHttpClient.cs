@@ -14,56 +14,61 @@ namespace QuickBooksSharp
 
         public static RateLimitBreachBehavior RateLimitBreachBehavior { get; set; } = RateLimitBreachBehavior.Throw;
 
-        private readonly string _accessToken;
+        private readonly string? _accessToken;
 
-        public QuickBooksHttpClient(string accessToken)
+        public QuickBooksHttpClient(string? accessToken)
         {
             _accessToken = accessToken;
         }
 
-        public async Task<TResponse> GetAsync<TResponse>(Uri uri, object queryParams = null)
+        public async Task<TResponse> GetAsync<TResponse>(Url url)
         {
-            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Get, new Url(uri).SetQueryParams(queryParams).ToString());
+            Func<HttpRequestMessage> makeRequest = () =>
+            {
+                var r = new HttpRequestMessage(HttpMethod.Get, url);
+                r.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                return r;
+            };
             return await this.SendAsync<TResponse>(makeRequest);
         }
 
-        public async Task<TResponse> PostAsync<TResponse>(Uri uri, object content)
+        public async Task<TResponse> PostAsync<TResponse>(Url url, object content)
         {
-            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Post, uri)
+            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
             };
             return await this.SendAsync<TResponse>(makeRequest);
         }
 
-        public async Task<HttpResponseMessage> PostAsync(Uri uri, object content)
+        public async Task<HttpResponseMessage> PostAsync(Url url, object content)
         {
-            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Post, uri)
+            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
             };
             return await this.SendAsync(makeRequest);
         }
 
-        public async Task<HttpResponseMessage> PutAsync(Uri uri, object content)
+        public async Task<HttpResponseMessage> PutAsync(Url url, object content)
         {
-            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Put, uri)
+            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Put, url)
             {
                 Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
             };
             return await this.SendAsync(makeRequest);
         }
 
-        public async Task<HttpResponseMessage> DeleteAsync(Uri uri)
+        public async Task<HttpResponseMessage> DeleteAsync(Url url)
         {
-            Func<HttpRequestMessage> request = () => new HttpRequestMessage(HttpMethod.Delete, uri);
+            Func<HttpRequestMessage> request = () => new HttpRequestMessage(HttpMethod.Delete, url);
             return await this.SendAsync(request);
         }
 
         public async Task<TResponse> SendAsync<TResponse>(Func<HttpRequestMessage> makeRequest)
         {
             var response = await this.SendAsync(makeRequest);
-            return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync())!;
         }
 
         public async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> makeRequest)

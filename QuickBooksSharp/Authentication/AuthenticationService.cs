@@ -29,14 +29,16 @@ namespace QuickBooksSharp
         {
             return await _client.SendAsync<TokenResponse>(() =>
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, new Uri(TOKEN_ENDPOINT_URL))
+                var request = new HttpRequestMessage(HttpMethod.Post, TOKEN_ENDPOINT_URL)
                 {
-                    Content = new FormUrlEncodedContent(new Dictionary<string, string>
+#pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
+                    Content = new FormUrlEncodedContent(new Dictionary<string, string?>
                                 {
                                     { "code", code },
                                     { "redirect_uri", redirectUrl },
                                     { "grant_type", "authorization_code" },
                                 })
+#pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
                 };
                 this.AddAuthenticationHeader(request, clientId, clientSecret);
                 return request;
@@ -51,13 +53,15 @@ namespace QuickBooksSharp
         {
             return await _client.SendAsync<TokenResponse>(() =>
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, new Uri(TOKEN_ENDPOINT_URL))
+                var request = new HttpRequestMessage(HttpMethod.Post, TOKEN_ENDPOINT_URL)
                 {
+#pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
                     Content = new FormUrlEncodedContent(new Dictionary<string, string>
                                 {
                                     { "refresh_token", refreshToken },
                                     { "grant_type", "refresh_token" },
                                 })
+#pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
                 };
                 this.AddAuthenticationHeader(request, clientId, clientSecret);
                 return request;
@@ -68,7 +72,7 @@ namespace QuickBooksSharp
         {
             await _client.SendAsync(() =>
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, new Uri(REVOKE_TOKEN_ENDPOINT_URL))
+                var request = new HttpRequestMessage(HttpMethod.Post, REVOKE_TOKEN_ENDPOINT_URL)
                 {
                     Content = new StringContent(JsonSerializer.Serialize(new { token = tokenOrRefreshToken }), Encoding.UTF8, "application/json")
                 };

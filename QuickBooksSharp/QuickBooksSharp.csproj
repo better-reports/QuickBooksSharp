@@ -10,14 +10,11 @@
     <RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
     <Description>Modern .NET Client for QuickBooks Online API</Description>
     <Version>1.0.1</Version>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Flurl" Version="3.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Entities\" />
   </ItemGroup>
 
 </Project>
