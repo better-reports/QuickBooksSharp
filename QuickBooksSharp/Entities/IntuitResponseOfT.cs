@@ -3,7 +3,7 @@ using System;
 
 namespace QuickBooksSharp
 {
-    public class IntuitResponse<TResponse>
+    public class IntuitResponse<TResponse> where TResponse : class
     {
         /// <summary>
         /// Indication that a request was processed, but with possible exceptional circumstances (i.e. ignored unsupported fields) that the client may want to be aware of
