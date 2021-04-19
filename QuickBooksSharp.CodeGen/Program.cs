@@ -15,7 +15,8 @@ namespace QuickBooksSharp.CodeGen
         /// <summary>
         /// -Download latest minor version XSD from https://developer.intuit.com/app/developer/qbo/docs/develop/explore-the-quickbooks-online-api/minor-versions
         /// -Unzip into the xsd/3.{MinorVersion} folder
-        /// -Update version local below adn ServiceBase.MinorVersion to reflect the download minor version number
+        /// -Update version local below 
+        /// -Update ServiceBase.cs MinorVersion
         /// -Run program
         /// </summary>
         /// <param name="args"></param>
@@ -139,40 +140,47 @@ namespace QuickBooksSharp.CodeGen
                 if (t.ContentTypeParticle.GetType().Name != "EmptyParticle")
                 {
                     var particles = GetParticlesRec(t, (XmlSchemaSequence)t.ContentTypeParticle);
-                    foreach (var p in particles)
+                    var elts = particles.SelectMany(p => p switch
                     {
-                        switch (p)
+                        XmlSchemaChoice choice => choice.Items.Cast<XmlSchemaObject>().SelectMany(o =>
                         {
-                            case XmlSchemaChoice choice:
-                                var elts = choice.Items.Cast<XmlSchemaObject>().SelectMany(o =>
-                                    {
-                                        if (o is XmlSchemaElement e)
-                                            return new[] { e };
-                                        else if (o is XmlSchemaSequence s)
-                                            return GetParticlesRec(t, s).Cast<XmlSchemaElement>();
-                                        else
-                                            throw new Exception();
-                                    }).ToArray();
-                                foreach (var elt in elts)
-                                {
-                                    if (eltNameToSubstitutedElements.Contains(elt.QualifiedName.Name))
-                                    {
-                                        foreach (var subElt in eltNameToSubstitutedElements[elt.QualifiedName.Name])
-                                            pties.Add(GetPropertyFromElt(subElt, true, elt.MaxOccurs == decimal.MaxValue));
-                                    }
-                                    else
-                                    {
-                                        pties.Add(GetPropertyFromElt(elt, true, false));
-                                    }
-                                }
-                                break;
-
-                            case XmlSchemaElement elt:
-                                pties.Add(GetPropertyFromElt(elt, false, false));
-                                break;
-
-                            default:
-                                throw new Exception("Unexpected particle");
+                            if (o is XmlSchemaElement e)
+                                return new[] { (Elt: e, IsChoiceChild: true) };
+                            else if (o is XmlSchemaSequence s)
+                                return GetParticlesRec(t, s).Cast<XmlSchemaElement>().Select(e => (Elt: e, IsChoiceChild: true));
+                            else
+                                throw new Exception();
+                        }),
+                        XmlSchemaElement elt => new[] { (Elt: elt, IsChoiceChild: false) },
+                        _ => throw new Exception()
+                    });
+                    foreach (var i in elts)
+                    {
+                        if (eltNameToSubstitutedElements.Contains(i.Elt.QualifiedName.Name))
+                        {
+                            bool isArray = i.Elt.MaxOccurs == decimal.MaxValue;
+                            bool isNullable = i.Elt.MinOccurs == 0;
+                            var subsitutionsPties = new List<PropertyModel>();
+                            foreach (var subElt in eltNameToSubstitutedElements[i.Elt.QualifiedName.Name]
+                                                        .Where(i => i.QualifiedName.Name != t.Name))
+                            {
+                                var pty = GetPropertyFromElt(subElt, true, isArray);
+                                pties.Add(pty);
+                                subsitutionsPties.Add(pty);
+                            }
+                            bool isAnyNullabe = isNullable || i.IsChoiceChild;
+                            pties.Add(new PropertyModel
+                            {
+                                Name = i.Elt.QualifiedName.Name + (isArray ? "s" : ""),
+                                TypeName = "object",
+                                IsArray = isArray,
+                                IsNullable = isAnyNullabe,
+                                Code = "{ get => " + string.Join(" ?? ", subsitutionsPties.Select((p, index) => (index == subsitutionsPties.Count - 1 ? $"(object{(isArray ? "[]" : "")}{(isAnyNullabe ? "?" : "")})" : "") + p.Name)) + (isAnyNullabe ? "" : "!") + "; }"
+                            });
+                        }
+                        else
+                        {
+                            pties.Add(GetPropertyFromElt(i.Elt, i.IsChoiceChild, false));
                         }
                     }
                 }
@@ -181,7 +189,6 @@ namespace QuickBooksSharp.CodeGen
                     var contentModel = (XmlSchemaSimpleContent)t.ContentModel;
                     var extension = (XmlSchemaSimpleContentExtension)contentModel.Content;
 
-                    ;
                     pties.Add(new PropertyModel
                     {
                         Name = "value",
@@ -229,7 +236,7 @@ namespace QuickBooksSharp.CodeGen
                 writer.WriteLine("using System;");
                 writer.WriteLine("using System.Text.Json.Serialization;");
                 writer.WriteLine();
-                writer.WriteLine("namespace QuickBooksSharp");
+                writer.WriteLine("namespace QuickBooksSharp.Entities");
                 writer.WriteLine("{");
 
                 foreach (var e in enums)
@@ -266,8 +273,9 @@ namespace QuickBooksSharp.CodeGen
                             ptyDecl += "[]";
                         if (pty.IsNullable)
                             ptyDecl += "?";
-                        ptyDecl += $" {safeName} {{ get; set; }}";
-                        if (!pty.IsNullable)
+                        ptyDecl += $" {safeName} ";
+                        ptyDecl += pty.Code ?? "{ get; set; }";
+                        if (!pty.IsNullable && pty.Code == null)
                             ptyDecl += " = default!; ";
                         writer.WriteLine(ptyDecl);
                     }

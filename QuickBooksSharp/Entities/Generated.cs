@@ -3496,6 +3496,7 @@ namespace QuickBooksSharp.Entities
         public MasterAccount? MasterAccount { get; set; }
         public Tag? Tag { get; set; }
         public TaxService? TaxService { get; set; }
+        public object? IntuitObject { get => RecurringTransaction ?? Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (object?)TaxService; }
         public Fault? Fault { get; set; }
         public Report? Report { get; set; }
         public QueryResponse? QueryResponse { get; set; }
@@ -3578,6 +3579,7 @@ namespace QuickBooksSharp.Entities
         public MasterAccount[]? MasterAccount { get; set; }
         public Tag[]? Tag { get; set; }
         public TaxService[]? TaxService { get; set; }
+        public object[]? IntuitObjects { get => RecurringTransaction ?? Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (object[]?)TaxService; }
         public Fault? Fault { get; set; }
     }
     public class CDCResponse
@@ -3656,6 +3658,7 @@ namespace QuickBooksSharp.Entities
         public MasterAccount? MasterAccount { get; set; }
         public Tag? Tag { get; set; }
         public TaxService? TaxService { get; set; }
+        public object? IntuitObject { get => RecurringTransaction ?? Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (object?)TaxService; }
         public Fault? Fault { get; set; }
         public Report? Report { get; set; }
         public QueryResponse? QueryResponse { get; set; }
@@ -3733,6 +3736,7 @@ namespace QuickBooksSharp.Entities
         public MasterAccount? MasterAccount { get; set; }
         public Tag? Tag { get; set; }
         public TaxService? TaxService { get; set; }
+        public object? IntuitObject { get => RecurringTransaction ?? Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (object?)TaxService; }
         public string? Query { get; set; }
         public string? ReportQuery { get; set; }
         public CDCQuery? CDCQuery { get; set; }
@@ -3753,7 +3757,72 @@ namespace QuickBooksSharp.Entities
     }
     public class RecurringTransaction : IntuitEntity
     {
-        public IntuitEntity IntuitObject { get; set; } = default!;
+        public Customer? Customer { get; set; }
+        public CustomerType? CustomerType { get; set; }
+        public Employee? Employee { get; set; }
+        public Vendor? Vendor { get; set; }
+        public OtherName? OtherName { get; set; }
+        public Estimate? Estimate { get; set; }
+        public SalesOrder? SalesOrder { get; set; }
+        public SalesReceipt? SalesReceipt { get; set; }
+        public PurchaseOrder? PurchaseOrder { get; set; }
+        public Purchase? Purchase { get; set; }
+        public BillPayment? BillPayment { get; set; }
+        public Payment? Payment { get; set; }
+        public CreditMemo? CreditMemo { get; set; }
+        public StatementCharge? StatementCharge { get; set; }
+        public ChargeCredit? ChargeCredit { get; set; }
+        public CreditCardPaymentTxn? CreditCardPaymentTxn { get; set; }
+        public ReimburseCharge? ReimburseCharge { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
+        public Term? Term { get; set; }
+        public JournalEntry? JournalEntry { get; set; }
+        public Transfer? Transfer { get; set; }
+        public Deposit? Deposit { get; set; }
+        public Class? Class { get; set; }
+        public TimeActivity? TimeActivity { get; set; }
+        public Item? Item { get; set; }
+        public TaxClassification? TaxClassification { get; set; }
+        public TaxCode? TaxCode { get; set; }
+        public TaxPayment? TaxPayment { get; set; }
+        public TaxReturn? TaxReturn { get; set; }
+        public TaxRate? TaxRate { get; set; }
+        public VendorCredit? VendorCredit { get; set; }
+        public SalesRep? SalesRep { get; set; }
+        public InventorySite? InventorySite { get; set; }
+        public QbTask? Task { get; set; }
+        public UserAlert? UserAlert { get; set; }
+        public VendorType? VendorType { get; set; }
+        public PriceLevel? PriceLevel { get; set; }
+        public Company? Company { get; set; }
+        public CompanyInfo? CompanyInfo { get; set; }
+        public FixedAsset? FixedAsset { get; set; }
+        public RefundReceipt? RefundReceipt { get; set; }
+        public Account? Account { get; set; }
+        public Preferences? Preferences { get; set; }
+        public Invoice? Invoice { get; set; }
+        public EmailDeliveryInfo? EmailDeliveryInfo { get; set; }
+        public Department? Department { get; set; }
+        public Bill? Bill { get; set; }
+        public Attachable? Attachable { get; set; }
+        public BooleanTypeCustomFieldDefinition? BooleanTypeCustomFieldDefinition { get; set; }
+        public CustomFieldDefinition? CustomFieldDefinition { get; set; }
+        public DateTypeCustomFieldDefinition? DateTypeCustomFieldDefinition { get; set; }
+        public NumberTypeCustomFieldDefinition? NumberTypeCustomFieldDefinition { get; set; }
+        public StringTypeCustomFieldDefinition? StringTypeCustomFieldDefinition { get; set; }
+        public Status? Status { get; set; }
+        public SyncActivity? SyncActivity { get; set; }
+        public Budget? Budget { get; set; }
+        public TaxAgency? TaxAgency { get; set; }
+        public TDSMetadata? TDSMetadata { get; set; }
+        public CompanyCurrency? CompanyCurrency { get; set; }
+        public ExchangeRate? ExchangeRate { get; set; }
+        public JournalCode? JournalCode { get; set; }
+        public QbdtEntityIdMapping? QbdtEntityIdMapping { get; set; }
+        public MasterAccount? MasterAccount { get; set; }
+        public Tag? Tag { get; set; }
+        public TaxService? TaxService { get; set; }
+        public object IntuitObject { get => Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (object)TaxService!; }
     }
     public class Status : IntuitEntity
     {
@@ -3859,6 +3928,7 @@ namespace QuickBooksSharp.Entities
         public MasterAccount? MasterAccount { get; set; }
         public Tag? Tag { get; set; }
         public TaxService? TaxService { get; set; }
+        public object? IntuitObject { get => RecurringTransaction ?? Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (object?)TaxService; }
         public Fault? Fault { get; set; }
     }
     public class Cascade

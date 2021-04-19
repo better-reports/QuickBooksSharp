@@ -9,5 +9,7 @@
         public bool IsNullable { get; set; }
 
         public bool IsArray { get; set; }
+
+        public string Code { get; set; }
     }
 }
