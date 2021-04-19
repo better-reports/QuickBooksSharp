@@ -27,7 +27,7 @@ namespace QuickBooksSharp.Tests
         [TestMethod]
         public async Task QueryCustomers()
         {
-            var res = await _service.Query<Customer>("SELECT * FROM Customer");
+            var res = await _service.QueryAsync<Customer>("SELECT * FROM Customer");
             Assert.IsNotNull(res);
             Assert.IsNull(res.Fault);
             Assert.IsNotNull(res.Time);
@@ -55,7 +55,7 @@ namespace QuickBooksSharp.Tests
                 try
                 {
                     string entityName = t == typeof(QbTask) ? "Task" : t.Name;
-                    var res = await _service.Query<IntuitEntity>($"SELECT COUNT(*) FROM {entityName}");
+                    var res = await _service.QueryAsync<IntuitEntity>($"SELECT COUNT(*) FROM {entityName}");
                     Assert.IsNotNull(res);
                     Assert.IsNull(res.Fault);
                     Assert.IsNotNull(res.Time);
@@ -84,7 +84,7 @@ namespace QuickBooksSharp.Tests
                 try
                 {
                     string entityName = t == typeof(QbTask) ? "Task" : t.Name;
-                    var res = await _service.Query<IntuitEntity>($"SELECT * FROM {entityName}");
+                    var res = await _service.QueryAsync<IntuitEntity>($"SELECT * FROM {entityName}");
                     Assert.IsNotNull(res);
                     Assert.IsNull(res.Fault);
                     Assert.IsNotNull(res.Time);

@@ -11,7 +11,7 @@ namespace QuickBooksSharp
         {
         }
 
-        public async Task<IntuitResponse<QueryResponse<TEntity>>> Query<TEntity>(string query) where TEntity : IntuitEntity
+        public async Task<IntuitResponse<QueryResponse<TEntity>>> QueryAsync<TEntity>(string query) where TEntity : IntuitEntity
         {
             var res = await _client.GetAsync<IntuitResponse>(_serviceUrl.SetQueryParam("query", query));
             var queryRes = res.QueryResponse;
