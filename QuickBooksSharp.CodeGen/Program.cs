@@ -172,10 +172,10 @@ namespace QuickBooksSharp.CodeGen
                             pties.Add(new PropertyModel
                             {
                                 Name = i.Elt.QualifiedName.Name + (isArray ? "s" : ""),
-                                TypeName = "object",
+                                TypeName = i.Elt.ElementSchemaType.QualifiedName.Name,
                                 IsArray = isArray,
                                 IsNullable = isAnyNullabe,
-                                Code = "{ get => " + string.Join(" ?? ", subsitutionsPties.Select((p, index) => (index == subsitutionsPties.Count - 1 ? $"(object{(isArray ? "[]" : "")}{(isAnyNullabe ? "?" : "")})" : "") + p.Name)) + (isAnyNullabe ? "" : "!") + "; }"
+                                Code = "{ get => " + string.Join(" ?? ", subsitutionsPties.Select((p, index) => (index == subsitutionsPties.Count - 1 ? $"({i.Elt.ElementSchemaType.QualifiedName.Name}{(isArray ? "[]" : "")}{(isAnyNullabe ? "?" : "")})" : "") + p.Name)) + (isAnyNullabe ? "" : "!") + "; }"
                             });
                         }
                         else
