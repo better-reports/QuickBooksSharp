@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace QuickBooksSharp
+namespace QuickBooksSharp.Entities
 {
     public enum AcquiredAsEnum
     {
