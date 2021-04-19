@@ -1,7 +1,9 @@
 ﻿using Flurl;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -11,9 +13,12 @@ namespace QuickBooksSharp
 {
     public class QuickBooksHttpClient
     {
-        public static HttpClient HttpClient { get; set; } = new HttpClient();
-
         public static RateLimitBreachBehavior RateLimitBreachBehavior { get; set; } = RateLimitBreachBehavior.Throw;
+
+        private static HttpClient _httpClient = new HttpClient(new HttpClientHandler 
+        { 
+            AutomaticDecompression = DecompressionMethods.GZip 
+        });
 
         private readonly string? _accessToken;
 
@@ -24,6 +29,13 @@ namespace QuickBooksSharp
                 new JsonStringEnumConverter()
             }
         };
+
+        static QuickBooksHttpClient()
+        {
+            _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(nameof(QuickBooksSharp), typeof(QuickBooksHttpClient).Assembly.GetName().Version!.ToString()));
+            _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(github.com/better-reports/QuickBooksSharp)"));
+            _httpClient.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+        }
 
         public QuickBooksHttpClient(string? accessToken)
         {
@@ -77,7 +89,7 @@ namespace QuickBooksSharp
         public async Task<TResponse> SendAsync<TResponse>(Func<HttpRequestMessage> makeRequest)
         {
             var response = await this.SendAsync(makeRequest);
-            return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync(), _jsonSerializerOptions)!;
+            return (await response.Content.ReadFromJsonAsync<TResponse>(_jsonSerializerOptions))!;
         }
 
         public async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> makeRequest)
@@ -92,7 +104,7 @@ namespace QuickBooksSharp
                 if (_accessToken != null)
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
 
-                var response = await HttpClient.SendAsync(request);
+                var response = await _httpClient.SendAsync(request);
 
                 if (!response.IsSuccessStatusCode)
                 {
