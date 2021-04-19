@@ -5,42 +5,47 @@ namespace QuickBooksSharp.Entities
 {
     public enum AcquiredAsEnum
     {
+        Unspecified = 0,
         New,
         Used,
     }
     public enum MonthEnum
     {
-        April,
-        August,
-        December,
-        February,
+        Unspecified = 0,
         January,
-        July,
-        June,
+        February,
         March,
+        April,
         May,
-        November,
-        October,
+        June,
+        July,
+        August,
         September,
+        October,
+        November,
+        December,
     }
     public enum WeekEnum
     {
-        Friday,
-        Monday,
-        Saturday,
+        Unspecified = 0,
         Sunday,
-        Thursday,
+        Monday,
         Tuesday,
         Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
     }
     public enum UOMFeatureTypeEnum
     {
+        Unspecified = 0,
         Disabled,
-        MultiplePerItem,
         SinglePerItem,
+        MultiplePerItem,
     }
     public enum AccountClassificationEnum
     {
+        Unspecified = 0,
         Asset,
         Equity,
         Expense,
@@ -49,10 +54,9 @@ namespace QuickBooksSharp.Entities
     }
     public enum ItemTypeEnum
     {
+        Unspecified = 0,
         Assembly,
-        Bundle,
         Category,
-        Discount,
         [JsonPropertyName("Fixed Asset")]
         FixedAsset,
         Group,
@@ -63,38 +67,44 @@ namespace QuickBooksSharp.Entities
         Payment,
         Service,
         Subtotal,
+        Discount,
         Tax,
         [JsonPropertyName("Tax Group")]
         TaxGroup,
+        Bundle,
     }
     public enum CustomerTypeEnum
     {
+        Unspecified = 0,
         Customer,
         Job,
     }
     public enum BillableStatusEnum
     {
+        Unspecified = 0,
         Billable,
-        HasBeenBilled,
         NotBillable,
+        HasBeenBilled,
     }
     public enum TaxFormTypeEnum
     {
+        Unspecified = 0,
         [JsonPropertyName("Form C")]
         FormC,
+        [JsonPropertyName("Form F")]
+        FormF,
+        [JsonPropertyName("Form I")]
+        FormI,
+        [JsonPropertyName("Form H")]
+        FormH,
         [JsonPropertyName("Form E1")]
         FormE1,
         [JsonPropertyName("Form E2")]
         FormE2,
-        [JsonPropertyName("Form F")]
-        FormF,
-        [JsonPropertyName("Form H")]
-        FormH,
-        [JsonPropertyName("Form I")]
-        FormI,
     }
     public enum EntityTypeEnum
     {
+        Unspecified = 0,
         Customer,
         Employee,
         Job,
@@ -103,264 +113,180 @@ namespace QuickBooksSharp.Entities
     }
     public enum TaxApplicableOnEnum
     {
+        Unspecified = 0,
         Purchase,
         Sales,
     }
     public enum PostingTypeEnum
     {
+        Unspecified = 0,
         Credit,
         Debit,
     }
     public enum LineDetailTypeEnum
     {
+        Unspecified = 0,
+        PaymentLineDetail,
+        DiscountLineDetail,
+        TaxLineDetail,
+        SalesItemLineDetail,
+        ItemBasedExpenseLineDetail,
         AccountBasedExpenseLineDetail,
         DepositLineDetail,
-        DescriptionOnly,
-        DiscountLineDetail,
-        GroupLineDetail,
-        ItemBasedExpenseLineDetail,
+        PurchaseOrderItemLineDetail,
         ItemReceiptLineDetail,
         JournalEntryLineDetail,
-        PaymentLineDetail,
-        PurchaseOrderItemLineDetail,
-        ReimburseLineDetail,
-        SalesItemLineDetail,
-        SalesOrderItemLineDetail,
+        GroupLineDetail,
+        DescriptionOnly,
         SubTotalLineDetail,
-        TaxLineDetail,
+        SalesOrderItemLineDetail,
         TDSLineDetail,
+        ReimburseLineDetail,
     }
     public enum AccountTypeEnum
     {
-        [JsonPropertyName("Accounts Payable")]
-        AccountsPayable,
+        Unspecified = 0,
+        Bank,
         [JsonPropertyName("Accounts Receivable")]
         AccountsReceivable,
-        Bank,
-        [JsonPropertyName("Cost of Goods Sold")]
-        CostofGoodsSold,
-        [JsonPropertyName("Credit Card")]
-        CreditCard,
-        Equity,
-        Expense,
-        [JsonPropertyName("Fixed Asset")]
-        FixedAsset,
-        Income,
-        [JsonPropertyName("Long Term Liability")]
-        LongTermLiability,
-        [JsonPropertyName("Non-Posting")]
-        NonPosting,
-        [JsonPropertyName("Other Asset")]
-        OtherAsset,
         [JsonPropertyName("Other Current Asset")]
         OtherCurrentAsset,
+        [JsonPropertyName("Fixed Asset")]
+        FixedAsset,
+        [JsonPropertyName("Other Asset")]
+        OtherAsset,
+        [JsonPropertyName("Accounts Payable")]
+        AccountsPayable,
+        [JsonPropertyName("Credit Card")]
+        CreditCard,
         [JsonPropertyName("Other Current Liability")]
         OtherCurrentLiability,
-        [JsonPropertyName("Other Expense")]
-        OtherExpense,
+        [JsonPropertyName("Long Term Liability")]
+        LongTermLiability,
+        Equity,
+        Income,
+        [JsonPropertyName("Cost of Goods Sold")]
+        CostofGoodsSold,
+        Expense,
         [JsonPropertyName("Other Income")]
         OtherIncome,
+        [JsonPropertyName("Other Expense")]
+        OtherExpense,
+        [JsonPropertyName("Non-Posting")]
+        NonPosting,
     }
     public enum TaxRateDisplayTypeEnum
     {
-        HideInAll,
-        HideInPrintedForms,
-        HideInTransactionForms,
+        Unspecified = 0,
         ReadOnly,
+        HideInTransactionForms,
+        HideInPrintedForms,
+        HideInAll,
     }
     public enum AccountSubTypeEnum
     {
+        Unspecified = 0,
+        IncomeTaxPayable,
+        IntangibleAssetsOther,
         AccountsPayable,
         AccountsReceivable,
-        AccrualsAndDeferredIncome,
-        AccruedLiabilities,
-        AccruedLongLermLiabilities,
-        AccruedVacationPayable,
         AccumulatedAdjustment,
         AccumulatedAmortization,
         AccumulatedAmortizationOfOtherAssets,
         AccumulatedDepletion,
         AccumulatedDepreciation,
-        AccumulatedOtherComprehensiveIncome,
         AdvertisingPromotional,
         AllowanceForBadDebts,
         Amortization,
-        AmortizationExpense,
-        AppropriationsToDepreciation,
-        AssetsAvailableForSale,
-        AssetsHeldForSale,
-        AssetsInCourseOfConstruction,
         Auto,
-        AvailableForSaleFinancialAssets,
         BadDebts,
-        BalWithGovtAuthorities,
         BankCharges,
-        BankLoans,
-        BorrowingCost,
         Buildings,
-        CalledUpShareCapital,
-        CalledUpShareCapitalNotPaid,
-        CapitalReserves,
-        CapitalWip,
-        CashAndCashEquivalents,
-        CashExpenditureExpense,
         CashOnHand,
-        CashReceiptIncome,
         CharitableContributions,
         Checking,
-        CommissionsAndFees,
         CommonStock,
         CostOfLabor,
         CostOfLaborCos,
-        CostOfSales,
         CreditCard,
-        CumulativeDepreciationOnIntangibleAssets,
-        CurrentLiabilities,
-        CurrentPortionEmployeeBenefitsObligations,
-        CurrentPortionOfObligationsUnderFinanceLeases,
-        CurrentTaxLiability,
-        DebtsRelatedToParticipatingInterests,
-        DeferredTax,
-        DeferredTaxExpense,
-        DeferredTaxLiabilities,
         DepletableAssets,
-        Depletion,
         Depreciation,
         DevelopmentCosts,
         DirectDepositPayable,
         DiscountsRefundsGiven,
-        DistributionCosts,
-        DividendDisbursed,
         DividendIncome,
-        DividendsPayable,
         DuesSubscriptions,
-        DutiesAndTaxes,
         EmployeeCashAdvances,
         Entertainment,
         EntertainmentMeals,
         EquipmentRental,
         EquipmentRentalCos,
-        EquityInEarningsOfSubsiduaries,
         EstimatedTaxes,
-        ExceptionalItems,
         ExchangeGainOrLoss,
-        ExpenditureAuthorisationsAndLettersOfCredit,
-        ExternalServices,
-        ExtraordinaryCharges,
-        ExtraordinaryItems,
         FederalIncomeTaxPayable,
         FinanceCosts,
         FixedAssetComputers,
         FixedAssetCopiers,
         FixedAssetFurniture,
-        FixedAssetOtherToolsEquipment,
         FixedAssetPhone,
         FixedAssetPhotoVideo,
         FixedAssetSoftware,
-        FreightAndDeliveryCos,
-        Funds,
+        FixedAssetOtherToolsEquipment,
         FurnitureAndFixtures,
-        GainLossOnSaleOfFixedAssets,
-        GainLossOnSaleOfInvestments,
-        GasAndFuel,
-        GlobalTaxDeferred,
         GlobalTaxExpense,
         GlobalTaxPayable,
-        GlobalTaxRefund,
         GlobalTaxSuspense,
+        GasAndFuel,
         Goodwill,
-        GovernmentAndOtherPublicAuthorities,
         Gratuity,
-        GroupAndAssociates,
         Healthcare,
         HomeOffice,
         HomeownerRentalInsurance,
-        IncomeTaxExpense,
-        IncomeTaxOtherExpense,
-        IncomeTaxPayable,
         Insurance,
         InsurancePayable,
         IntangibleAssets,
-        IntangibleAssetsOther,
-        IntangibleAssetsUnderDevelopment,
         InterestEarned,
         InterestPaid,
-        InterestPayables,
-        InternalTransfers,
         Inventory,
         Investment_MortgageRealEstateLoans,
         Investment_Other,
         Investment_TaxExemptSecurities,
         Investment_USGovernmentObligations,
-        InvestmentGrants,
-        Investments,
         Land,
-        LandAsset,
         LeaseBuyout,
         LeaseholdImprovements,
         LegalProfessionalFees,
-        LiabilitiesRelatedToAssetsHeldForSale,
         Licenses,
         LineOfCredit,
         LoanPayable,
         LoansToOfficers,
         LoansToOthers,
         LoansToStockholders,
-        LongTermBorrowings,
-        LongTermDebit,
-        LongTermEmployeeBenefitObligations,
-        LongTermInvestments,
-        LongTermLoansAndAdvancesToRelatedParties,
-        LossOnDiscontinuedOperationsNetOfTax,
-        LossOnDisposalOfAssets,
         MachineryAndEquipment,
-        ManagementCompensation,
-        MatCredit,
         MoneyMarket,
-        MoneyReceivedAgainstShareWarrants,
         MortgageInterestHomeOffice,
-        NonCurrentAssets,
         NonProfitIncome,
         NotesPayable,
-        ObligationsUnderFinanceLeases,
         OfficeGeneralAdministrativeExpenses,
         OpeningBalanceEquity,
-        OperatingGrants,
         OrganizationalCosts,
         OtherBusinessExpenses,
-        OtherConsumables,
         OtherCostsOfServiceCos,
         OtherCurrentAssets,
         OtherCurrentLiabilities,
-        OtherCurrentOperatingCharges,
-        OtherCurrentOperatingIncome,
-        OtherEarmarkedBankAccounts,
-        OtherExternalServices,
         OtherFixedAssets,
-        OtherFreeReserves,
         OtherHomeOfficeExpenses,
-        OtherIntangibleAssets,
         OtherInvestmentIncome,
         OtherLongTermAssets,
-        OtherLongTermInvestments,
         OtherLongTermLiabilities,
-        OtherLongTermLoansAndAdvances,
-        OtherLongTermProvisions,
         OtherMiscellaneousExpense,
         OtherMiscellaneousIncome,
         OtherMiscellaneousServiceCost,
-        OtherOperatingIncome,
         OtherPrimaryIncome,
-        OtherRentalCosts,
-        OtherSellingExpenses,
         OtherVehicleExpenses,
-        OutstandingDuesMicroSmallEnterprise,
-        OutstandingDuesOtherThanMicroSmallEnterprise,
         OwnersEquity,
-        OwnWorkCapitalized,
         PaidInCapitalOrSurplus,
         ParkingAndTolls,
-        ParticipatingInterests,
         PartnerContributions,
         PartnerDistributions,
         PartnersEquity,
@@ -373,62 +299,30 @@ namespace QuickBooksSharp.Entities
         PreferredStock,
         PrepaidExpenses,
         PrepaidExpensesPayable,
-        PrepaymentsAndAccruedIncome,
-        PriorPeriodItems,
-        ProjectStudiesSurveysAssessments,
         PromotionalMeals,
         PropertyTaxHomeOffice,
-        ProvisionForLiabilities,
-        ProvisionForWarrantyObligations,
-        ProvisionsCurrentAssets,
-        ProvisionsCurrentLiabilities,
-        ProvisionsFixedAssets,
-        ProvisionsNonCurrentAssets,
-        ProvisionsNonCurrentLiabilities,
-        PurchasesRebates,
         RentAndLeaseHomeOffice,
         RentOrLeaseOfBuildings,
         RentsHeldInTrust,
         RentsInTrustLiability,
-        RepairMaintenance,
         RepairsAndMaintainceHomeOffice,
+        RepairMaintenance,
         Retainage,
         RetainedEarnings,
-        RevenueGeneral,
         SalesOfProductIncome,
-        SalesRetail,
         SalesTaxPayable,
-        SalesWholesale,
         Savings,
-        SavingsByTaxScheme,
         SecurityDeposits,
         ServiceFeeIncome,
-        ShareApplicationMoneyPendingAllotment,
-        ShareCapital,
         ShareholderNotesPayable,
-        ShippingAndDeliveryExpense,
         ShippingFreightDelivery,
         ShippingFreightDeliveryCos,
-        ShortTermBorrowings,
-        ShortTermInvestmentsInRelatedParties,
-        ShortTermLoansAndAdvancesToRelatedParties,
-        SocialSecurityAgencies,
-        StaffAndRelatedLiabilityAccounts,
-        StaffAndRelatedLongTermLiabilityAccounts,
-        StaffCosts,
         StateLocalIncomeTaxPayable,
-        Sundry,
-        SundryDebtorsAndCreditors,
         SuppliesMaterials,
         SuppliesMaterialsCogs,
         TaxesPaid,
         TaxExemptInterest,
-        TaxRoundoffGainOrLoss,
-        TradeAndOtherPayables,
-        TradeAndOtherReceivables,
         Travel,
-        TravelExpensesGeneralAndAdminExpenses,
-        TravelExpensesSellingExpense,
         TravelMeals,
         TreasuryStock,
         TrustAccounts,
@@ -436,7 +330,6 @@ namespace QuickBooksSharp.Entities
         UnappliedCashBillPaymentExpense,
         UnappliedCashPaymentIncome,
         UndepositedFunds,
-        UnrealisedLossOnSecuritiesNetOfTax,
         Utilities,
         UtilitiesHomeOffice,
         Vehicle,
@@ -448,34 +341,161 @@ namespace QuickBooksSharp.Entities
         VehicleRepairs,
         Vehicles,
         WashAndRoadServices,
+        WithholdingTaxSales,
+        WithholdingTaxPurchases,
         WithholdingAssetAmount,
         WithholdingLiabilityAmount,
-        WithholdingTaxPurchases,
-        WithholdingTaxSales,
         WithholdingTaxSuspense,
+        ProvisionsCurrentAssets,
+        OtherConsumables,
+        ExpenditureAuthorisationsAndLettersOfCredit,
+        InternalTransfers,
+        ProvisionsFixedAssets,
+        AssetsInCourseOfConstruction,
+        ParticipatingInterests,
+        CumulativeDepreciationOnIntangibleAssets,
+        ProvisionsNonCurrentAssets,
+        OutstandingDuesMicroSmallEnterprise,
+        OutstandingDuesOtherThanMicroSmallEnterprise,
+        GlobalTaxRefund,
+        GlobalTaxDeferred,
+        ProvisionsCurrentLiabilities,
+        StaffAndRelatedLiabilityAccounts,
+        SocialSecurityAgencies,
+        SundryDebtorsAndCreditors,
+        ProvisionsNonCurrentLiabilities,
+        DebtsRelatedToParticipatingInterests,
+        StaffAndRelatedLongTermLiabilityAccounts,
+        GovernmentAndOtherPublicAuthorities,
+        GroupAndAssociates,
+        InvestmentGrants,
+        CashReceiptIncome,
+        OwnWorkCapitalized,
+        OperatingGrants,
+        OtherCurrentOperatingIncome,
+        CostOfSales,
+        CashExpenditureExpense,
+        ExternalServices,
+        OtherExternalServices,
+        PurchasesRebates,
+        OtherRentalCosts,
+        ProjectStudiesSurveysAssessments,
+        Sundry,
+        StaffCosts,
+        OtherCurrentOperatingCharges,
+        ExtraordinaryCharges,
+        AppropriationsToDepreciation,
+        AccrualsAndDeferredIncome,
+        CurrentTaxLiability,
+        DeferredTax,
+        DistributionCosts,
+        Investments,
+        LongTermBorrowings,
+        OtherIntangibleAssets,
+        PrepaymentsAndAccruedIncome,
+        ShortTermBorrowings,
+        ProvisionForLiabilities,
+        CalledUpShareCapital,
+        CalledUpShareCapitalNotPaid,
+        LandAsset,
+        AvailableForSaleFinancialAssets,
+        ProvisionForWarrantyObligations,
+        CurrentPortionEmployeeBenefitsObligations,
+        LongTermEmployeeBenefitObligations,
+        ObligationsUnderFinanceLeases,
+        BankLoans,
+        InterestPayables,
+        GainLossOnSaleOfInvestments,
+        GainLossOnSaleOfFixedAssets,
+        ShareCapital,
+        CurrentPortionOfObligationsUnderFinanceLeases,
+        AssetsHeldForSale,
+        AccruedLiabilities,
+        AccruedLongLermLiabilities,
+        AccruedVacationPayable,
+        CashAndCashEquivalents,
+        CommissionsAndFees,
+        AmortizationExpense,
+        LossOnDiscontinuedOperationsNetOfTax,
+        ManagementCompensation,
+        OtherSellingExpenses,
+        LiabilitiesRelatedToAssetsHeldForSale,
+        LongTermDebit,
+        EquityInEarningsOfSubsiduaries,
+        OtherOperatingIncome,
+        RevenueGeneral,
+        DividendDisbursed,
+        FreightAndDeliveryCos,
+        ShippingAndDeliveryExpense,
+        TravelExpensesGeneralAndAdminExpenses,
+        TravelExpensesSellingExpense,
+        UnrealisedLossOnSecuritiesNetOfTax,
+        SalesRetail,
+        SalesWholesale,
+        AccumulatedOtherComprehensiveIncome,
+        AssetsAvailableForSale,
+        LossOnDisposalOfAssets,
+        NonCurrentAssets,
+        IncomeTaxExpense,
+        LongTermInvestments,
+        DividendsPayable,
+        TradeAndOtherReceivables,
+        TradeAndOtherPayables,
+        CurrentLiabilities,
+        SavingsByTaxScheme,
+        BorrowingCost,
+        Depletion,
+        ExceptionalItems,
+        PriorPeriodItems,
+        ExtraordinaryItems,
+        MatCredit,
+        OtherFreeReserves,
+        CapitalReserves,
+        Funds,
+        MoneyReceivedAgainstShareWarrants,
+        ShareApplicationMoneyPendingAllotment,
+        DeferredTaxLiabilities,
+        OtherLongTermProvisions,
+        CapitalWip,
+        IntangibleAssetsUnderDevelopment,
+        OtherLongTermInvestments,
+        LongTermLoansAndAdvancesToRelatedParties,
+        OtherLongTermLoansAndAdvances,
+        ShortTermInvestmentsInRelatedParties,
+        OtherEarmarkedBankAccounts,
+        ShortTermLoansAndAdvancesToRelatedParties,
+        DeferredTaxExpense,
+        IncomeTaxOtherExpense,
+        DutiesAndTaxes,
+        BalWithGovtAuthorities,
+        TaxRoundoffGainOrLoss,
     }
     public enum APCreditCardOperationEnum
     {
+        Unspecified = 0,
         Charge,
         Credit,
     }
     public enum DayOfWeekEnum
     {
-        Friday,
+        Unspecified = 0,
         Monday,
-        Saturday,
-        Sunday,
-        Thursday,
         Tuesday,
         Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday,
     }
     public enum EstimateStatusEnum
     {
+        Unspecified = 0,
         Active,
         NotActive,
     }
     public enum PaymentMethodEnum
     {
+        Unspecified = 0,
         AmEx,
         Cash,
         Check,
@@ -490,33 +510,38 @@ namespace QuickBooksSharp.Entities
     }
     public enum PaymentStatusEnum
     {
+        Unspecified = 0,
         Draft,
         Overdue,
-        Paid,
-        Payable,
         Pending,
+        Payable,
+        Paid,
         Trash,
         UnPaid,
     }
     public enum PaySalesTaxEnum
     {
+        Unspecified = 0,
         Annually,
         Monthly,
         Quarterly,
     }
     public enum PerItemAdjustEnum
     {
+        Unspecified = 0,
         Cost,
         CurrentCustomPrice,
         StandardPrice,
     }
     public enum PriceLevelTypeEnum
     {
+        Unspecified = 0,
         FixedPercentage,
         PerItem,
     }
     public enum QboEstimateStatusEnum
     {
+        Unspecified = 0,
         Accepted,
         Closed,
         Pending,
@@ -524,17 +549,20 @@ namespace QuickBooksSharp.Entities
     }
     public enum PurchaseOrderStatusEnum
     {
-        Closed,
+        Unspecified = 0,
         Open,
+        Closed,
     }
     public enum ReimbursableTypeEnum
     {
+        Unspecified = 0,
         Billable,
         BillableHasBeenBilled,
         NotBillable,
     }
     public enum RoundingMethodEnum
     {
+        Unspecified = 0,
         Down,
         Nearest,
         None,
@@ -542,34 +570,40 @@ namespace QuickBooksSharp.Entities
     }
     public enum SalesRepTypeEnum
     {
+        Unspecified = 0,
         Employee,
         Other,
         Vendor,
     }
     public enum SalesTermTypeEnum
     {
+        Unspecified = 0,
         DateDriven,
         Standard,
     }
     public enum SpecialItemTypeEnum
     {
+        Unspecified = 0,
         FinanceCharge,
         ReimbursableExpenseGroup,
         ReimbursableExpenseSubtotal,
     }
     public enum SymbolPositionEnum
     {
+        Unspecified = 0,
         Leading,
         Trailing,
     }
     public enum TaxTypeApplicablityEnum
     {
+        Unspecified = 0,
         TaxOnAmount,
         TaxOnAmountPlusTax,
         TaxOnTax,
     }
     public enum TemplateTypeEnum
     {
+        Unspecified = 0,
         BuildAssembly,
         CreditMemo,
         Estimate,
@@ -581,12 +615,14 @@ namespace QuickBooksSharp.Entities
     }
     public enum TimeActivityTypeEnum
     {
+        Unspecified = 0,
         Employee,
         Other,
         Vendor,
     }
     public enum TxnTypeEnum
     {
+        Unspecified = 0,
         APCreditCard,
         ARRefundCreditCard,
         Bill,
@@ -611,21 +647,22 @@ namespace QuickBooksSharp.Entities
         LiabilityAdjustment,
         Paycheck,
         PayrollLiabilityCheck,
-        PriorPayment,
         PurchaseOrder,
+        PriorPayment,
         ReceivePayment,
         RefundCheck,
         ReimburseCharge,
         SalesOrder,
         SalesReceipt,
         SalesTaxPaymentCheck,
-        TimeActivity,
         Transfer,
+        TimeActivity,
         VendorCredit,
         YTDAdjustment,
     }
     public enum UOMBaseTypeEnum
     {
+        Unspecified = 0,
         Area,
         Count,
         Length,
@@ -636,6 +673,7 @@ namespace QuickBooksSharp.Entities
     }
     public enum PaymentTypeEnum
     {
+        Unspecified = 0,
         Cash,
         Check,
         CreditCard,
@@ -644,95 +682,109 @@ namespace QuickBooksSharp.Entities
     }
     public enum BillPaymentTypeEnum
     {
+        Unspecified = 0,
         Check,
         CreditCard,
     }
     public enum PrintStatusEnum
     {
-        NeedToPrint,
+        Unspecified = 0,
         NotSet,
+        NeedToPrint,
         PrintComplete,
     }
     public enum EmailStatusEnum
     {
-        EmailSent,
-        NeedToSend,
+        Unspecified = 0,
         NotSet,
+        NeedToSend,
+        EmailSent,
     }
     public enum ETransactionStatusEnum
     {
-        Accepted,
-        Delivered,
+        Unspecified = 0,
+        Sent,
+        Viewed,
+        Paid,
         [JsonPropertyName("Delivery Error")]
         DeliveryError,
-        Disputed,
+        Updated,
         Error,
-        Paid,
+        Accepted,
         Rejected,
-        Sent,
         [JsonPropertyName("Sent With ICN Error")]
         SentWithICNError,
-        Updated,
-        Viewed,
+        Delivered,
+        Disputed,
     }
     public enum ETransactionEnabledStatusEnum
     {
+        Unspecified = 0,
         Enabled,
         NotApplicable,
     }
     public enum GlobalTaxCalculationEnum
     {
-        NotApplicable,
-        TaxExcluded,
+        Unspecified = 0,
         TaxInclusive,
+        TaxExcluded,
+        NotApplicable,
     }
     public enum TxnSourceEnum
     {
-        EInvoice,
-        GoPayment,
+        Unspecified = 0,
         QBMobile,
+        GoPayment,
+        EInvoice,
         Square,
     }
     public enum BudgetTypeEnum
     {
-        BalanceSheet,
+        Unspecified = 0,
         ProfitAndLoss,
+        BalanceSheet,
     }
     public enum BudgetEntryTypeEnum
     {
-        Monthly,
-        Quarterly,
+        Unspecified = 0,
         Yearly,
+        Quarterly,
+        Monthly,
     }
     public enum ItemCategoryTypeEnum
     {
+        Unspecified = 0,
         Product,
         Service,
     }
     public enum TransactionLocationTypeEnum
     {
-        FranceOverseas,
-        OutsideEU,
-        OutsideFranceWithEU,
+        Unspecified = 0,
         WithinFrance,
+        FranceOverseas,
+        OutsideFranceWithEU,
+        OutsideEU,
     }
     public enum JournalCodeTypeEnum
     {
-        Bank,
-        Cash,
+        Unspecified = 0,
         Expenses,
-        Nouveaux,
-        Others,
         Sales,
+        Bank,
+        Nouveaux,
         Wages,
+        Cash,
+        Others,
     }
     public enum DiscountTypeEnum
     {
-        Amount,
+        Unspecified = 0,
         Rate,
+        Amount,
     }
     public enum ServiceTypeEnum
     {
+        Unspecified = 0,
         ADVT,
         AIRPORTSERVICES,
         AIRTRANSPORT,
@@ -841,336 +893,359 @@ namespace QuickBooksSharp.Entities
     }
     public enum QboEntityTypeEnum
     {
-        ACCOUNT,
-        ATTACHABLE,
-        BANKING_TRANSACTIONS,
+        Unspecified = 0,
+        CUSTOMER,
+        VENDOR,
+        EMPLOYEE,
+        CREDIT_CARD,
+        CHECK,
+        INVOICE,
+        RECEIVED_PAYMENT,
+        GENERAL_JOURNAL,
         BILL,
-        BILL_CHECK,
+        CREDIT_CARD_CREDIT,
         BILL_CREDIT,
+        CHARGE_CREDIT,
+        BILL_CHECK,
         BILL_CREDIT_CARD,
-        BUDGET,
-        BUSINESS_TERMS,
+        CHARGE,
+        TRANSFER,
+        RECEIVED_MONEY,
+        STATEMENT,
+        REIMB_CHARGE,
         CASH_PURCHASE,
         CASH_SALE,
-        CHARGE,
-        CHARGE_CREDIT,
-        CHECK,
-        CREDIT_CARD,
-        CREDIT_CARD_CREDIT,
         CREDIT_MEMO,
         CREDIT_REFUND,
-        CUSTOMER,
-        DD_CHECK,
-        DEPARTMENT,
-        DESKTOPIMPORT_SEED_QOH,
-        DIRECT_DEPOSIT_BANK_INFO,
-        DISCOUNT_RATE,
-        EFILE_ENROLLMENT,
-        EMPLOYEE,
-        EPAY_AGENCY_CREDENTIALS,
-        EPAY_BANK_ACCOUNT_INFO,
         ESTIMATE,
-        GENERAL_JOURNAL,
-        GENERIC_EXPENSE,
-        GLOBAL_TAX_ADJUSTMENT,
-        GLOBAL_TAX_PAYMENT,
-        GROSS_ADJUSTMENT,
         INVENTORY_QUANTITY_ADJUSTMENT,
-        INVOICE,
-        ITEM,
-        JOB_INVOICE,
-        JOURNAL_CODE,
-        KLASS,
-        LIABILITY_CHECK,
-        LIABILITY_CREDIT_CARD,
-        LIABILITY_EPAY,
-        LIABILITY_MMAP,
-        LIABILITY_REFUND,
-        MANAGEMENT_REPORT,
-        MEMORIZED_REPORTS,
-        MEMORIZED_TRANSACTION,
-        NOTES,
-        OLB_FINANCIAL_INSTITUTIONS,
-        OLB_RULES,
-        PAID_TIME_OFF_ENTRIES,
-        PAY_GROUPS,
-        PAYCHECK,
-        PAYMENT_METHOD,
-        PAYROLL_ADJUSTMENT,
-        PAYROLL_ADJUSTMENT_V2,
-        PAYROLL_CHECK,
-        PAYROLL_FORMS,
-        PAYROLL_ITEMS,
-        PAYROLL_REFUND,
-        PAYROLL_YTD,
-        PREFERENCES,
-        PRINT_PREF,
-        PRIOR_LIABILITY_PAYMENTS,
         PURCHASE_ORDER,
-        RECEIVED_MONEY,
-        RECEIVED_PAYMENT,
-        REIMB_CHARGE,
-        REMINDERS,
-        REVERSE_CHARGE,
-        SDK_USERS,
-        STATEMENT,
-        TAX_AGENCY,
+        PAYROLL_CHECK,
+        TAX_PAYMENT,
+        PAYROLL_ADJUSTMENT_V2,
+        PAYROLL_REFUND,
+        GLOBAL_TAX_PAYMENT,
+        GLOBAL_TAX_ADJUSTMENT,
+        JOB_INVOICE,
+        ITEM,
+        GENERIC_EXPENSE,
+        TIME_ACTIVITY,
+        DEPARTMENT,
+        USERS,
+        KLASS,
+        PAYMENT_METHOD,
+        MEMORIZED_TRANSACTION,
+        TERM,
+        BUDGET,
         TAX_CODE,
         TAX_CODE_RATE,
-        TAX_CREDIT_DEFER,
-        TAX_CREDIT_REFUND,
-        TAX_CREDIT_REVERSE,
+        TAX_AGENCY,
+        ATTACHABLE,
+        ACCOUNT,
+        PREFERENCES,
+        JOURNAL_CODE,
+        DISCOUNT_RATE,
+        BANKING_TRANSACTIONS,
+        BUSINESS_TERMS,
+        LIABILITY_CHECK,
+        LIABILITY_CREDIT_CARD,
+        LIABILITY_REFUND,
+        PRIOR_LIABILITY_PAYMENTS,
+        LIABILITY_EPAY,
+        LIABILITY_MMAP,
         TAX_CREDIT_UTILISE,
+        TAX_CREDIT_DEFER,
+        TAX_CREDIT_REVERSE,
+        TAX_CREDIT_REFUND,
+        GROSS_ADJUSTMENT,
+        REVERSE_CHARGE,
+        DD_CHECK,
+        PAYCHECK,
+        PAYROLL_ADJUSTMENT,
+        PAYROLL_YTD,
+        SDK_USERS,
+        PAYROLL_ITEMS,
+        PAY_GROUPS,
+        PAID_TIME_OFF_ENTRIES,
         TAX_JURISDICTIONS,
-        TAX_PAYMENT,
+        MEMORIZED_REPORTS,
+        OLB_FINANCIAL_INSTITUTIONS,
+        DIRECT_DEPOSIT_BANK_INFO,
+        REMINDERS,
+        PAYROLL_FORMS,
+        EPAY_BANK_ACCOUNT_INFO,
+        EPAY_AGENCY_CREDENTIALS,
+        EFILE_ENROLLMENT,
         TAXRETURNLINES,
-        TERM,
-        TIME_ACTIVITY,
-        TRANSFER,
-        USERS,
-        VENDOR,
+        NOTES,
+        PRINT_PREF,
+        MANAGEMENT_REPORT,
+        OLB_RULES,
+        DESKTOPIMPORT_SEED_QOH,
     }
     public enum DesktopEntityTypeEnum
     {
-        ACCOUNT,
+        Unspecified = 0,
         ANY,
+        CREDIT_CARD,
+        DEPOSIT,
+        CHECK,
+        INVOICE,
+        CASHSALE,
+        CREDIT_MEMO,
         APP_PAY,
-        AR_CCREFUND_TO_CREDITMEMO,
-        AR_CCREFUND_TO_JOURNAL,
-        AR_CCREFUND_TO_PAYMENT,
-        AR_CREDIT_CARD_REFUND,
-        ATTACHABLE,
-        BEGIN_BALANCE_CHECK,
+        GENERAL_JOURNAL,
         BILL,
+        GENERIC,
+        CREDIT_CARD_REFUND,
+        BILL_REFUND,
+        AR_CREDIT_CARD_REFUND,
         BILL_CHECK,
         BILL_CREDIT_CARD,
-        BILL_REFUND,
-        BILLTOCCARD,
-        BILLTOCHECK,
-        BILLTOCREDIT,
-        BILLTOCREDITLINE,
-        BILLTODISCOUNT,
-        BUDGET,
-        BUILDASSEMBLY,
-        CASHSALE,
-        CHECK,
-        CREDIT_CARD,
-        CREDIT_CARD_REFUND,
-        CREDIT_MEMO,
-        CREDLINETODISCLINE,
-        CUSTOMER,
-        DEPARTMENT,
-        DEPOSIT,
-        DEPOSITTOPAYMENT,
-        EFPLIABCHECK,
-        EMPLOYEE,
-        ESTIMATE,
-        GENERAL_JOURNAL,
-        GENERIC,
-        GIRO_TO_CHECK,
+        SALES_TAX_PAYMENT,
+        PURCHASE_ORDER,
         INVENTORY_ADJUSTMENT,
         INVENTORY_RECEIPT,
-        INVOICE,
-        INVOICETOCREDITLINE,
-        INVOICETOCRMEMO,
-        INVOICETODISCOUNT,
-        INVOICETODISCOUNTLINE,
-        INVOICETOESTIMATEAMT,
-        INVOICETOESTIMATEQTY,
-        INVOICETOPAYMENT,
-        INVOICETOPMTLINE,
-        INVOICETOSALESORDERAMT,
-        INVOICETOSALESORDERQTY,
-        ITEM,
-        ITEM_ALLITEMS,
-        ITEM_ASSEMBLY,
-        ITEM_CHARGES,
-        ITEM_DISCOUNT,
-        ITEM_FIXEDASSET,
-        ITEM_GROUP,
-        ITEM_GROUPEND,
-        ITEM_INVENTORY,
-        ITEM_INVOICE,
-        ITEM_MAX,
-        ITEM_NOTAXES,
-        ITEM_PART,
-        ITEM_PAYMENT,
-        ITEM_PO,
-        ITEM_PURCHASE,
-        ITEM_REAL_GROUP_END,
+        PAYCHECK,
+        LIABILITY_CHECK,
+        BEGIN_BALANCE_CHECK,
+        LIABILITY_ADJUSTMENT,
+        ESTIMATE,
+        STATEMENT_CHARGE,
+        TRANSFER,
+        SALESORDER,
+        QBRSLIABCHECK,
+        BUILDASSEMBLY,
+        EFPLIABCHECK,
+        PRIOR_PMT,
+        LIAB_REFUND_CHECK,
         ITEM_SERVICE,
-        ITEM_SERVICES_AND_CHARGES,
+        ITEM_INVENTORY,
+        ITEM_ASSEMBLY,
+        ITEM_PART,
+        ITEM_FIXEDASSET,
+        ITEM_CHARGES,
         ITEM_SUBTOTAL,
+        ITEM_GROUP,
+        ITEM_DISCOUNT,
+        ITEM_PAYMENT,
         ITEM_TAXCOMP,
         ITEM_TAXGROUP,
-        JOURNALENTRYTOCRMEMO,
-        KLASS,
-        LIAB_REFUND_CHECK,
-        LIABILITY_ADJUSTMENT,
-        LIABILITY_CHECK,
-        NULLLINKTYPE,
+        ITEM_GROUPEND,
+        ITEM_PURCHASE,
+        ITEM_PO,
+        ITEM_INVOICE,
+        ITEM_ALLITEMS,
+        ITEM_NOTAXES,
+        ITEM_SERVICES_AND_CHARGES,
+        ITEM_REAL_GROUP_END,
+        ITEM_MAX,
+        CUSTOMER,
+        VENDOR,
+        EMPLOYEE,
         OTHERNAME,
-        PAYCHECK,
-        PAYMENT_METHOD,
-        PREFERENCES,
-        PRIOR_PMT,
-        PURCHASE_ORDER,
-        PURCHASEORDERTORECEIPT,
-        QBRSLIABCHECK,
+        NULLLINKTYPE,
+        UNUSED1,
         REFUNDCHECKTOCRMEMO,
+        INVOICETOCRMEMO,
+        INVOICETOPAYMENT,
+        INVOICETODISCOUNT,
+        BILLTOCHECK,
+        BILLTOCCARD,
+        BILLTOCREDIT,
+        DEPOSITTOPAYMENT,
         REFUNDCHECKTOPAYMENT,
-        SALES_TAX_PAYMENT,
-        SALESORDER,
-        STATEMENT_CHARGE,
-        TAX_AGENCY,
+        INVOICETOPMTLINE,
+        INVOICETOCREDITLINE,
+        BILLTOCREDITLINE,
+        CREDLINETODISCLINE,
+        PURCHASEORDERTORECEIPT,
+        BILLTODISCOUNT,
+        INVOICETODISCOUNTLINE,
+        INVOICETOESTIMATEQTY,
+        INVOICETOESTIMATEAMT,
+        INVOICETOSALESORDERQTY,
+        INVOICETOSALESORDERAMT,
+        JOURNALENTRYTOCRMEMO,
+        AR_CCREFUND_TO_CREDITMEMO,
+        AR_CCREFUND_TO_PAYMENT,
+        AR_CCREFUND_TO_JOURNAL,
+        GIRO_TO_CHECK,
+        ITEM,
+        DEPARTMENT,
+        USERS,
+        KLASS,
+        PAYMENT_METHOD,
+        TERM,
+        BUDGET,
         TAX_CODE,
         TAX_CODE_RATE,
-        TERM,
-        TRANSFER,
-        UNUSED1,
-        USERS,
-        VENDOR,
+        TAX_AGENCY,
+        ATTACHABLE,
+        ACCOUNT,
+        PREFERENCES,
     }
     public enum TaxReturnStatusEnum
     {
-        AGENCY_PAYMENT_COMPLETED,
-        AGENCY_PAYMENT_INITIATED,
+        Unspecified = 0,
         FILED,
         FILING_FAILED,
         FILING_FAILED_WRONG_AGENCY_CREDENTIALS,
+        AGENCY_PAYMENT_INITIATED,
+        AGENCY_PAYMENT_COMPLETED,
     }
     public enum AgencyPaymentMethodEnum
     {
+        Unspecified = 0,
         ACH_CREDIT,
         ACH_DEBIT,
         CHECK,
-        OTHER,
         WIRE,
+        OTHER,
     }
     public enum TaxReviewStatusEnum
     {
-        AST_TAX_OVERRIDE,
+        Unspecified = 0,
         NON_AST_TAX,
+        AST_TAX_OVERRIDE,
     }
     public enum ConvenienceFeeTypeEnum
     {
-        AUTO,
-        DISABLED,
+        Unspecified = 0,
         MANUAL,
+        AUTO,
         PAID,
+        DISABLED,
     }
     public enum SpecialTaxTypeEnum
     {
-        ADJUSTMENT_RATE,
-        FOREIGN_TAX,
+        Unspecified = 0,
         NONE,
-        REVERSE_CHARGE,
         ZERO_RATE,
+        FOREIGN_TAX,
+        REVERSE_CHARGE,
+        ADJUSTMENT_RATE,
     }
     public enum GTMConfigTypeEnum
     {
-        HIDDEN_AGENCY,
-        SCRA_DEFINED,
+        Unspecified = 0,
         SYSTEM_GENERATED,
         USER_DEFINED,
+        SCRA_DEFINED,
+        HIDDEN_AGENCY,
     }
     public enum AttachableCategoryEnum
     {
+        Unspecified = 0,
+        Image,
+        Signature,
         [JsonPropertyName("Contact Photo")]
         ContactPhoto,
-        Document,
-        Image,
-        Other,
         Receipt,
-        Signature,
+        Document,
         Sound,
+        Other,
     }
     public enum OLBTxnStatusEnum
     {
+        Unspecified = 0,
+        Pending,
         Approved,
         Deleted,
-        Pending,
     }
     public enum ContactTypeEnum
     {
-        EmailAddress,
-        GenericContactType,
+        Unspecified = 0,
         TelephoneNumber,
+        EmailAddress,
         WebSiteAddress,
+        GenericContactType,
     }
     public enum DeliveryTypeEnum
     {
+        Unspecified = 0,
         Email,
         Tradeshift,
     }
     public enum DeliveryErrorTypeEnum
     {
-        [JsonPropertyName("Bounced Email")]
-        BouncedEmail,
-        [JsonPropertyName("Delivery Server Down")]
-        DeliveryServerDown,
+        Unspecified = 0,
         [JsonPropertyName("Missing Info")]
         MissingInfo,
         Undeliverable,
+        [JsonPropertyName("Delivery Server Down")]
+        DeliveryServerDown,
+        [JsonPropertyName("Bounced Email")]
+        BouncedEmail,
     }
     public enum EmailAddressTypeEnum
     {
-        CC,
+        Unspecified = 0,
         Primary,
+        CC,
     }
     public enum PhysicalAddressTypeEnum
     {
+        Unspecified = 0,
         Billing,
         Shipping,
     }
     public enum TelephoneNumberTypeEnum
     {
+        Unspecified = 0,
         Business,
         Fax,
         Home,
         Mobile,
-        Other,
         Pager,
         Primary,
         Secondary,
+        Other,
     }
     public enum TelephoneDeviceTypeEnum
     {
-        Fax,
+        Unspecified = 0,
         LandLine,
         Mobile,
+        Fax,
         Pager,
     }
     public enum gender
     {
-        Female,
+        Unspecified = 0,
         Male,
+        Female,
     }
     public enum CCSecurityCodeMatchEnum
     {
+        Unspecified = 0,
         Fail,
         NotAvailable,
         Pass,
     }
     public enum CCAVSMatchEnum
     {
+        Unspecified = 0,
         Fail,
         NotAvailable,
         Pass,
     }
     public enum CCPaymentStatusEnum
     {
+        Unspecified = 0,
         Completed,
-        Unknown,
         Voided,
+        Unknown,
     }
     public enum CCTxnModeEnum
     {
+        Unspecified = 0,
         CardNotPresent,
         CardPresent,
     }
     public enum CCTxnTypeEnum
     {
+        Unspecified = 0,
         Authorization,
         Capture,
         Charge,
@@ -1179,6 +1254,7 @@ namespace QuickBooksSharp.Entities
     }
     public enum CreditCardTypeEnum
     {
+        Unspecified = 0,
         AmEx,
         DebitCard,
         Discover,
@@ -1189,32 +1265,35 @@ namespace QuickBooksSharp.Entities
     }
     public enum CustomFieldTypeEnum
     {
-        BooleanType,
-        DateType,
-        NumberType,
+        Unspecified = 0,
         StringType,
+        BooleanType,
+        NumberType,
+        DateType,
     }
     public enum EntityStatusEnum
     {
+        Unspecified = 0,
         Deleted,
-        Draft,
-        InTransit,
-        Pending,
-        SyncError,
-        Synchronized,
         Voided,
+        Draft,
+        Pending,
+        InTransit,
+        Synchronized,
+        SyncError,
     }
     public enum currencyCode
     {
+        Unspecified = 0,
         AED,
         AFA,
         ALL,
-        AMD,
         ANG,
         AOA,
         AOK,
         ARP,
         ARS,
+        AMD,
         ATS,
         AUD,
         AWF,
@@ -1236,8 +1315,8 @@ namespace QuickBooksSharp.Entities
         BTN,
         BUK,
         BWP,
-        BYB,
         BYR,
+        BYB,
         BZD,
         CAD,
         CDF,
@@ -1246,9 +1325,9 @@ namespace QuickBooksSharp.Entities
         CNY,
         COP,
         CRC,
+        CZK,
         CUP,
         CVE,
-        CZK,
         DDM,
         DEM,
         DJF,
@@ -1381,9 +1460,9 @@ namespace QuickBooksSharp.Entities
         UYP,
         UYU,
         UZS,
-        VAL,
         VND,
         VUV,
+        VAL,
         WST,
         XAF,
         XCD,
@@ -1398,6 +1477,7 @@ namespace QuickBooksSharp.Entities
     }
     public enum idDomainEnum
     {
+        Unspecified = 0,
         BM,
         NG,
         PMT,
@@ -1407,6 +1487,7 @@ namespace QuickBooksSharp.Entities
     }
     public enum objectNameEnumType
     {
+        Unspecified = 0,
         Account,
         All,
         Attachable,
@@ -1421,10 +1502,9 @@ namespace QuickBooksSharp.Entities
         CreditMemo,
         Customer,
         CustomerType,
-        CustomFieldDefinition,
+        Discount,
         Department,
         Deposit,
-        Discount,
         Employee,
         Estimate,
         FixedAsset,
@@ -1453,27 +1533,30 @@ namespace QuickBooksSharp.Entities
         ShipMethod,
         StatementCharge,
         Tag,
-        TaxClassification,
         TaxCode,
+        TaxClassification,
         TaxPayment,
         TaxRate,
         TaxReturn,
         Term,
         TimeActivity,
-        Transaction,
         Transfer,
+        Transaction,
         TxnLocation,
         UOM,
         Vendor,
         VendorCredit,
+        CustomFieldDefinition,
     }
     public enum ReportBasisEnum
     {
+        Unspecified = 0,
         Accrual,
         Cash,
     }
     public enum EmployeeTypeEnum
     {
+        Unspecified = 0,
         Officer,
         Owner,
         Regular,
@@ -1481,22 +1564,25 @@ namespace QuickBooksSharp.Entities
     }
     public enum SubcontractorTypeEnum
     {
-        Company,
+        Unspecified = 0,
         Individual,
+        Company,
         Partnership,
         Trust,
     }
     public enum CISRateEnum
     {
+        Unspecified = 0,
         [JsonPropertyName("CIS gross rate (0%)")]
         CISgrossrate0,
-        [JsonPropertyName("CIS higher rate (30%)")]
-        CIShigherrate30,
         [JsonPropertyName("CIS standard rate (20%)")]
         CISstandardrate20,
+        [JsonPropertyName("CIS higher rate (30%)")]
+        CIShigherrate30,
     }
     public enum JobStatusEnum
     {
+        Unspecified = 0,
         Awarded,
         Closed,
         InProgress,
@@ -1506,100 +1592,71 @@ namespace QuickBooksSharp.Entities
     }
     public enum TimeEntryUsedForPaychecksEnum
     {
-        DoNotUseTimeEntry,
+        Unspecified = 0,
         NotSet,
+        DoNotUseTimeEntry,
         UseTimeEntry,
     }
     public enum TaxReportBasisTypeEnum
     {
-        Accrual,
+        Unspecified = 0,
         Cash,
+        Accrual,
     }
     public enum FifoCalculationStatus
     {
+        Unspecified = 0,
+        None,
+        InProgress,
         Completed,
         Error,
-        InProgress,
-        None,
     }
     public enum FaultTypeEnum
     {
+        Unspecified = 0,
         AuthenticationFault,
         AuthorizatonFault,
-        SystemFault,
         ValidationFault,
+        SystemFault,
     }
     public enum OperationEnum
     {
+        Unspecified = 0,
         create,
-        delete,
-        merge,
-        revert,
-        send,
         update,
+        revert,
+        delete,
         [JsonPropertyName("void")]
         @void,
+        send,
+        merge,
     }
     public enum SyncType
     {
+        Unspecified = 0,
         Upload,
         Writeback,
     }
     public enum SyncErrorType
     {
-        BusinessLogic,
+        Unspecified = 0,
         OutOfSync,
+        BusinessLogic,
         SystemError,
     }
     public enum DateMacro
     {
+        Unspecified = 0,
         All,
-        [JsonPropertyName("Last Calendar Quarter")]
-        LastCalendarQuarter,
-        [JsonPropertyName("Last Calendar Quarter-to-date")]
-        LastCalendarQuartertodate,
-        [JsonPropertyName("Last Calendar Year")]
-        LastCalendarYear,
-        [JsonPropertyName("Last Calendar Year-to-date")]
-        LastCalendarYeartodate,
-        [JsonPropertyName("Last Fiscal Quarter")]
-        LastFiscalQuarter,
-        [JsonPropertyName("Last Fiscal Quarter-to-date")]
-        LastFiscalQuartertodate,
-        [JsonPropertyName("Last Fiscal Year")]
-        LastFiscalYear,
-        [JsonPropertyName("Last Fiscal Year-to-date")]
-        LastFiscalYeartodate,
-        [JsonPropertyName("Last Month")]
-        LastMonth,
-        [JsonPropertyName("Last Month-to-date")]
-        LastMonthtodate,
-        [JsonPropertyName("Last Week")]
-        LastWeek,
-        [JsonPropertyName("Last Week-to-date")]
-        LastWeektodate,
-        [JsonPropertyName("Next 4 Weeks")]
-        Next4Weeks,
-        [JsonPropertyName("Next Calendar Quarter")]
-        NextCalendarQuarter,
-        [JsonPropertyName("Next Calendar Year")]
-        NextCalendarYear,
-        [JsonPropertyName("Next Fiscal Quarter")]
-        NextFiscalQuarter,
-        [JsonPropertyName("Next Fiscal Year")]
-        NextFiscalYear,
-        [JsonPropertyName("Next Month")]
-        NextMonth,
-        [JsonPropertyName("Next Week")]
-        NextWeek,
-        [JsonPropertyName("This Calendar Quarter")]
-        ThisCalendarQuarter,
-        [JsonPropertyName("This Calendar Quarter-to-date")]
-        ThisCalendarQuartertodate,
-        [JsonPropertyName("This Calendar Year")]
-        ThisCalendarYear,
-        [JsonPropertyName("This Calendar Year-to-date")]
-        ThisCalendarYeartodate,
+        Today,
+        [JsonPropertyName("This Week")]
+        ThisWeek,
+        [JsonPropertyName("This Week-to-date")]
+        ThisWeektodate,
+        [JsonPropertyName("This Month")]
+        ThisMonth,
+        [JsonPropertyName("This Month-to-date")]
+        ThisMonthtodate,
         [JsonPropertyName("This Fiscal Quarter")]
         ThisFiscalQuarter,
         [JsonPropertyName("This Fiscal Quarter-to-date")]
@@ -1608,58 +1665,99 @@ namespace QuickBooksSharp.Entities
         ThisFiscalYear,
         [JsonPropertyName("This Fiscal Year-to-date")]
         ThisFiscalYeartodate,
-        [JsonPropertyName("This Month")]
-        ThisMonth,
-        [JsonPropertyName("This Month-to-date")]
-        ThisMonthtodate,
-        [JsonPropertyName("This Week")]
-        ThisWeek,
-        [JsonPropertyName("This Week-to-date")]
-        ThisWeektodate,
-        Today,
+        [JsonPropertyName("This Calendar Quarter")]
+        ThisCalendarQuarter,
+        [JsonPropertyName("This Calendar Quarter-to-date")]
+        ThisCalendarQuartertodate,
+        [JsonPropertyName("This Calendar Year")]
+        ThisCalendarYear,
+        [JsonPropertyName("This Calendar Year-to-date")]
+        ThisCalendarYeartodate,
         Yesterday,
+        [JsonPropertyName("Last Week")]
+        LastWeek,
+        [JsonPropertyName("Last Week-to-date")]
+        LastWeektodate,
+        [JsonPropertyName("Last Month")]
+        LastMonth,
+        [JsonPropertyName("Last Month-to-date")]
+        LastMonthtodate,
+        [JsonPropertyName("Last Fiscal Quarter")]
+        LastFiscalQuarter,
+        [JsonPropertyName("Last Fiscal Quarter-to-date")]
+        LastFiscalQuartertodate,
+        [JsonPropertyName("Last Fiscal Year")]
+        LastFiscalYear,
+        [JsonPropertyName("Last Fiscal Year-to-date")]
+        LastFiscalYeartodate,
+        [JsonPropertyName("Last Calendar Quarter")]
+        LastCalendarQuarter,
+        [JsonPropertyName("Last Calendar Quarter-to-date")]
+        LastCalendarQuartertodate,
+        [JsonPropertyName("Last Calendar Year")]
+        LastCalendarYear,
+        [JsonPropertyName("Last Calendar Year-to-date")]
+        LastCalendarYeartodate,
+        [JsonPropertyName("Next Week")]
+        NextWeek,
+        [JsonPropertyName("Next 4 Weeks")]
+        Next4Weeks,
+        [JsonPropertyName("Next Month")]
+        NextMonth,
+        [JsonPropertyName("Next Fiscal Quarter")]
+        NextFiscalQuarter,
+        [JsonPropertyName("Next Fiscal Year")]
+        NextFiscalYear,
+        [JsonPropertyName("Next Calendar Quarter")]
+        NextCalendarQuarter,
+        [JsonPropertyName("Next Calendar Year")]
+        NextCalendarYear,
     }
     public enum SummarizeColumnsByEnum
     {
-        Classes,
-        Customers,
-        Days,
-        Departments,
-        Employees,
-        FiscalQuarter,
-        FiscalYear,
-        Month,
-        ProductsAndServices,
-        Quarter,
+        Unspecified = 0,
         Total,
-        Vendors,
-        Week,
         Year,
+        Quarter,
+        FiscalYear,
+        FiscalQuarter,
+        Month,
+        Week,
+        Days,
+        Customers,
+        Vendors,
+        Employees,
+        Departments,
+        Classes,
+        ProductsAndServices,
     }
     public enum ColumnTypeEnum
     {
+        Unspecified = 0,
         Account,
-        Class,
-        Customer,
-        Department,
-        Employee,
         Money,
-        ProductsAndService,
         Rate,
-        String,
+        Customer,
         Vendor,
+        Employee,
+        ProductsAndService,
+        Department,
+        Class,
+        String,
     }
     public enum RowTypeEnum
     {
-        Data,
+        Unspecified = 0,
         Section,
+        Data,
     }
     public enum TaxRateApplicableOnEnum
     {
+        Unspecified = 0,
+        Sales,
+        Purchase,
         Adjustment,
         Other,
-        Purchase,
-        Sales,
     }
     public class LinkedTxn
     {

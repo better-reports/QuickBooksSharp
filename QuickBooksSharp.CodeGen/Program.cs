@@ -223,7 +223,6 @@ namespace QuickBooksSharp.CodeGen
                                                     .Cast<XmlSchemaFacet>()
                                                     .Select(f => f.Value)
                                                     .Distinct()
-                                                    .OrderBy(f => f)
                                                     .ToArray()
             }).Where(e => e.Fields.Any())
               .ToArray();
@@ -244,6 +243,7 @@ namespace QuickBooksSharp.CodeGen
                     writer.WriteLine($"public enum {e.Name}");
                     writer.WriteLine("{");
 
+                    writer.WriteLine($"Unspecified = 0,");
                     foreach (var name in e.Fields)
                     {
                         string safeName = GetSafePropertyName(name);
