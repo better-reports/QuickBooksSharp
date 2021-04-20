@@ -8,54 +8,119 @@ https://developer.intuit.com/app/developer/qbo/docs/develop
 
 `Install-Package QuickBooksSharp`
 
-### Implemented operations
+- TargetFramework = netstandard2.1
+- The object model is generated via the XSD.
+- Minor version is pinned to version 56
+- Not all operatons are implemented yet. PRs are welcome.
 
-Not all endpoints are fully implemented yet.
+## OAuth authentication
 
-PRs are welcome!
-
-| Endpoint                     | Operation                         | Implemented? |
-| ---------------------------- | --------------------------------- | ------------ |
-| Authentication			   | *                                 | Yes          |
-| Account					   | *                                 | No           |
-| Customer					   | *                                 | No           |
-
-
-### Authenticating and calling the API
-
-All services must be given an access token which can be fetched via the `AuthenticationService`.
-
-###### OAuth authentication
-
+### Generate URL to redirect user for approval of connection:
 ```
 var authService = new AuthenticationService();
-string redirectUrl = authService.GenerateAuthorizationPromptUrl(clientId, redirectUrl, state);
+var scopes = new[] { "com.intuit.quickbooks.accounting" };
+string redirectUrl = "https://myapp.com/quickbooks/authresult"
+string state = Guid.NewGuid().ToString();
+string url = authService.GenerateAuthorizationPromptUrl(clientId, scopes, redirectUrl, state);
 // Redirect the user to redirectUrl so that they can approve the connection
-...
-...
-// Then exchange the code on the redirected url for a token
-var token = await _service.GetOAuthTokenAsync(clientId, clientSecret, "ENTER_CODE_HERE", "ENTER_REDIRECT_URL_HERE");
-... 
-...
-TODO
 ```
 
-### Global settings
+### Exchange code for token
+```
+[HttpGet]
+public async Task<IActionResult> AuthResult(string code, long realmId, string state)
+{
+    //validate state parameter
+    var authService = new AuthenticationService();
+    string clientId = //get from config
+    string clientSecret = //get from config
+    var result = await authService.GetOAuthTokenAsync(clientId, clientSecret, code, redirectUrl);
+    //persit access token and refresh token
+    ...
+}
+```
 
-#### Custom `HttpClient`
+### Refresh token
+```
+var authService = new AuthenticationService();
+var result = await authService.RefreshOAuthTokenAsync(clientId, clientSecret, refreshToken);
+//persit access token and refresh token
+```
 
-You may set a custom `HttpClient`: 
+## Instantiating the DataService
+```
+var dataService = new DataService(accessToken, realmId, useSandbox: true);
+```
 
-`QuickBooksHttpClient.HttpClient = myHttpClient;`
+## Creating / Updating entities
+```
+var result = await dataService.PostAsync(new Customer
+            {
+                DisplayName = "Chandler Bing",
+                Suffix = "Jr",
+                Title = "Mr",
+                MiddleName = "Muriel",
+                FamilyName = "Bing",
+                GivenName = "Chandler",
+            });
+//result.Response if of type Customer
+var customer = result.Response;
 
-#### Rate limit breach behaviour
+//Sparse update some properties
+result = await dataService.PostAsync(new Customer
+            {
+                Id = customer.Id,
+                SyncToken = customer.SyncToken,
+                GivenName = "Ross",
+                sparse = true
+            });
 
-By default, a `QuickBooksException` is thrown when you breach your rate limit.
+//Update all properties
+customer = result.Response;
+customer.FamilyName = "Geller";
+customer.sparse = false;
+result = await dataService.PostAsync(customer);
+```
 
-Alternatively, you can opt-in for QuickBooksSharp to automatically retry after 1 minute:
+## Querying entities
+```
+var result = await dataService.QueryAsync<Customer>("SELECT * FROM Customer")
+//res.Response.Entities if of type Customer[]
+var customers = res.Response.Entities;
+```
 
-`QuickBooksHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;`
+## Querying reports
+```
+var report = await dataService.GetReportAsync("ProfitAndLoss", new()
+            {
+                { "accounting_method", "Accrual" },
+                { "date_macro", "Last Fiscal Year" }
+            });
+string reportName = report.Header.ReportName;
+```
 
-### Verifying webhooks
+## Change Data Capture (CDC)
+```
+var result = await dataService.GetCDCAsync(DateTimeOffset.UtcNow.AddDays(-10), "Customer,Invoice");
+var queryResponses = result.Response.QueryResponse; //type QueryResponse[]
+var customers = queryResponses[0].IntuitObjects.Cast<Customer>();
+var invoices = queryResponses[0].IntuitObjects.Cast<Invoice>();
+```
 
-TODO
+## Verifying webhooks
+```
+[HttpPost]
+[IgnoreAntiforgeryToken]
+[AllowAnonymous]
+public async Task<IActionResult> Webhook()
+{
+    string signature = Request.Headers["intuit-signature"].ToString();
+    string webhookVerifierToken = //get from config
+    string requestBodyJSON = await base.ReadBodyToEndAsync();
+    if (!WebhooksHelper.IsAuthenticWebhook(signature, webhookVerifierToken, requestBodyJSON))
+        return BadRequest();
+        //return HTTP error status
+
+    //Process webhook
+}
+```
