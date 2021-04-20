@@ -106,7 +106,7 @@ string reportName = report.Header.ReportName;
 var result = await dataService.GetCDCAsync(DateTimeOffset.UtcNow.AddDays(-10), "Customer,Invoice");
 var queryResponses = result.Response.QueryResponse; //type QueryResponse[]
 var customers = queryResponses[0].IntuitObjects.Cast<Customer>();
-var invoices = queryResponses[0].IntuitObjects.Cast<Invoice>();
+var invoices = queryResponses[1].IntuitObjects.Cast<Invoice>();
 ```
 
 ## Verifying webhooks
