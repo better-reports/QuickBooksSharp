@@ -65,7 +65,7 @@ var result = await dataService.PostAsync(new Customer
                 FamilyName = "Bing",
                 GivenName = "Chandler",
             });
-//result.Response if of type Customer
+//result.Response is of type Customer
 var customer = result.Response;
 
 //Sparse update some properties
@@ -87,7 +87,7 @@ result = await dataService.PostAsync(customer);
 ## Querying entities
 ```csharp
 var result = await dataService.QueryAsync<Customer>("SELECT * FROM Customer")
-//res.Response.Entities if of type Customer[]
+//res.Response.Entities is of type Customer[]
 var customers = res.Response.Entities;
 ```
 
