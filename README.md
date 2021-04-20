@@ -16,7 +16,7 @@ https://developer.intuit.com/app/developer/qbo/docs/develop
 ## OAuth authentication
 
 ### Generate URL to redirect user for approval of connection:
-```
+```csharp
 var authService = new AuthenticationService();
 var scopes = new[] { "com.intuit.quickbooks.accounting" };
 string redirectUrl = "https://myapp.com/quickbooks/authresult"
@@ -26,7 +26,7 @@ string url = authService.GenerateAuthorizationPromptUrl(clientId, scopes, redire
 ```
 
 ### Exchange code for token
-```
+```csharp
 [HttpGet]
 public async Task<IActionResult> AuthResult(string code, long realmId, string state)
 {
@@ -41,19 +41,19 @@ public async Task<IActionResult> AuthResult(string code, long realmId, string st
 ```
 
 ### Refresh token
-```
+```csharp
 var authService = new AuthenticationService();
 var result = await authService.RefreshOAuthTokenAsync(clientId, clientSecret, refreshToken);
 //persit access token and refresh token
 ```
 
 ## Instantiating the DataService
-```
+```csharp
 var dataService = new DataService(accessToken, realmId, useSandbox: true);
 ```
 
 ## Creating / Updating entities
-```
+```csharp
 var result = await dataService.PostAsync(new Customer
             {
                 DisplayName = "Chandler Bing",
@@ -83,14 +83,14 @@ result = await dataService.PostAsync(customer);
 ```
 
 ## Querying entities
-```
+```csharp
 var result = await dataService.QueryAsync<Customer>("SELECT * FROM Customer")
 //res.Response.Entities if of type Customer[]
 var customers = res.Response.Entities;
 ```
 
 ## Querying reports
-```
+```csharp
 var report = await dataService.GetReportAsync("ProfitAndLoss", new()
             {
                 { "accounting_method", "Accrual" },
@@ -100,7 +100,7 @@ string reportName = report.Header.ReportName;
 ```
 
 ## Change Data Capture (CDC)
-```
+```csharp
 var result = await dataService.GetCDCAsync(DateTimeOffset.UtcNow.AddDays(-10), "Customer,Invoice");
 var queryResponses = result.Response.QueryResponse; //type QueryResponse[]
 var customers = queryResponses[0].IntuitObjects.Cast<Customer>();
@@ -108,7 +108,7 @@ var invoices = queryResponses[0].IntuitObjects.Cast<Invoice>();
 ```
 
 ## Verifying webhooks
-```
+```csharp
 [HttpPost]
 [IgnoreAntiforgeryToken]
 [AllowAnonymous]
