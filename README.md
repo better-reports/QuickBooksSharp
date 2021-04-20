@@ -4,7 +4,7 @@
 
 https://developer.intuit.com/app/developer/qbo/docs/develop
 
-![Build](https://github.com/better-reports/QuickBooksSharp/workflows/Build/badge.svg)
+![Build](https://github.com/better-reports/QuickBooksSharp/actions/workflows/ci.yml/badge.svg)
 
 `Install-Package QuickBooksSharp`
 
