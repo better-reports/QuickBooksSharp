@@ -6,6 +6,8 @@ https://developer.intuit.com/app/developer/qbo/docs/develop
 
 ![Build](https://github.com/better-reports/QuickBooksSharp/actions/workflows/ci.yml/badge.svg)
 
+https://www.nuget.org/packages/QuickBooksSharp/
+
 `Install-Package QuickBooksSharp`
 
 - TargetFramework = netstandard2.1
