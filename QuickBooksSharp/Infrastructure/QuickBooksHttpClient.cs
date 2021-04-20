@@ -35,6 +35,7 @@ namespace QuickBooksSharp
             _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(nameof(QuickBooksSharp), typeof(QuickBooksHttpClient).Assembly.GetName().Version!.ToString()));
             _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(github.com/better-reports/QuickBooksSharp)"));
             _httpClient.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public QuickBooksHttpClient(string? accessToken)
@@ -44,12 +45,7 @@ namespace QuickBooksSharp
 
         public async Task<TResponse> GetAsync<TResponse>(Url url)
         {
-            Func<HttpRequestMessage> makeRequest = () =>
-            {
-                var r = new HttpRequestMessage(HttpMethod.Get, url);
-                r.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                return r;
-            };
+            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Get, url);
             return await this.SendAsync<TResponse>(makeRequest);
         }
 
