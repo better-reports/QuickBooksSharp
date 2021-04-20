@@ -22,6 +22,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       env:
+        QUICKBOOKS_SHARP_CLIENT_ID: ${{ secrets.QUICKBOOKS_SHARP_CLIENT_ID }}
+        QUICKBOOKS_SHARP_CLIENT_SECRET: ${{ secrets.QUICKBOOKS_SHARP_CLIENT_SECRET }}
+        QUICKBOOKS_SHARP_OAUTH_REDIRECT_URI: ${{ secrets.QUICKBOOKS_SHARP_OAUTH_REDIRECT_URI }}
         QUICKBOOKS_SHARP_REFRESH_TOKEN: ${{ secrets.QUICKBOOKS_SHARP_REFRESH_TOKEN }}
         QUICKBOOKS_SHARP_REALMID: ${{ secrets.QUICKBOOKS_SHARP_REALMID }}
       run: dotnet test --no-restore --verbosity normal
