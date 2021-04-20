@@ -1,6 +1,7 @@
 name: Build Test Publish
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
