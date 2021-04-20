@@ -96,8 +96,8 @@ namespace QuickBooksSharp.Tests
                 .Where(t2 => !new[]
                                 {
                                     typeof(TaxPayment),//Only available on AU/UK companies
-                                    typeof(ExchangeRate),//Message=Error processing query
-                                    typeof(CustomerType),//Detail=Dear entity developer, pl implement count query
+                                    typeof(ExchangeRate),//Message=Error processing query https://help.developer.intuit.com/s/question/0D54R00007pirJESAY/the-following-query-results-in-an-error-select-count-from-exchangerateerror-returned-from-api-error-processing-query
+                                    typeof(CustomerType),//Detail=Dear entity developer, pl implement count query https://help.developer.intuit.com/s/question/0D54R00007pirJFSAY/select-count-from-customertype-returns-an-error
                                 }.Contains(t2))
                 .Select(async t =>
             {
@@ -156,6 +156,7 @@ namespace QuickBooksSharp.Tests
             }));
 
             await Task.WhenAll(entities
+                //https://help.developer.intuit.com/s/question/0D54R00007pisJuSAI/taxcode-id-tax-instead-of-numeric-ids
                 .Where(e => e.GetType() != typeof(TaxCode))//id is not numeric but Read endpoint expects number
                 .Select(async e =>
             {
@@ -164,6 +165,87 @@ namespace QuickBooksSharp.Tests
                 Assert.IsNotNull(resOne.Response);
                 Assert.IsNotNull(resOne.Response.Id);
             }));
+        }
+
+        [TestMethod]
+        public async Task GetReport()
+        {
+            var r = await _service.GetReportAsync("ProfitAndLoss", new()
+            {
+                { "accounting_method", "Accrual" },
+                { "date_macro", "Last Fiscal Year" }
+            });
+            Assert.IsNotNull(r);
+            Assert.IsNotNull(r.Header?.ReportName);
+            Assert.IsTrue(r.Rows.Row.Length != 0);
+            Assert.IsTrue(r.Columns.Column.Length != 0);
+        }
+
+        [TestMethod]
+        public async Task GetCDC()
+        {
+            var entityTypes = _entityTypes.Except(new[]
+                                        {
+                                            typeof(Preferences), //deserialization bug https://help.developer.intuit.com/s/question/0D54R00007pirzQSAQ/financexsd-preferencessalesformsprefscustomfield-is-wrong
+                                            typeof(TaxPayment), //UK/AU only
+
+                                            //not all entities are supported by CDC
+                                            typeof(QbdtEntityIdMapping),
+                                            typeof(ConvenienceFeeDetail),
+                                            typeof(EmailDeliveryInfo),
+                                            typeof(Tag),
+                                            typeof(FixedAsset),
+                                            typeof(MasterAccount),
+                                            typeof(StatementCharge),
+                                            typeof(JournalCode),
+                                            typeof(SalesOrder),
+                                            typeof(SalesRep),
+                                            typeof(PriceLevel),
+                                            typeof(PriceLevelPerItem),
+                                            typeof(CustomerMsg),
+                                            typeof(InventorySite),
+                                            typeof(ShipMethod),
+                                            typeof(QbTask),
+                                            typeof(UOM),
+                                            typeof(TemplateName),
+                                            typeof(TDSMetadata),
+                                            typeof(BooleanTypeCustomFieldDefinition),
+                                            typeof(DateTypeCustomFieldDefinition),
+                                            typeof(NumberTypeCustomFieldDefinition),
+                                            typeof(StringTypeCustomFieldDefinition),
+                                            typeof(ChargeCredit),
+                                            typeof(JobType),
+                                            typeof(OtherName),
+                                            typeof(Status),
+                                            typeof(SyncActivity),
+                                            typeof(TaxAgency),
+                                            typeof(TaxClassification),
+                                            typeof(TaxService),
+                                            typeof(User),
+                                            typeof(VendorType),
+                                        })
+                                        .OrderBy(t => t.Name);
+
+            await Task.WhenAll(entityTypes.Select(async t =>
+            {
+                var res = await _service.GetCDCAsync(DateTimeOffset.UtcNow.AddDays(-10), new[] { t.Name });
+                Assert.IsNotNull(res);
+                Assert.IsNotNull(res.Response);
+                Assert.IsTrue(res.Response.QueryResponse.Length == 1);
+                var queryResponse = res.Response.QueryResponse.First();
+                if (queryResponse.IntuitObjects != null)
+                    Assert.IsTrue(queryResponse.IntuitObjects.All(o => o.GetType() == t));
+            }));
+
+            var resAll = await _service.GetCDCAsync(DateTimeOffset.UtcNow.AddDays(-10), entityTypes.Select(t => t.Name));
+            Assert.IsNotNull(resAll);
+            Assert.IsNotNull(resAll.Response);
+            Assert.IsTrue(resAll.Response.QueryResponse.Length == entityTypes.Count());
+            foreach (var i in Enumerable.Zip(resAll.Response.QueryResponse, entityTypes))
+            {
+                if (i.First.IntuitObjects != null)
+                    Assert.IsTrue(i.First.IntuitObjects.All(o => o.GetType() == i.Second));
+            }
         }
     }
 }
