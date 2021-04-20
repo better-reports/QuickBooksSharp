@@ -23,6 +23,7 @@ jobs:
     - name: Test
       env:
         QUICKBOOKS_SHARP_REFRESH_TOKEN: ${{ secrets.QUICKBOOKS_SHARP_REFRESH_TOKEN }}
+        QUICKBOOKS_SHARP_REALMID: ${{ secrets.QUICKBOOKS_SHARP_REALMID }}
       run: dotnet test --no-restore --verbosity normal
     - name: Publish to nuget
       env:
