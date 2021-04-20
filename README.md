@@ -19,7 +19,7 @@ https://developer.intuit.com/app/developer/qbo/docs/develop
 ```csharp
 var authService = new AuthenticationService();
 var scopes = new[] { "com.intuit.quickbooks.accounting" };
-string redirectUrl = "https://myapp.com/quickbooks/authresult"
+string redirectUrl = "https://myapp.com/quickbooks/authresult";
 string state = Guid.NewGuid().ToString();
 string url = authService.GenerateAuthorizationPromptUrl(clientId, scopes, redirectUrl, state);
 // Redirect the user to redirectUrl so that they can approve the connection
