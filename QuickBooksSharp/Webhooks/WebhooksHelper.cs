@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace QuickBooksSharp.Webhooks
+namespace QuickBooksSharp
 {
     public class WebhooksHelper
     {
