@@ -146,7 +146,11 @@ namespace QuickBooksSharp.Tests
                         Assert.IsNotNull(res.Response.Entities);
                         Assert.IsNotNull(res.Response.MaxResults);
                         if (res.Response.Entities.FirstOrDefault()?.Id != null)
-                            entities.Enqueue(res.Response.Entities.FirstOrDefault());
+                        {
+                            //Built-in tax code entities can have non numeric id TAX  or NON
+                            //See https://help.developer.intuit.com/s/question/0D74R000004jvUi
+                            entities.Enqueue(res.Response.Entities.FirstOrDefault(i => long.TryParse(i.Id, out _)));
+                        }
                     }
                 }
                 catch (QuickBooksException ex) when (ex.ResponseContent.Contains("Metadata not found for Entity"))
@@ -157,7 +161,6 @@ namespace QuickBooksSharp.Tests
 
             await Task.WhenAll(entities
                 //https://help.developer.intuit.com/s/question/0D54R00007pisJuSAI/taxcode-id-tax-instead-of-numeric-ids
-                .Where(e => e.GetType() != typeof(TaxCode))//id is not numeric but Read endpoint expects number
                 .Select(async e =>
             {
                 var resOne = await _service.GetAsync(e.Id, e.GetType());
