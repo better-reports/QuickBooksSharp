@@ -65,7 +65,7 @@ var result = await dataService.PostAsync(new Customer
                 FamilyName = "Bing",
                 GivenName = "Chandler",
             });
-//result.Response if of type Customer
+//result.Response is of type Customer
 var customer = result.Response;
 
 //Sparse update some properties
@@ -87,7 +87,7 @@ result = await dataService.PostAsync(customer);
 ## Querying entities
 ```csharp
 var result = await dataService.QueryAsync<Customer>("SELECT * FROM Customer")
-//res.Response.Entities if of type Customer[]
+//res.Response.Entities is of type Customer[]
 var customers = res.Response.Entities;
 ```
 
@@ -106,7 +106,7 @@ string reportName = report.Header.ReportName;
 var result = await dataService.GetCDCAsync(DateTimeOffset.UtcNow.AddDays(-10), "Customer,Invoice");
 var queryResponses = result.Response.QueryResponse; //type QueryResponse[]
 var customers = queryResponses[0].IntuitObjects.Cast<Customer>();
-var invoices = queryResponses[0].IntuitObjects.Cast<Invoice>();
+var invoices = queryResponses[1].IntuitObjects.Cast<Invoice>();
 ```
 
 ## Verifying webhooks
