@@ -13,6 +13,7 @@ namespace QuickBooksSharp.Tests
         private DataService _service;
         private Type[] _entityTypes = typeof(IntuitEntity).Assembly
                                                 .GetExportedTypes()
+                                                .OrderBy(t => t.Name)
                                                 .Where(t => typeof(IntuitEntity).IsAssignableFrom(t) && !t.IsAbstract)
                                                 .Where(t => t != typeof(CompanyInfo))
                                                 .ToArray();
@@ -22,7 +23,10 @@ namespace QuickBooksSharp.Tests
         {
             _service = new DataService(await GetAccessTokenAsync(), TestHelper.RealmId, true);
             //exclude abstract types
-            _entityTypes = _entityTypes.Where(t => !_entityTypes.Any(t2 => t != t2 && t2.IsAssignableTo(t))).ToArray();
+            var excludedTypes = _entityTypes.Where(t => _entityTypes.Any(t2 => t != t2 && t2.IsAssignableTo(t)))
+                                            .Except(new[] { typeof(Account), typeof(Vendor) })
+                                            .ToArray();
+            _entityTypes = _entityTypes.Except(excludedTypes).ToArray();
         }
 
         [TestMethod]

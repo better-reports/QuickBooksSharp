@@ -9,13 +9,14 @@
     <PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
     <Description>Modern .NET Client for QuickBooks Online API</Description>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Nullable>enable</Nullable>
     <PackageTags>quickbooks online intuit qbo accounting</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Flurl" Version="3.0.1" />
+    <PackageReference Include="Macross.Json.Extensions" Version="2.0.0" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 

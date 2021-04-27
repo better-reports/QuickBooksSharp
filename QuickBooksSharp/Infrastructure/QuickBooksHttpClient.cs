@@ -26,7 +26,11 @@ namespace QuickBooksSharp
         {
             Converters =
             {
-                new JsonStringEnumConverter()
+                //new JsonStringEnumConverter(),
+
+                //using community package to fix https://github.com/dotnet/runtime/issues/31081
+                //can revert to out of the box converter once fix (.net 6?)
+                new JsonStringEnumMemberConverter()
             }
         };
 

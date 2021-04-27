@@ -236,6 +236,7 @@ namespace QuickBooksSharp.CodeGen
             using (var writer = new StreamWriter(outFilePath))
             {
                 writer.WriteLine("using System;");
+                writer.WriteLine("using System.Runtime.Serialization;");
                 writer.WriteLine("using System.Text.Json.Serialization;");
                 writer.WriteLine();
                 writer.WriteLine("namespace QuickBooksSharp.Entities");
@@ -251,7 +252,7 @@ namespace QuickBooksSharp.CodeGen
                     {
                         string safeName = GetSafePropertyName(name);
                         if (name != safeName)
-                            writer.WriteLine($"[JsonPropertyName(\"{name}\")]");
+                            writer.WriteLine($"[EnumMember(Value = \"{name}\")]");
                         writer.WriteLine($"{safeName},");
                     }
 

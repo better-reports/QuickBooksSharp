@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace QuickBooksSharp.Entities
@@ -57,19 +58,19 @@ namespace QuickBooksSharp.Entities
         Unspecified = 0,
         Assembly,
         Category,
-        [JsonPropertyName("Fixed Asset")]
+        [EnumMember(Value = "Fixed Asset")]
         FixedAsset,
         Group,
         Inventory,
         NonInventory,
-        [JsonPropertyName("Other Charge")]
+        [EnumMember(Value = "Other Charge")]
         OtherCharge,
         Payment,
         Service,
         Subtotal,
         Discount,
         Tax,
-        [JsonPropertyName("Tax Group")]
+        [EnumMember(Value = "Tax Group")]
         TaxGroup,
         Bundle,
     }
@@ -89,17 +90,17 @@ namespace QuickBooksSharp.Entities
     public enum TaxFormTypeEnum
     {
         Unspecified = 0,
-        [JsonPropertyName("Form C")]
+        [EnumMember(Value = "Form C")]
         FormC,
-        [JsonPropertyName("Form F")]
+        [EnumMember(Value = "Form F")]
         FormF,
-        [JsonPropertyName("Form I")]
+        [EnumMember(Value = "Form I")]
         FormI,
-        [JsonPropertyName("Form H")]
+        [EnumMember(Value = "Form H")]
         FormH,
-        [JsonPropertyName("Form E1")]
+        [EnumMember(Value = "Form E1")]
         FormE1,
-        [JsonPropertyName("Form E2")]
+        [EnumMember(Value = "Form E2")]
         FormE2,
     }
     public enum EntityTypeEnum
@@ -147,32 +148,32 @@ namespace QuickBooksSharp.Entities
     {
         Unspecified = 0,
         Bank,
-        [JsonPropertyName("Accounts Receivable")]
+        [EnumMember(Value = "Accounts Receivable")]
         AccountsReceivable,
-        [JsonPropertyName("Other Current Asset")]
+        [EnumMember(Value = "Other Current Asset")]
         OtherCurrentAsset,
-        [JsonPropertyName("Fixed Asset")]
+        [EnumMember(Value = "Fixed Asset")]
         FixedAsset,
-        [JsonPropertyName("Other Asset")]
+        [EnumMember(Value = "Other Asset")]
         OtherAsset,
-        [JsonPropertyName("Accounts Payable")]
+        [EnumMember(Value = "Accounts Payable")]
         AccountsPayable,
-        [JsonPropertyName("Credit Card")]
+        [EnumMember(Value = "Credit Card")]
         CreditCard,
-        [JsonPropertyName("Other Current Liability")]
+        [EnumMember(Value = "Other Current Liability")]
         OtherCurrentLiability,
-        [JsonPropertyName("Long Term Liability")]
+        [EnumMember(Value = "Long Term Liability")]
         LongTermLiability,
         Equity,
         Income,
-        [JsonPropertyName("Cost of Goods Sold")]
+        [EnumMember(Value = "Cost of Goods Sold")]
         CostofGoodsSold,
         Expense,
-        [JsonPropertyName("Other Income")]
+        [EnumMember(Value = "Other Income")]
         OtherIncome,
-        [JsonPropertyName("Other Expense")]
+        [EnumMember(Value = "Other Expense")]
         OtherExpense,
-        [JsonPropertyName("Non-Posting")]
+        [EnumMember(Value = "Non-Posting")]
         NonPosting,
     }
     public enum TaxRateDisplayTypeEnum
@@ -706,13 +707,13 @@ namespace QuickBooksSharp.Entities
         Sent,
         Viewed,
         Paid,
-        [JsonPropertyName("Delivery Error")]
+        [EnumMember(Value = "Delivery Error")]
         DeliveryError,
         Updated,
         Error,
         Accepted,
         Rejected,
-        [JsonPropertyName("Sent With ICN Error")]
+        [EnumMember(Value = "Sent With ICN Error")]
         SentWithICNError,
         Delivered,
         Disputed,
@@ -1139,7 +1140,7 @@ namespace QuickBooksSharp.Entities
         Unspecified = 0,
         Image,
         Signature,
-        [JsonPropertyName("Contact Photo")]
+        [EnumMember(Value = "Contact Photo")]
         ContactPhoto,
         Receipt,
         Document,
@@ -1170,12 +1171,12 @@ namespace QuickBooksSharp.Entities
     public enum DeliveryErrorTypeEnum
     {
         Unspecified = 0,
-        [JsonPropertyName("Missing Info")]
+        [EnumMember(Value = "Missing Info")]
         MissingInfo,
         Undeliverable,
-        [JsonPropertyName("Delivery Server Down")]
+        [EnumMember(Value = "Delivery Server Down")]
         DeliveryServerDown,
-        [JsonPropertyName("Bounced Email")]
+        [EnumMember(Value = "Bounced Email")]
         BouncedEmail,
     }
     public enum EmailAddressTypeEnum
@@ -1573,11 +1574,11 @@ namespace QuickBooksSharp.Entities
     public enum CISRateEnum
     {
         Unspecified = 0,
-        [JsonPropertyName("CIS gross rate (0%)")]
+        [EnumMember(Value = "CIS gross rate (0%)")]
         CISgrossrate0,
-        [JsonPropertyName("CIS standard rate (20%)")]
+        [EnumMember(Value = "CIS standard rate (20%)")]
         CISstandardrate20,
-        [JsonPropertyName("CIS higher rate (30%)")]
+        [EnumMember(Value = "CIS higher rate (30%)")]
         CIShigherrate30,
     }
     public enum JobStatusEnum
@@ -1626,7 +1627,7 @@ namespace QuickBooksSharp.Entities
         update,
         revert,
         delete,
-        [JsonPropertyName("void")]
+        [EnumMember(Value = "void")]
         @void,
         send,
         merge,
@@ -1649,68 +1650,68 @@ namespace QuickBooksSharp.Entities
         Unspecified = 0,
         All,
         Today,
-        [JsonPropertyName("This Week")]
+        [EnumMember(Value = "This Week")]
         ThisWeek,
-        [JsonPropertyName("This Week-to-date")]
+        [EnumMember(Value = "This Week-to-date")]
         ThisWeektodate,
-        [JsonPropertyName("This Month")]
+        [EnumMember(Value = "This Month")]
         ThisMonth,
-        [JsonPropertyName("This Month-to-date")]
+        [EnumMember(Value = "This Month-to-date")]
         ThisMonthtodate,
-        [JsonPropertyName("This Fiscal Quarter")]
+        [EnumMember(Value = "This Fiscal Quarter")]
         ThisFiscalQuarter,
-        [JsonPropertyName("This Fiscal Quarter-to-date")]
+        [EnumMember(Value = "This Fiscal Quarter-to-date")]
         ThisFiscalQuartertodate,
-        [JsonPropertyName("This Fiscal Year")]
+        [EnumMember(Value = "This Fiscal Year")]
         ThisFiscalYear,
-        [JsonPropertyName("This Fiscal Year-to-date")]
+        [EnumMember(Value = "This Fiscal Year-to-date")]
         ThisFiscalYeartodate,
-        [JsonPropertyName("This Calendar Quarter")]
+        [EnumMember(Value = "This Calendar Quarter")]
         ThisCalendarQuarter,
-        [JsonPropertyName("This Calendar Quarter-to-date")]
+        [EnumMember(Value = "This Calendar Quarter-to-date")]
         ThisCalendarQuartertodate,
-        [JsonPropertyName("This Calendar Year")]
+        [EnumMember(Value = "This Calendar Year")]
         ThisCalendarYear,
-        [JsonPropertyName("This Calendar Year-to-date")]
+        [EnumMember(Value = "This Calendar Year-to-date")]
         ThisCalendarYeartodate,
         Yesterday,
-        [JsonPropertyName("Last Week")]
+        [EnumMember(Value = "Last Week")]
         LastWeek,
-        [JsonPropertyName("Last Week-to-date")]
+        [EnumMember(Value = "Last Week-to-date")]
         LastWeektodate,
-        [JsonPropertyName("Last Month")]
+        [EnumMember(Value = "Last Month")]
         LastMonth,
-        [JsonPropertyName("Last Month-to-date")]
+        [EnumMember(Value = "Last Month-to-date")]
         LastMonthtodate,
-        [JsonPropertyName("Last Fiscal Quarter")]
+        [EnumMember(Value = "Last Fiscal Quarter")]
         LastFiscalQuarter,
-        [JsonPropertyName("Last Fiscal Quarter-to-date")]
+        [EnumMember(Value = "Last Fiscal Quarter-to-date")]
         LastFiscalQuartertodate,
-        [JsonPropertyName("Last Fiscal Year")]
+        [EnumMember(Value = "Last Fiscal Year")]
         LastFiscalYear,
-        [JsonPropertyName("Last Fiscal Year-to-date")]
+        [EnumMember(Value = "Last Fiscal Year-to-date")]
         LastFiscalYeartodate,
-        [JsonPropertyName("Last Calendar Quarter")]
+        [EnumMember(Value = "Last Calendar Quarter")]
         LastCalendarQuarter,
-        [JsonPropertyName("Last Calendar Quarter-to-date")]
+        [EnumMember(Value = "Last Calendar Quarter-to-date")]
         LastCalendarQuartertodate,
-        [JsonPropertyName("Last Calendar Year")]
+        [EnumMember(Value = "Last Calendar Year")]
         LastCalendarYear,
-        [JsonPropertyName("Last Calendar Year-to-date")]
+        [EnumMember(Value = "Last Calendar Year-to-date")]
         LastCalendarYeartodate,
-        [JsonPropertyName("Next Week")]
+        [EnumMember(Value = "Next Week")]
         NextWeek,
-        [JsonPropertyName("Next 4 Weeks")]
+        [EnumMember(Value = "Next 4 Weeks")]
         Next4Weeks,
-        [JsonPropertyName("Next Month")]
+        [EnumMember(Value = "Next Month")]
         NextMonth,
-        [JsonPropertyName("Next Fiscal Quarter")]
+        [EnumMember(Value = "Next Fiscal Quarter")]
         NextFiscalQuarter,
-        [JsonPropertyName("Next Fiscal Year")]
+        [EnumMember(Value = "Next Fiscal Year")]
         NextFiscalYear,
-        [JsonPropertyName("Next Calendar Quarter")]
+        [EnumMember(Value = "Next Calendar Quarter")]
         NextCalendarQuarter,
-        [JsonPropertyName("Next Calendar Year")]
+        [EnumMember(Value = "Next Calendar Year")]
         NextCalendarYear,
     }
     public enum SummarizeColumnsByEnum
