@@ -127,7 +127,6 @@ namespace QuickBooksSharp.Tests
                  .Where(t2 => !new[]
                                 {
                                     typeof(TaxPayment),//Only available on AU/UK companies
-                                    typeof(Preferences), //deserialization bug
                                 }.Contains(t2))
                 .Select(async t =>
             {
@@ -189,7 +188,6 @@ namespace QuickBooksSharp.Tests
         {
             var entityTypes = _entityTypes.Except(new[]
                                         {
-                                            typeof(Preferences), //deserialization bug https://help.developer.intuit.com/s/question/0D54R00007pirzQSAQ/financexsd-preferencessalesformsprefscustomfield-is-wrong
                                             typeof(TaxPayment), //UK/AU only
 
                                             //not all entities are supported by CDC

@@ -201,10 +201,13 @@ namespace QuickBooksSharp.CodeGen
                 }
 
                 bool isReferenceType = t.Name == "ReferenceType";
+                bool isCustomFieldDefinitionType = t.Name == "CustomFieldDefinition";
                 return new ClassModel
                 {
                     Name = t.Name,
-                    IsAbstract = t.IsAbstract,
+                    //todo create a custom converter that can deseriaize to the correct CustomFieldDefinition dervived type
+                    //For now, we simply mark the base type as a concrete type, since none of the dervied properties are returned by the API anyway
+                    IsAbstract = isCustomFieldDefinitionType ? false : t.IsAbstract,
                     BaseName = isReferenceType ? null : t.BaseXmlSchemaType?.Name,
                     Properties = pties.ToArray()
 

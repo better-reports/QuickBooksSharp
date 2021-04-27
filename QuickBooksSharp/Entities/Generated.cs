@@ -3123,7 +3123,7 @@ namespace QuickBooksSharp.Entities
         public CustomField[]? CustomField { get; set; }
         public IntuitAnyType? AttachableRefEx { get; set; }
     }
-    public abstract class CustomFieldDefinition : IntuitEntity
+    public class CustomFieldDefinition : IntuitEntity
     {
         public string? EntityType { get; set; }
         public string? Name { get; set; }
