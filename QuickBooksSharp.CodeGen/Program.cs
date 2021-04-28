@@ -99,7 +99,7 @@ namespace QuickBooksSharp.CodeGen
                 "anyURI" => "string",
                 "positiveInteger" => "uint",
                 "boolean" => "bool",
-                "date" => "DateTimeOffset",
+                "date" => "DateTime",
                 "dateTime" => "DateTimeOffset",
                 "anyType" => "object",
                 _ => typeName

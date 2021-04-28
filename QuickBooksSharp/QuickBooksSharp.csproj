@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
     <Description>Modern .NET Client for QuickBooks Online API</Description>
-    <Version>1.1.3</Version>
+    <Version>1.2.0</Version>
     <Nullable>enable</Nullable>
     <PackageTags>quickbooks online intuit qbo accounting</PackageTags>
   </PropertyGroup>
