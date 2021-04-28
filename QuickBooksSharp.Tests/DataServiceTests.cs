@@ -228,6 +228,7 @@ namespace QuickBooksSharp.Tests
                                             typeof(TaxService),
                                             typeof(User),
                                             typeof(VendorType),
+                                            typeof(Currency),
                                         })
                                         .OrderBy(t => t.Name);
 

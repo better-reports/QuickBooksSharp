@@ -40,7 +40,7 @@ namespace QuickBooksSharp
 
         public async Task<IntuitResponse<TEntity>> GetAsync<TEntity>(string id) where TEntity : IntuitEntity
         {
-            var res = await _client.GetAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(typeof(TEntity).Name.ToLowerInvariant())
+            var res = await _client.GetAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TEntity)))
                                                                                  .AppendPathSegment(id));
             return new IntuitResponse<TEntity>
             {
@@ -55,7 +55,7 @@ namespace QuickBooksSharp
 
         public async Task<IntuitResponse<IntuitEntity>> GetAsync(string id, Type entityType)
         {
-            var res = await _client.GetAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(entityType.Name.ToLowerInvariant())
+            var res = await _client.GetAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(GetEntityName(entityType))
                                                                                  .AppendPathSegment(id));
             return new IntuitResponse<IntuitEntity>
             {
@@ -100,7 +100,7 @@ namespace QuickBooksSharp
         /// </summary>
         public async Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e) where TEntity : IntuitEntity
         {
-            var res = await _client.PostAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(typeof(TEntity).Name.ToLowerInvariant()), e);
+            var res = await _client.PostAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TEntity))), e);
             return new IntuitResponse<TEntity>
             {
                 RequestId = res.requestId,
@@ -110,6 +110,14 @@ namespace QuickBooksSharp
                 Fault = res.Fault,
                 Response = (TEntity?)res.IntuitObject
             };
+        }
+
+        private string GetEntityName(Type t)
+        {
+            if (t == typeof(CreditCardPaymentTxn))
+                return "creditcardpayment";
+
+            return t.Name.ToLowerInvariant();
         }
     }
 }
