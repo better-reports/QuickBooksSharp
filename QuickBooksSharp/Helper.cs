@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 namespace QuickBooksSharp
 {
-    public class WebhooksHelper
+    public class Helper
     {
         /// <summary>
         /// Returns whether the webhook request was signed by Intui
@@ -21,6 +22,11 @@ namespace QuickBooksSharp
             var hmacBytes = hmac.ComputeHash(jsonBytes);
             var hash = Convert.ToBase64String(hmacBytes);
             return hash == intuitSignature;
+        }
+
+        public static string SerializeToJSON(object o)
+        {
+            return JsonSerializer.Serialize(o, QuickBooksHttpClient.jsonSerializerOptions);
         }
     }
 }

@@ -174,12 +174,25 @@ namespace QuickBooksSharp.Tests
         }
 
         [TestMethod]
-        public async Task GetReport()
+        public async Task GetProfitAndLossReport()
         {
             var r = await _service.GetReportAsync("ProfitAndLoss", new()
             {
                 { "accounting_method", "Accrual" },
                 { "date_macro", "Last Fiscal Year" }
+            });
+            Assert.IsNotNull(r);
+            Assert.IsNotNull(r.Header?.ReportName);
+            Assert.IsTrue(r.Rows.Row.Length != 0);
+            Assert.IsTrue(r.Columns.Column.Length != 0);
+        }
+
+        [TestMethod]
+        public async Task GetJournalReport()
+        {
+            var r = await _service.GetReportAsync("JournalReport", new()
+            {
+                { "docnum", "1047" }
             });
             Assert.IsNotNull(r);
             Assert.IsNotNull(r.Header?.ReportName);
