@@ -6,7 +6,10 @@ namespace QuickBooksSharp.Tests
     {
         protected async Task<string> GetAccessTokenAsync()
         {
-            return (await new AuthenticationService().RefreshOAuthTokenAsync(TestHelper.ClientId, TestHelper.ClientSecret, TestHelper.RefreshToken)).access_token;
+            var res = await new AuthenticationService().RefreshOAuthTokenAsync(TestHelper.ClientId, TestHelper.ClientSecret, TestHelper.RefreshToken);
+            if (res.refresh_token != TestHelper.RefreshToken)
+                TestHelper.PersistNewRefreshToken(res.refresh_token);
+            return res.access_token;
         }
     }
 }
