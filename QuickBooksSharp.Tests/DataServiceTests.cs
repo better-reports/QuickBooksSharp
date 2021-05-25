@@ -192,7 +192,7 @@ namespace QuickBooksSharp.Tests
         {
             var r = await _service.GetReportAsync("JournalReport", new()
             {
-                { "docnum", "1047" }
+                { "date_macro", "Last Fiscal Year" }
             });
             Assert.IsNotNull(r);
             Assert.IsNotNull(r.Header?.ReportName);
