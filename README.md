@@ -109,6 +109,43 @@ var customers = queryResponses[0].IntuitObjects.Cast<Customer>();
 var invoices = queryResponses[1].IntuitObjects.Cast<Invoice>();
 ```
 
+## Batch
+```csharp
+//Delete 30 bills in a batch
+var bills = (await dataService.QueryAsync<Bill>("SELECT * FROM Bill MAXRESULTS 30")).Response.Entities;
+var response = await dataService.BatchAsync(new IntuitBatchRequest
+{
+    BatchItemRequest = bills.Select(b => new BatchItemRequest
+    {
+        bId = Guid.NewGuid().ToString(),
+        operation = OperationEnum.delete,
+        Bill = new Bill
+        {
+            Id = b.Id,
+            SyncToken = b.SyncToken
+        }
+    }).ToArray()
+});
+
+//Issue multiple queries in a batch
+var response = await dataService.BatchAsync(new IntuitBatchRequest
+{
+    BatchItemRequest = new[]
+    {
+            new BatchItemRequest
+            {
+                bId = Guid.NewGuid().ToString(),
+                Query = "SELECT * FROM Bill MAXRESULTS 30",
+            },
+            new BatchItemRequest
+            {
+                bId = Guid.NewGuid().ToString(),
+                Query = "SELECT * FROM Invoice MAXRESULTS 30",
+            }
+    }
+});
+```
+
 ## Verifying webhooks
 ```csharp
 [HttpPost]
@@ -119,7 +156,7 @@ public async Task<IActionResult> Webhook()
     string signature = Request.Headers["intuit-signature"].ToString();
     string webhookVerifierToken = //get from config
     string requestBodyJSON = await base.ReadBodyToEndAsync();
-    if (!WebhooksHelper.IsAuthenticWebhook(signature, webhookVerifierToken, requestBodyJSON))
+    if (!Helper.IsAuthenticWebhook(signature, webhookVerifierToken, requestBodyJSON))
         return BadRequest();
         //return HTTP error status
 

@@ -63,30 +63,6 @@ namespace QuickBooksSharp
             return await this.SendAsync<TResponse>(makeRequest);
         }
 
-        public async Task<HttpResponseMessage> PostAsync(Url url, object content)
-        {
-            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = new StringContent(JsonSerializer.Serialize(content, jsonSerializerOptions), Encoding.UTF8, "application/json")
-            };
-            return await this.SendAsync(makeRequest);
-        }
-
-        public async Task<HttpResponseMessage> PutAsync(Url url, object content)
-        {
-            Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Put, url)
-            {
-                Content = new StringContent(JsonSerializer.Serialize(content, jsonSerializerOptions), Encoding.UTF8, "application/json")
-            };
-            return await this.SendAsync(makeRequest);
-        }
-
-        public async Task<HttpResponseMessage> DeleteAsync(Url url)
-        {
-            Func<HttpRequestMessage> request = () => new HttpRequestMessage(HttpMethod.Delete, url);
-            return await this.SendAsync(request);
-        }
-
         public async Task<TResponse> SendAsync<TResponse>(Func<HttpRequestMessage> makeRequest)
         {
             var response = await this.SendAsync(makeRequest);

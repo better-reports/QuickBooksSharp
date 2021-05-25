@@ -266,5 +266,28 @@ namespace QuickBooksSharp.Tests
                     Assert.IsTrue(i.First.IntuitObjects.All(o => o.GetType() == i.Second));
             }
         }
+
+        [TestMethod]
+        public async Task BatchQuery()
+        {
+            var response = await _service.BatchAsync(new IntuitBatchRequest
+            {
+                BatchItemRequest = new[]
+                {
+                        new BatchItemRequest
+                        {
+                            bId = Guid.NewGuid().ToString(),
+                            Query = "SELECT * FROM Bill MAXRESULTS 30",
+                        },
+                        new BatchItemRequest
+                        {
+                            bId = Guid.NewGuid().ToString(),
+                            Query = "SELECT * FROM Invoice MAXRESULTS 30",
+                        }
+                }
+            });
+            Assert.IsTrue(response.Response.ElementAt(0).QueryResponse.Bill.Length > 0);
+            Assert.IsTrue(response.Response.ElementAt(1).QueryResponse.Invoice.Length > 0);
+        }
     }
 }

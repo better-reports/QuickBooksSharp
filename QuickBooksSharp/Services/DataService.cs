@@ -95,6 +95,20 @@ namespace QuickBooksSharp
             };
         }
 
+        public async Task<IntuitResponse<BatchItemResponse[]>> BatchAsync(IntuitBatchRequest r)
+        {
+            var res = await _client.PostAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment("batch"), r);
+            return new IntuitResponse<BatchItemResponse[]>
+            {
+                RequestId = res.requestId,
+                Time = res.time,
+                Status = res.status,
+                Warnings = res.Warnings,
+                Fault = res.Fault,
+                Response = res.BatchItemResponse
+            };
+        }
+
         /// <summary>
         /// Create, Update, or SparseUpdate the entity, depending on the value of the 'sparse' property
         /// </summary>

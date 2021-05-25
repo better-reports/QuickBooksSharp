@@ -272,7 +272,10 @@ namespace QuickBooksSharp.CodeGen
                         string safeName = GetSafePropertyName(pty.Name);
                         if (pty.Name != safeName)
                             writer.WriteLine($"[JsonPropertyName(\"{pty.Name}\")]");
-                        string ptyDecl = $"public {GetSafeClassName(pty.TypeName)}";
+                        string ptyDecl = string.Empty;
+                        if (c.Name == "BatchItemRequest")
+                            ptyDecl += pty.Name == "IntuitObject" ? "[JsonIgnore]\r\n" : "[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]\r\n";
+                        ptyDecl += $"public {GetSafeClassName(pty.TypeName)}";
                         if (pty.IsArray)
                             ptyDecl += "[]";
                         if (pty.IsNullable)

@@ -3766,78 +3766,151 @@ namespace QuickBooksSharp.Entities
     }
     public class BatchItemRequest
     {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? bId { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public OperationEnum? operation { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? optionsData { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public RecurringTransaction? RecurringTransaction { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Customer? Customer { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CustomerType? CustomerType { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Employee? Employee { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Vendor? Vendor { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public OtherName? OtherName { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Estimate? Estimate { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public SalesOrder? SalesOrder { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public SalesReceipt? SalesReceipt { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public PurchaseOrder? PurchaseOrder { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Purchase? Purchase { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public BillPayment? BillPayment { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Payment? Payment { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CreditMemo? CreditMemo { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public StatementCharge? StatementCharge { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ChargeCredit? ChargeCredit { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CreditCardPaymentTxn? CreditCardPaymentTxn { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ReimburseCharge? ReimburseCharge { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public PaymentMethod? PaymentMethod { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Term? Term { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public JournalEntry? JournalEntry { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Transfer? Transfer { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Deposit? Deposit { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Class? Class { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TimeActivity? TimeActivity { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Item? Item { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxClassification? TaxClassification { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxCode? TaxCode { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxPayment? TaxPayment { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxReturn? TaxReturn { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxRate? TaxRate { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public VendorCredit? VendorCredit { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public SalesRep? SalesRep { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public InventorySite? InventorySite { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public QbTask? Task { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public UserAlert? UserAlert { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public VendorType? VendorType { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public PriceLevel? PriceLevel { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Company? Company { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CompanyInfo? CompanyInfo { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public FixedAsset? FixedAsset { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public RefundReceipt? RefundReceipt { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Account? Account { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Preferences? Preferences { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Invoice? Invoice { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public EmailDeliveryInfo? EmailDeliveryInfo { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Department? Department { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Bill? Bill { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Attachable? Attachable { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public BooleanTypeCustomFieldDefinition? BooleanTypeCustomFieldDefinition { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CustomFieldDefinition? CustomFieldDefinition { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTypeCustomFieldDefinition? DateTypeCustomFieldDefinition { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public NumberTypeCustomFieldDefinition? NumberTypeCustomFieldDefinition { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public StringTypeCustomFieldDefinition? StringTypeCustomFieldDefinition { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Status? Status { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public SyncActivity? SyncActivity { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Budget? Budget { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxAgency? TaxAgency { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TDSMetadata? TDSMetadata { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CompanyCurrency? CompanyCurrency { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ExchangeRate? ExchangeRate { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public JournalCode? JournalCode { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public QbdtEntityIdMapping? QbdtEntityIdMapping { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public MasterAccount? MasterAccount { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Tag? Tag { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public TaxService? TaxService { get; set; }
+        [JsonIgnore]
         public IntuitEntity? IntuitObject { get => RecurringTransaction ?? Customer ?? CustomerType ?? Employee ?? Vendor ?? OtherName ?? Estimate ?? SalesOrder ?? SalesReceipt ?? PurchaseOrder ?? Purchase ?? BillPayment ?? Payment ?? CreditMemo ?? StatementCharge ?? ChargeCredit ?? CreditCardPaymentTxn ?? ReimburseCharge ?? PaymentMethod ?? Term ?? JournalEntry ?? Transfer ?? Deposit ?? Class ?? TimeActivity ?? Item ?? TaxClassification ?? TaxCode ?? TaxPayment ?? TaxReturn ?? TaxRate ?? VendorCredit ?? SalesRep ?? InventorySite ?? Task ?? UserAlert ?? VendorType ?? PriceLevel ?? Company ?? CompanyInfo ?? FixedAsset ?? RefundReceipt ?? Account ?? Preferences ?? Invoice ?? EmailDeliveryInfo ?? Department ?? Bill ?? Attachable ?? BooleanTypeCustomFieldDefinition ?? CustomFieldDefinition ?? DateTypeCustomFieldDefinition ?? NumberTypeCustomFieldDefinition ?? StringTypeCustomFieldDefinition ?? Status ?? SyncActivity ?? Budget ?? TaxAgency ?? TDSMetadata ?? CompanyCurrency ?? ExchangeRate ?? JournalCode ?? QbdtEntityIdMapping ?? MasterAccount ?? Tag ?? (IntuitEntity?)TaxService; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Query { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ReportQuery { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public CDCQuery? CDCQuery { get; set; }
     }
     public class CDCQuery
