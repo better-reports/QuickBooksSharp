@@ -27,5 +27,7 @@ namespace QuickBooksSharp
         /// </summary>
         [JsonConverter(typeof(NumberTimespanConverter))]
         public TimeSpan x_refresh_token_expires_in { get; set; }
+
+        public string? id_token { get; set; }
     }
 }

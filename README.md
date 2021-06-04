@@ -48,6 +48,13 @@ var result = await authService.RefreshOAuthTokenAsync(clientId, clientSecret, re
 //persit access token and refresh token
 ```
 
+### Get User Info
+```csharp
+var authService = new AuthenticationService();
+var userInfo = await authService.GetUserInfo(accessToken, useSandbox: true);
+//persit access token and refresh token
+```
+
 ## Instantiating the DataService
 ```csharp
 var dataService = new DataService(accessToken, realmId, useSandbox: true);

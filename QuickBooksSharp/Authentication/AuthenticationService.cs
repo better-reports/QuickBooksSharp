@@ -13,6 +13,8 @@ namespace QuickBooksSharp
         private readonly QuickBooksHttpClient _client = new QuickBooksHttpClient(null);
         private const string TOKEN_ENDPOINT_URL = "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer";
         private const string REVOKE_TOKEN_ENDPOINT_URL = "https://developer.api.intuit.com/v2/oauth2/tokens/revoke";
+        private const string USER_INFO_ENDPOINT_URL = "https://accounts.platform.intuit.com/v1/openid_connect/userinfo";
+        private const string USER_INFO_ENDPOINT_SANDBOX_URL = "https://sandbox-accounts.platform.intuit.com/v1/openid_connect/userinfo";
 
         public string GenerateAuthorizationPromptUrl(string clientId, IEnumerable<string> scopes, string redirectUrl, string state)
         {
@@ -23,6 +25,11 @@ namespace QuickBooksSharp
                         .SetQueryParam("response_type", "code")
                         .SetQueryParam("state", state)
                         .ToString();
+        }
+
+        public async Task<UserInfo> GetUserInfo(string accessToken, bool useSandbox)
+        {
+            return await new QuickBooksHttpClient(accessToken).GetAsync<UserInfo>(useSandbox ? USER_INFO_ENDPOINT_SANDBOX_URL : USER_INFO_ENDPOINT_URL);
         }
 
         public async Task<TokenResponse> GetOAuthTokenAsync(string clientId, string clientSecret, string code, string redirectUrl)
