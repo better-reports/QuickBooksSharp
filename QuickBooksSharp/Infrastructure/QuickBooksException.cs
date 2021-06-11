@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 
 namespace QuickBooksSharp
@@ -23,6 +24,12 @@ namespace QuickBooksSharp
         /// HTTP 429
         /// </summary>
         public bool IsRateLimit => (int)Response.StatusCode == 429;
+
+        public string? IntuitTId => GetHeaderValue("intuit_tid");
+
+        public string? QBOVersion => GetHeaderValue("QBO-Version");
+
+        private string? GetHeaderValue(string headerName) => Response.Headers.TryGetValues(headerName, out var values) ? values.FirstOrDefault() : null;
 
         public QuickBooksException(HttpResponseMessage response, string responseContent)
             : base($@"QuickBooks API call failed with code: {response.StatusCode}
