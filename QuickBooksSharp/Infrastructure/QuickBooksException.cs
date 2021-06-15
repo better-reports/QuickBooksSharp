@@ -25,14 +25,15 @@ namespace QuickBooksSharp
         /// </summary>
         public bool IsRateLimit => (int)Response.StatusCode == 429;
 
-        public string? IntuitTId => GetHeaderValue("intuit_tid");
+        public string? IntuitTId => GetHeaderValue(Response, "intuit_tid");
 
-        public string? QBOVersion => GetHeaderValue("QBO-Version");
+        public string? QBOVersion => GetHeaderValue(Response, "QBO-Version");
 
-        private string? GetHeaderValue(string headerName) => Response.Headers.TryGetValues(headerName, out var values) ? values.FirstOrDefault() : null;
+        private static string? GetHeaderValue(HttpResponseMessage r, string headerName) => r.Headers.TryGetValues(headerName, out var values) ? values.FirstOrDefault() : null;
 
         public QuickBooksException(HttpResponseMessage response, string responseContent)
             : base($@"QuickBooks API call failed with code: {response.StatusCode}
+IntuiTId: {GetHeaderValue(response, "intuit_tid")},
 Reason: {response.ReasonPhrase}
 Content: {responseContent}")
         {
