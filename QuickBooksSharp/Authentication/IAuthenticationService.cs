@@ -44,7 +44,7 @@ namespace QuickBooksSharp
         /// </summary>
         /// <param name="clientId">The client id of your QuickBooks application making the request</param>
         /// <param name="clientSecret">The client secret of your QuickBooks application</param>
-        /// <param name="refreshToken">The last refresh token obtained from either <c ref=GetOAuthTokenAsync>GetOAuthTokenAsync</c> or <c ref="RefreshOAuthTokenAsync">RefreshOAuthTokenAsync</c> </param>
+        /// <param name="refreshToken">The last refresh token obtained from either <see cref="GetOAuthTokenAsync"/> or <see cref="RefreshOAuthTokenAsync"/></param>
         /// <returns></returns>
         Task<TokenResponse> RefreshOAuthTokenAsync(string clientId, string clientSecret, string refreshToken);
         /// <summary>
@@ -52,7 +52,7 @@ namespace QuickBooksSharp
         /// </summary>
         /// <param name="clientId">The client id of your QuickBooks application making the request</param>
         /// <param name="clientSecret">The client secret of your QuickBooks application</param>
-        /// <param name="tokenOrRefreshToken">The last access or refresh token obtained from either <c ref=GetOAuthTokenAsync>GetOAuthTokenAsync</c> or <c ref="RefreshOAuthTokenAsync">RefreshOAuthTokenAsync</param>
+        /// <param name="tokenOrRefreshToken">The last access or refresh token obtained from either <see cref="GetOAuthTokenAsync"/> or <see cref="RefreshOAuthTokenAsync"/></param>
         /// <returns></returns>
         Task RevokeOAuthTokenAsync(string clientId, string clientSecret, string tokenOrRefreshToken);
     }
