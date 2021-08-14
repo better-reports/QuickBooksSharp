@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuickBooksSharp
 {
-    public class AuthenticationService
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly QuickBooksHttpClient _client = new QuickBooksHttpClient(null);
         private const string TOKEN_ENDPOINT_URL = "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer";
