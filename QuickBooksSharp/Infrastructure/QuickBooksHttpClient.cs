@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace QuickBooksSharp
 {
-    public class QuickBooksHttpClient
+    public class QuickBooksHttpClient : IQuickBooksHttpClient
     {
         public static RateLimitBreachBehavior RateLimitBreachBehavior { get; set; } = RateLimitBreachBehavior.Throw;
 
-        private static HttpClient _httpClient = new HttpClient(new HttpClientHandler 
-        { 
-            AutomaticDecompression = DecompressionMethods.GZip 
+        private static HttpClient _httpClient = new HttpClient(new HttpClientHandler
+        {
+            AutomaticDecompression = DecompressionMethods.GZip
         });
 
 
