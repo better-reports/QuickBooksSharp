@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace QuickBooksSharp
 {
-    public class DataService : ServiceBase
+    public class DataService : ServiceBase, IDataService
     {
-        public DataService(string accessToken, long realmId, bool useSandbox) 
+        public DataService(string accessToken, long realmId, bool useSandbox)
             : base(accessToken, realmId, useSandbox)
         {
         }
