@@ -23,7 +23,7 @@ namespace QuickBooksSharp
         /// </returns>
         public static Url Build(bool useSandbox, long realmId)
         {
-            string serviceBaseUrl = useSandbox ? SandboxBaseUrl : ProductionBaseUrl;
+            var serviceBaseUrl = useSandbox ? SandboxBaseUrl : ProductionBaseUrl;
 
             return new Url($"{serviceBaseUrl}/v3/company/{realmId}")
                 .SetQueryParam("minorversion", MinorVersion);

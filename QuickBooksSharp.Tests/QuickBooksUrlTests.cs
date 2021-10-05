@@ -8,7 +8,7 @@ namespace QuickBooksSharp.Tests
         [TestMethod]
         public void ShouldCreateSandboxUrl()
         {
-            Flurl.Url url = QuickBooksUrl.Build(true, 123);
+            var url = QuickBooksUrl.Build(true, 123);
 
             Assert.IsNotNull(url);
             Assert.AreEqual(url.Scheme, "https");
@@ -21,7 +21,7 @@ namespace QuickBooksSharp.Tests
         [TestMethod]
         public void ShouldCreateProductionUrl()
         {
-            Flurl.Url url = QuickBooksUrl.Build(false, 123);
+            var url = QuickBooksUrl.Build(false, 123);
 
             Assert.IsNotNull(url);
             Assert.AreEqual(url.Scheme, "https");
