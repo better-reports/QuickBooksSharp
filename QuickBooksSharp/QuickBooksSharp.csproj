@@ -12,7 +12,7 @@
     <Version>1.6.5</Version>
     <Nullable>enable</Nullable>
     <PackageTags>quickbooks online intuit qbo accounting</PackageTags>
-    <PackageReleaseNotes>Added interfaces for QuickBooksHttpClient and DataService</PackageReleaseNotes>
+    <PackageReleaseNotes>Added QuickBooksUrl class to construct QuickBooks Online API Url</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
