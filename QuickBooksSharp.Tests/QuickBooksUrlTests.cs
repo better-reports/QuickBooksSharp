@@ -12,10 +12,6 @@ namespace QuickBooksSharp.Tests
 
             Assert.IsNotNull(url);
             Assert.AreEqual(url.ToUri().AbsoluteUri, "https://sandbox-quickbooks.api.intuit.com/v3/company/123?minorversion=56");
-            Assert.AreEqual(url.Scheme, "https");
-            Assert.AreEqual(url.Host, "sandbox-quickbooks.api.intuit.com");
-            Assert.AreEqual(url.Path, "/v3/company/123");
-            Assert.AreEqual(url.Query, "minorversion=56");
 
         }
 
@@ -26,10 +22,6 @@ namespace QuickBooksSharp.Tests
 
             Assert.IsNotNull(url);
             Assert.AreEqual(url.ToUri().AbsoluteUri, "https://quickbooks.api.intuit.com/v3/company/123?minorversion=56");
-            Assert.AreEqual(url.Scheme, "https");
-            Assert.AreEqual(url.Host, "quickbooks.api.intuit.com");
-            Assert.AreEqual(url.Path, "/v3/company/123");
-            Assert.AreEqual(url.Query, "minorversion=56");
         }
     }
 }
