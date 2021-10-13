@@ -4,6 +4,6 @@ namespace QuickBooksSharp
 {
     public class DataChangeEvent
     {
-        public EntityChanged[] Entities { get; set; } = new EntityChanged[0];
+        public EntityChange[] Entities { get; set; } = default!;
     }
 }

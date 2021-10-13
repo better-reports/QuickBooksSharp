@@ -6,7 +6,7 @@ namespace QuickBooksSharp
     /// <summary>
     /// Information about the entity that changed (customer, Invoice, etc.)
     /// </summary>
-    public class EntityChanged
+    public class EntityChange
     {
         /// <summary>
         /// The name of the entity that changed (customer, Invoice, etc.)
@@ -15,7 +15,7 @@ namespace QuickBooksSharp
         /// <summary>
         /// The ID of the changed entity
         /// </summary>
-        public string Id { get; set; } = string.Empty;
+        public string Id { get; set; } = default!;
         /// <summary>
         /// The type of change
         /// </summary>
