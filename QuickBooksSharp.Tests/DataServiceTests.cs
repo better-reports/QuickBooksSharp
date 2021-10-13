@@ -289,5 +289,18 @@ namespace QuickBooksSharp.Tests
             Assert.IsTrue(response.Response.ElementAt(0).QueryResponse.Bill.Length > 0);
             Assert.IsTrue(response.Response.ElementAt(1).QueryResponse.Invoice.Length > 0);
         }
+
+        [TestMethod]
+        public async Task GetInvoicePDF()
+        {
+            var response = await _service.QueryAsync<Invoice>("SELECT * FROM Invoice MAXRESULTS 1");
+
+            Assert.IsTrue(response.Response.Entities.Length > 0);
+
+            var invoidePdfStream = await _service.GetInvoicePDF(response.Response.Entities[0].Id);
+
+            Assert.IsNotNull(invoidePdfStream);
+            Assert.IsNotNull(invoidePdfStream.Length > 0);
+        }
     }
 }

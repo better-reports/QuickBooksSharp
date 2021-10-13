@@ -2,7 +2,10 @@
 using QuickBooksSharp.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace QuickBooksSharp
@@ -124,6 +127,26 @@ namespace QuickBooksSharp
                 Fault = res.Fault,
                 Response = (TEntity?)res.IntuitObject
             };
+        }
+
+        /// <summary>
+        /// Get an invoice as PDF
+        /// <para>This resource returns the specified object in the response body as an Adobe Portable Document Format (PDF) file. The resulting PDF file is formatted according to custom form styles in the company settings.</para>
+        /// <see href="https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice#get-an-invoice-as-pdf">QBO Documentation</see>
+        /// </summary>
+        /// <param name="invoiceId">Unique identifier for this object</param>
+        /// <returns>This resource returns the specified object in the response body as an Adobe Portable Document Format (PDF) file. The resulting PDF file is formatted according to custom form styles in the company settings.</returns>
+        public async Task<Stream> GetInvoicePDF(string invoiceId)
+        {
+            var url = new Url(_serviceUrl).AppendPathSegment($"/invoice/{invoiceId}/pdf");
+            var res = await _client.SendAsync(() =>
+            {
+                var httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
+                httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/pdf"));
+                return httpRequest;
+            });
+
+            return await res.Content.ReadAsStreamAsync();
         }
 
         private string GetEntityName(Type t)
