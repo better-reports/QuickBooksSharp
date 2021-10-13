@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace QuickBooksSharp
+﻿namespace QuickBooksSharp
 {
     public class DataChangeEvent
     {
