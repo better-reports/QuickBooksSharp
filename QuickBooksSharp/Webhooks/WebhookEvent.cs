@@ -15,19 +15,7 @@ namespace QuickBooksSharp
     /// </remarks>
     public class WebhookEvent
     {
-        public EventNotification[] EventNotifications { get; set; } = new EventNotification[0];
-
-        public readonly static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            Converters =
-            {
-                //new JsonStringEnumConverter(),
-
-                //using community package to fix https://github.com/dotnet/runtime/issues/31081
-                //can revert to out of the box converter once fix (.net 6?)
-                new JsonStringEnumMemberConverter()
-            }
-        };
+        [JsonPropertyName("eventNotifications")]
+        public EventNotification[] EventNotifications { get; set; } = default!;
     }
 }

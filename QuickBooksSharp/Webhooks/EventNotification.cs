@@ -1,8 +1,12 @@
-﻿namespace QuickBooksSharp
+﻿using System.Text.Json.Serialization;
+
+namespace QuickBooksSharp
 {
     public class EventNotification
     {
-        public string RealmId { get; set; } = string.Empty;
-        public DataChangeEvent DataChangeEvent { get; set; } = new DataChangeEvent();
+        [JsonPropertyName("realmId")]
+        public string RealmId { get; set; } = default!;
+        [JsonPropertyName("dataChangeEvent")]
+        public DataChangeEvent DataChangeEvent { get; set; } = default!;
     }
 }

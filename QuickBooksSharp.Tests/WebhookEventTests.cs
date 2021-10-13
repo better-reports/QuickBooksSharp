@@ -42,7 +42,7 @@ namespace QuickBooksSharp.Tests
         [TestMethod]
         public void ShouldDeserializeValidJson()
         {
-            WebhookEvent notification = JsonSerializer.Deserialize<WebhookEvent>(_validNotification, WebhookEvent.JsonSerializerOptions);
+            WebhookEvent notification = JsonSerializer.Deserialize<WebhookEvent>(_validNotification, QuickBooksHttpClient.JsonSerializerOptions);
 
             Assert.IsNotNull(notification);
             Assert.IsNotNull(notification.EventNotifications);

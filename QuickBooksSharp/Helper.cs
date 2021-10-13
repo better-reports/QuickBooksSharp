@@ -26,7 +26,7 @@ namespace QuickBooksSharp
 
         public static string SerializeToJSON(object o)
         {
-            return JsonSerializer.Serialize(o, QuickBooksHttpClient.jsonSerializerOptions);
+            return JsonSerializer.Serialize(o, QuickBooksHttpClient.JsonSerializerOptions);
         }
     }
 }
