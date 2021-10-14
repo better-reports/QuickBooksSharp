@@ -9,10 +9,10 @@
     <PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
     <Description>Modern .NET Client for QuickBooks Online API</Description>
-    <Version>1.6.5</Version>
+    <Version>1.7.0</Version>
     <Nullable>enable</Nullable>
     <PackageTags>quickbooks online intuit qbo accounting</PackageTags>
-    <PackageReleaseNotes>Added QuickBooksUrl class to construct QuickBooks Online API Url</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for Webhooks Notifications</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

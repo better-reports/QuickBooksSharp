@@ -21,7 +21,7 @@ namespace QuickBooksSharp
         });
 
 
-        internal static JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions
+        public readonly static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
         {
             Converters =
             {
@@ -58,7 +58,7 @@ namespace QuickBooksSharp
         {
             Func<HttpRequestMessage> makeRequest = () => new HttpRequestMessage(HttpMethod.Post, url)
             {
-                Content = new StringContent(JsonSerializer.Serialize(content, jsonSerializerOptions), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonSerializer.Serialize(content, JsonSerializerOptions), Encoding.UTF8, "application/json")
             };
             return await this.SendAsync<TResponse>(makeRequest);
         }
@@ -66,7 +66,7 @@ namespace QuickBooksSharp
         public async Task<TResponse> SendAsync<TResponse>(Func<HttpRequestMessage> makeRequest)
         {
             var response = await this.SendAsync(makeRequest);
-            return (await response.Content.ReadFromJsonAsync<TResponse>(jsonSerializerOptions))!;
+            return (await response.Content.ReadFromJsonAsync<TResponse>(JsonSerializerOptions))!;
         }
 
         public async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> makeRequest)
