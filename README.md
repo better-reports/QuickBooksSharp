@@ -167,5 +167,12 @@ public async Task<IActionResult> Webhook()
         //return HTTP error status
 
     //Process webhook
+    WebhookEvent notification = JsonSerializer.Deserialize<WebhookEvent>(requestBodyJSON, QuickBooksHttpClient.JsonSerializerOptions);
 }
+```
+
+## Download Invoice PDF
+```csharp
+    var invoiceId = "1023";
+    var invoidePdfStream = await dataService.GetInvoicePDF(invoiceId);
 ```

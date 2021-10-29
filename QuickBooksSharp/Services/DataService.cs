@@ -129,14 +129,11 @@ namespace QuickBooksSharp
             };
         }
 
-        /// <summary>
-        /// Get an invoice as PDF
-        /// <para>This resource returns the specified object in the response body as an Adobe Portable Document Format (PDF) file. The resulting PDF file is formatted according to custom form styles in the company settings.</para>
-        /// <see href="https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice#get-an-invoice-as-pdf">QBO Documentation</see>
-        /// </summary>
-        /// <param name="invoiceId">Unique identifier for this object</param>
-        /// <returns>This resource returns the specified object in the response body as an Adobe Portable Document Format (PDF) file. The resulting PDF file is formatted according to custom form styles in the company settings.</returns>
-        public async Task<Stream> GetInvoicePDF(string invoiceId)
+        [Obsolete("Use GetInvoicePDFAsync")]
+        public async Task<Stream> GetInvoicePDF(string invoiceId) => await GetInvoicePDFAsync(invoiceId);
+
+        /// <inheritdoc/>
+        public async Task<Stream> GetInvoicePDFAsync(string invoiceId)
         {
             var url = new Url(_serviceUrl).AppendPathSegment($"/invoice/{invoiceId}/pdf");
             var res = await _client.SendAsync(() =>

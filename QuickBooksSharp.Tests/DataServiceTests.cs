@@ -291,13 +291,13 @@ namespace QuickBooksSharp.Tests
         }
 
         [TestMethod]
-        public async Task GetInvoicePDF()
+        public async Task GetInvoicePDFAsync()
         {
             var response = await _service.QueryAsync<Invoice>("SELECT * FROM Invoice MAXRESULTS 1");
 
             Assert.IsTrue(response.Response.Entities.Length > 0);
 
-            var invoidePdfStream = await _service.GetInvoicePDF(response.Response.Entities[0].Id);
+            var invoidePdfStream = await _service.GetInvoicePDFAsync(response.Response.Entities[0].Id);
 
             Assert.IsNotNull(invoidePdfStream);
             Assert.IsNotNull(invoidePdfStream.Length > 0);
