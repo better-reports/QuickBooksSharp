@@ -21,7 +21,8 @@ namespace QuickBooksSharp.Tests
         [TestInitialize]
         public async Task Initialize()
         {
-            _service = new DataService(await GetAccessTokenAsync(), TestHelper.RealmId, true);
+            var accessToken = await GetAccessTokenAsync();
+            _service = new DataService(accessToken, TestHelper.RealmId, true);
             //exclude abstract types
             var excludedTypes = _entityTypes.Where(t => _entityTypes.Any(t2 => t != t2 && t2.IsAssignableTo(t)))
                                             .Except(new[] { typeof(Account), typeof(Vendor) })
@@ -301,6 +302,60 @@ namespace QuickBooksSharp.Tests
 
             Assert.IsNotNull(invoidePdfStream);
             Assert.IsNotNull(invoidePdfStream.Length > 0);
+        }
+
+        [TestMethod]
+        public async Task CreatePaymentAndVoidAsync()
+        {
+            // GET an Open Invoice
+            var invoiceResponse = await _service.QueryAsync<Invoice>(
+                "SELECT * FROM Invoice " +
+                "WHERE Balance > '0' " +
+                "ORDERBY DueDate DESC, Balance DESC " +
+                "MAXRESULTS 1");
+
+            if (invoiceResponse.Response.Entities.Length == 0)
+            {
+                Assert.Fail("No Invoices returned");
+            }
+
+            var invoice = invoiceResponse.Response.Entities[0];
+
+            // Create a Payment for that Invoice
+            var payment = new Payment()
+            {
+                CustomerRef = invoice.CustomerRef,
+                TotalAmt = 1,
+                Line = new[] {
+                    new Line
+                    {
+                        Amount = 1,
+                        LinkedTxn = new LinkedTxn[] { new LinkedTxn
+                        {
+                            TxnId = invoice.Id,
+                            TxnType = $"{QboEntityTypeEnum.INVOICE}"
+                        } }
+                    }
+                },
+                PrivateNote = "Payment made by QuickBooksSharp"
+            };
+
+            var paymentResponse = await _service.PostAsync(payment);
+
+            Assert.IsTrue(paymentResponse.Response != null);
+
+            // Void Payment
+            var voidPayment = new Payment()
+            {
+                Id = paymentResponse.Response.Id,
+                SyncToken = paymentResponse.Response.SyncToken,
+                sparse = true,
+                PrivateNote = "Payment voided by QuickBooksSharp"
+            };
+
+            var voidPaymentResponse = await _service.PostAsync(voidPayment, OperationEnum.@void);
+
+            Assert.IsNotNull(voidPaymentResponse.Response);
         }
     }
 }
