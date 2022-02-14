@@ -112,12 +112,17 @@ namespace QuickBooksSharp
             };
         }
 
-        /// <summary>
-        /// Create, Update, or SparseUpdate the entity, depending on the value of the 'sparse' property
-        /// </summary>
-        public async Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e) where TEntity : IntuitEntity
+        /// <inheritdoc/>
+        public async Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e, OperationEnum include = OperationEnum.Unspecified) where TEntity : IntuitEntity
         {
-            var res = await _client.PostAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TEntity))), e);
+            var url = new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TEntity)));
+
+            if (include != OperationEnum.Unspecified)
+            {
+                url = url.SetQueryParam("include", include);
+            }
+
+            var res = await _client.PostAsync<IntuitResponse>(url, e);
             return new IntuitResponse<TEntity>
             {
                 RequestId = res.requestId,
