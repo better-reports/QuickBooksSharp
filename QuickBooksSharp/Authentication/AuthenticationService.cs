@@ -11,6 +11,10 @@ namespace QuickBooksSharp
     public class AuthenticationService : IAuthenticationService
     {
         private readonly QuickBooksHttpClient _client = new QuickBooksHttpClient(null);
+
+        //TODO: retrieve the endpoints URLs dynamically
+        //See https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-openid-discovery-doc
+
         private const string TOKEN_ENDPOINT_URL = "https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer";
         private const string REVOKE_TOKEN_ENDPOINT_URL = "https://developer.api.intuit.com/v2/oauth2/tokens/revoke";
         private const string USER_INFO_ENDPOINT_URL = "https://accounts.platform.intuit.com/v1/openid_connect/userinfo";
