@@ -1631,6 +1631,7 @@ namespace QuickBooksSharp.Entities
         @void,
         send,
         merge,
+        emailed
     }
     public enum SyncType
     {
