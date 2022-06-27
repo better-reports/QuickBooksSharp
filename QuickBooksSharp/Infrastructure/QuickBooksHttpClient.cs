@@ -85,7 +85,7 @@ namespace QuickBooksSharp
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    var exception = new QuickBooksException(response, await response.Content.ReadAsStringAsync());
+                    var exception = new QuickBooksException(request, response, await response.Content.ReadAsStringAsync());
                     if (isFirstTry && RateLimitBreachBehavior == RateLimitBreachBehavior.WaitAndRetryOnce && exception.IsRateLimit)
                     {
                         isFirstTry = false;

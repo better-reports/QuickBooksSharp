@@ -6,6 +6,8 @@ namespace QuickBooksSharp
 {
     public class QuickBooksException : Exception
     {
+        public HttpRequestMessage Request { get; }
+
         public HttpResponseMessage Response { get; }
 
         public string ResponseContent { get; }
@@ -31,12 +33,13 @@ namespace QuickBooksSharp
 
         private static string? GetHeaderValue(HttpResponseMessage r, string headerName) => r.Headers.TryGetValues(headerName, out var values) ? values.FirstOrDefault() : null;
 
-        public QuickBooksException(HttpResponseMessage response, string responseContent)
-            : base($@"QuickBooks API call failed with code: {response.StatusCode}
+        public QuickBooksException(HttpRequestMessage request, HttpResponseMessage response, string responseContent)
+            : base($@"QuickBooks API call to {request.RequestUri} failed with code: {response.StatusCode}
 IntuiTId: {GetHeaderValue(response, "intuit_tid")},
 Reason: {response.ReasonPhrase}
 Content: {responseContent}")
         {
+            this.Request = request;
             this.Response = response;
             this.ResponseContent = responseContent;
         }
