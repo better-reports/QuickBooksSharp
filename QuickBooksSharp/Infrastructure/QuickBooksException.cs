@@ -31,6 +31,10 @@ namespace QuickBooksSharp
 
         public string? QBOVersion => GetHeaderValue(Response, "QBO-Version");
 
+        public string? ErrorCode => GetHeaderValue(Response, "ErrorCode");
+
+        public string? ErrorCause => GetHeaderValue(Response, "ErrorCause");
+
         private static string? GetHeaderValue(HttpResponseMessage r, string headerName) => r.Headers.TryGetValues(headerName, out var values) ? values.FirstOrDefault() : null;
 
         public QuickBooksException(HttpRequestMessage request, HttpResponseMessage response, string responseContent)
