@@ -9,7 +9,7 @@ namespace QuickBooksSharp
     {
         public const string SandboxBaseUrl = "https://sandbox-quickbooks.api.intuit.com";
         public const string ProductionBaseUrl = "https://quickbooks.api.intuit.com";
-        public const int MinorVersion = 56;
+        public const int MinorVersion = 65;
 
         /// <summary>
         /// Creates the <see cref="Url"/> using the <paramref name="useSandbox"/> and <paramref name="realmId"/> specified.
