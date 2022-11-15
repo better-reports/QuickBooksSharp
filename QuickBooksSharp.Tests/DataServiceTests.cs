@@ -202,6 +202,74 @@ namespace QuickBooksSharp.Tests
         }
 
         [TestMethod]
+        public async Task GetTransactionDetailByAccount()
+        {
+            var includedColumns = new[]
+            {
+                "account_name",
+                "create_by",
+                "create_date",
+                "credit_amt",
+                "credit_home_amt",
+                "currency",
+                "cust_name",
+                "debt_amt",
+                "debt_home_amt",
+                "dept_name",
+                "doc_num",
+                "due_date",
+                "emp_name",
+                "exch_rate",
+                "foreign_net_amount",
+                "foreign_tax_amount",
+                "home_net_amount",
+                "home_tax_amount",
+                "net_amount",
+                "tax_amount",
+                "is_adj",
+                "is_ap_paid",
+                "is_ar_paid",
+                "is_cleared",
+                "item_name",
+                "klass_name",
+                "last_mod_by",
+                "last_mod_date",
+                "memo",
+                "nat_foreign_amount",
+                "nat_foreign_open_bal",
+                "nat_home_open_bal",
+                "nat_open_bal",
+                "olb_status",
+                "pmt_mthd",
+                "quantity",
+                "rate",
+                "split_acc",
+                "subt_nat_home_amount",
+                "subt_nat_amount",
+                "tax_code_name",
+                "tax_type",
+                "tx_date",
+                "txn_type",
+                "vend_name",
+            };
+            var r = await _service.GetReportAsync("TransactionDetailByAccount", new()
+            {
+                { "columns", string.Join(",", includedColumns) },
+                { "transaction_type", "post" },
+                { "groupby", "none" },
+                { "accounting_method", "Cash" },
+                { "sort_by", "create_date" },
+                { "sort_order", "descend" },
+                { "start_date", DateTime.Today.AddMonths(-1).ToString("yyyy-MM-dd") },
+                { "end_date", DateTime.Today.ToString("yyyy-MM-dd") },
+            });
+            Assert.IsNotNull(r);
+            Assert.IsNotNull(r.Header?.ReportName);
+            Assert.IsTrue(r.Columns.Column.Length != 0);
+        }
+
+
+        [TestMethod]
         public async Task GetCDC()
         {
             var entityTypes = _entityTypes.Except(new[]
@@ -261,11 +329,6 @@ namespace QuickBooksSharp.Tests
             Assert.IsNotNull(resAll);
             Assert.IsNotNull(resAll.Response);
             Assert.IsTrue(resAll.Response.QueryResponse.Length == entityTypes.Count());
-            foreach (var i in Enumerable.Zip(resAll.Response.QueryResponse, entityTypes))
-            {
-                if (i.First.IntuitObjects != null)
-                    Assert.IsTrue(i.First.IntuitObjects.All(o => o.GetType() == i.Second));
-            }
         }
 
         [TestMethod]
