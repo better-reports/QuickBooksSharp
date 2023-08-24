@@ -1,6 +1,8 @@
 # QuickBooksSharp
 
-.NET client for QuickBooks Online Accounting API
+Modern, async first, .NET client for QuickBooks Online Accounting API
+
+This project was created because the [official .NET client](https://github.com/intuit/QuickBooks-V3-DotNET-SDK) provided by Intuit is hard to work with and based on outdated .NET patterns.
 
 https://developer.intuit.com/app/developer/qbo/docs/develop
 
