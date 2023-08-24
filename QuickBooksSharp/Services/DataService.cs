@@ -10,11 +10,16 @@ using System.Threading.Tasks;
 
 namespace QuickBooksSharp
 {
-    public class DataService : ServiceBase, IDataService
+    public class DataService : IDataService
     {
-        public DataService(string accessToken, long realmId, bool useSandbox)
-            : base(accessToken, realmId, useSandbox)
+        protected readonly QuickBooksHttpClient _client;
+
+        protected readonly Url _serviceUrl;
+
+        public DataService(string accessToken, long realmId, bool useSandbox, IRunPolicy? runPolicy = null)
         {
+            _client = new QuickBooksHttpClient(accessToken, realmId, runPolicy ?? RunPolicy.DefaultRunPolicy);
+            _serviceUrl = QuickBooksUrl.Build(useSandbox, realmId);
         }
 
         public async Task<IntuitResponse<QueryResponse<TEntity>>> QueryAsync<TEntity>(string query) where TEntity : IntuitEntity

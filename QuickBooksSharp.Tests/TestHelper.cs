@@ -3,7 +3,7 @@
 namespace QuickBooksSharp.Tests
 {
     /// <summary>
-    /// https://developer.intuit.com/app/developer/playground makes it easy to generate values from the varialbes below
+    /// https://developer.intuit.com/app/developer/playground makes it easy to generate values from the variables below
     /// </summary>
     public class TestHelper
     {

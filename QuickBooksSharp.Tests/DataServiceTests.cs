@@ -11,23 +11,51 @@ namespace QuickBooksSharp.Tests
     public class DataServiceTests : ServiceTestBase
     {
         private DataService _service;
-        private Type[] _entityTypes = typeof(IntuitEntity).Assembly
-                                                .GetExportedTypes()
-                                                .OrderBy(t => t.Name)
-                                                .Where(t => typeof(IntuitEntity).IsAssignableFrom(t) && !t.IsAbstract)
-                                                .Where(t => t != typeof(CompanyInfo))
-                                                .ToArray();
+        private readonly Type[] _entityTypes = new[]
+        {
+            typeof(Account),
+            typeof(BillPayment),
+            typeof(Bill),
+            typeof(Budget),
+            typeof(Class),
+            typeof(CompanyCurrency),
+            typeof(CompanyInfo),
+            typeof(CreditCardPayment),
+            typeof(CreditMemo),
+            typeof(Customer),
+            typeof(CustomerType),
+            typeof(Deposit),
+            typeof(Employee),
+            typeof(Estimate),
+            typeof(ExchangeRate),
+            typeof(Invoice),
+            typeof(Item),
+            typeof(JournalEntry),
+            typeof(Department),
+            typeof(PaymentMethod),
+            typeof(Payment),
+            typeof(Preferences),
+            typeof(PurchaseOrder),
+            typeof(Purchase),
+            typeof(RefundReceipt),
+            typeof(ReimburseCharge),
+            typeof(SalesReceipt),
+            typeof(TaxAgency),
+            typeof(TaxClassification),
+            typeof(TaxCode),
+            typeof(TaxRate),
+            typeof(Term),
+            typeof(TimeActivity),
+            typeof(Transfer),
+            typeof(VendorCredit),
+            typeof(Vendor),
+        };
 
         [TestInitialize]
         public async Task Initialize()
         {
             var accessToken = await GetAccessTokenAsync();
             _service = new DataService(accessToken, TestHelper.RealmId, true);
-            //exclude abstract types
-            var excludedTypes = _entityTypes.Where(t => _entityTypes.Any(t2 => t != t2 && t2.IsAssignableTo(t)))
-                                            .Except(new[] { typeof(Account), typeof(Vendor) })
-                                            .ToArray();
-            _entityTypes = _entityTypes.Except(excludedTypes).ToArray();
         }
 
         [TestMethod]
@@ -103,6 +131,7 @@ namespace QuickBooksSharp.Tests
                                     typeof(TaxPayment),//Only available on AU/UK companies
                                     typeof(ExchangeRate),//Message=Error processing query https://help.developer.intuit.com/s/question/0D54R00007pirJESAY/the-following-query-results-in-an-error-select-count-from-exchangerateerror-returned-from-api-error-processing-query
                                     typeof(CustomerType),//Detail=Dear entity developer, pl implement count query https://help.developer.intuit.com/s/question/0D54R00007pirJFSAY/select-count-from-customertype-returns-an-error
+                                    typeof(CompanyInfo),//Total count not returned
                                 }.Contains(t2))
                 .Select(async t =>
             {
@@ -129,10 +158,6 @@ namespace QuickBooksSharp.Tests
         {
             var entities = new ConcurrentQueue<IntuitEntity>();
             await Task.WhenAll(_entityTypes
-                 .Where(t2 => !new[]
-                                {
-                                    typeof(TaxPayment),//Only available on AU/UK companies
-                                }.Contains(t2))
                 .Select(async t =>
             {
                 try

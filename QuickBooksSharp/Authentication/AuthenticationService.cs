@@ -10,7 +10,7 @@ namespace QuickBooksSharp
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly QuickBooksHttpClient _client = new QuickBooksHttpClient(null);
+        private readonly QuickBooksHttpClient _client = new QuickBooksHttpClient(null, null, new NoRetryRunPolicy());
 
         //TODO: retrieve the endpoints URLs dynamically
         //See https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-openid-discovery-doc
@@ -33,7 +33,7 @@ namespace QuickBooksSharp
 
         public async Task<UserInfo> GetUserInfo(string accessToken, bool useSandbox)
         {
-            return await new QuickBooksHttpClient(accessToken).GetAsync<UserInfo>(useSandbox ? USER_INFO_ENDPOINT_SANDBOX_URL : USER_INFO_ENDPOINT_URL);
+            return await new QuickBooksHttpClient(accessToken, null, RunPolicy.DefaultRunPolicy).GetAsync<UserInfo>(useSandbox ? USER_INFO_ENDPOINT_SANDBOX_URL : USER_INFO_ENDPOINT_URL);
         }
 
         public async Task<TokenResponse> GetOAuthTokenAsync(string clientId, string clientSecret, string code, string redirectUrl)

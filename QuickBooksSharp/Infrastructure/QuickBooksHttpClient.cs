@@ -13,7 +13,9 @@ namespace QuickBooksSharp
 {
     public class QuickBooksHttpClient : IQuickBooksHttpClient
     {
-        public static RateLimitBreachBehavior RateLimitBreachBehavior { get; set; } = RateLimitBreachBehavior.Throw;
+        private readonly string? _accessToken;
+        private readonly long? _realmId;
+        private IRunPolicy _runPolicy;
 
         private static HttpClient _httpClient = new HttpClient(new HttpClientHandler
         {
@@ -33,8 +35,6 @@ namespace QuickBooksSharp
             }
         };
 
-        private readonly string? _accessToken;
-
         static QuickBooksHttpClient()
         {
             _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(nameof(QuickBooksSharp), typeof(QuickBooksHttpClient).Assembly.GetName().Version!.ToString()));
@@ -43,9 +43,11 @@ namespace QuickBooksSharp
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public QuickBooksHttpClient(string? accessToken)
+        public QuickBooksHttpClient(string? accessToken, long? realmId, IRunPolicy runPolicy)
         {
             _accessToken = accessToken;
+            _realmId = realmId;
+            _runPolicy = runPolicy;
         }
 
         public async Task<TResponse> GetAsync<TResponse>(Url url)
@@ -71,32 +73,20 @@ namespace QuickBooksSharp
 
         public async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> makeRequest)
         {
-            //we use a request factory to make a new request when a retry is needed
-            //that is because request message cannot be reused
-            bool isFirstTry = true;
-
-        send:
-            using (var request = makeRequest())
+            var response = await this._runPolicy.RunAsync(_realmId, async () =>
             {
-                if (_accessToken != null)
-                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
-
-                var response = await _httpClient.SendAsync(request);
-
-                if (!response.IsSuccessStatusCode)
+                using (var request = makeRequest())
                 {
-                    var exception = new QuickBooksException(request, response, await response.Content.ReadAsStringAsync());
-                    if (isFirstTry && RateLimitBreachBehavior == RateLimitBreachBehavior.WaitAndRetryOnce && exception.IsRateLimit)
-                    {
-                        isFirstTry = false;
-                        await Task.Delay(TimeSpan.FromMinutes(1));
-                        goto send;
-                    }
-                    throw exception;
-                }
+                    if (_accessToken != null)
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
 
-                return response;
-            }
+                    var response = await _httpClient.SendAsync(request);
+                    var ex = response.IsSuccessStatusCode ? null : new QuickBooksException(request, response, await response.Content.ReadAsStringAsync());
+                    return new QuickBooksAPIResponse( response, ex);
+                }
+            });
+
+            return response;
         }
     }
 }
