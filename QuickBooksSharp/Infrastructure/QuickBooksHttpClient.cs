@@ -82,7 +82,11 @@ namespace QuickBooksSharp
 
                     var response = await _httpClient.SendAsync(request);
                     var ex = response.IsSuccessStatusCode ? null : new QuickBooksException(request, response, await response.Content.ReadAsStringAsync());
-                    return new QuickBooksAPIResponse( response, ex);
+
+                    if (ex?.IsRateLimit == true)
+                        RunPolicy.NotifyRateLimt(new RateLimitEvent(_realmId, request.RequestUri));
+
+                    return new QuickBooksAPIResponse(response, ex);
                 }
             });
 
