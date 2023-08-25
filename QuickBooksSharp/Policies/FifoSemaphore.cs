@@ -10,6 +10,8 @@ namespace QuickBooksSharp
 
         private ConcurrentQueue<TaskCompletionSource<bool>> queue = new ConcurrentQueue<TaskCompletionSource<bool>>();
 
+        public int QueueCount => queue.Count;
+
         public FifoSemaphore(int maxConcurrency)
         {
             _semaphore = new SemaphoreSlim(maxConcurrency, maxConcurrency);

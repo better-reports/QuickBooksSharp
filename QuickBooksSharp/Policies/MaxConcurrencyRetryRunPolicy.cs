@@ -13,6 +13,8 @@ namespace QuickBooksSharp
 
         private ConcurrentDictionary<long, FifoSemaphore> _realmIdToQueue = new ConcurrentDictionary<long, FifoSemaphore>();
 
+        public int GetQueueCount(long realmId) => _realmIdToQueue[realmId].QueueCount;
+
         public async Task<HttpResponseMessage> RunAsync(long? realmId, Func<Task<QuickBooksAPIResponse>> getResponseAsync)
         {
             FifoSemaphore? sem = null;
