@@ -1819,7 +1819,11 @@ namespace QuickBooksSharp.Entities
         public bool? SampleFile { get; set; }
         public string? CompanyUserId { get; set; }
         public string? CompanyUserAdminEmail { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? CompanyStartDate { get; set; }
+#else
         public DateTime? CompanyStartDate { get; set; }
+#endif
         public string? EmployerId { get; set; }
         public MonthEnum? FiscalYearStartMonth { get; set; }
         public MonthEnum? TaxYearStartMonth { get; set; }
@@ -1855,7 +1859,11 @@ namespace QuickBooksSharp.Entities
         public bool? SampleFile { get; set; }
         public string? CompanyUserId { get; set; }
         public string? CompanyUserAdminEmail { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? CompanyStartDate { get; set; }
+#else
         public DateTime? CompanyStartDate { get; set; }
+#endif
         public string? EmployerId { get; set; }
         public MonthEnum? FiscalYearStartMonth { get; set; }
         public MonthEnum? TaxYearStartMonth { get; set; }
@@ -1879,7 +1887,11 @@ namespace QuickBooksSharp.Entities
     public class Transaction : IntuitEntity
     {
         public string? DocNumber { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? TxnDate { get; set; }
+#else
         public DateTime? TxnDate { get; set; }
+#endif
         public ReferenceType? DepartmentRef { get; set; }
         public ReferenceType? CurrencyRef { get; set; }
         public decimal? ExchangeRate { get; set; }
@@ -1918,12 +1930,20 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? RemitToRef { get; set; }
         public ReferenceType? ClassRef { get; set; }
         public ReferenceType? SalesTermRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DueDate { get; set; }
+#else
         public DateTime? DueDate { get; set; }
+#endif
         public ReferenceType? SalesRepRef { get; set; }
         public string? PONumber { get; set; }
         public string? FOB { get; set; }
         public ReferenceType? ShipMethodRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? ShipDate { get; set; }
+#else
         public DateTime? ShipDate { get; set; }
+#endif
         public string? TrackingNum { get; set; }
         public GlobalTaxCalculationEnum? GlobalTaxCalculation { get; set; }
         public decimal? TotalAmt { get; set; }
@@ -1971,7 +1991,11 @@ namespace QuickBooksSharp.Entities
         public string? PaymentDetailsMessage { get; set; }
         public ConvenienceFeeDetail? ConvenienceFeeDetail { get; set; }
         public string? InvoiceLinkSecurityCode { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? InvoiceLinkExpiryDate { get; set; }
+#else
         public DateTime? InvoiceLinkExpiryDate { get; set; }
+#endif
         public bool? AutoPayEligible { get; set; }
         public bool? SchedulePayEligible { get; set; }
         public string? ScheduledPaymentId { get; set; }
@@ -1991,9 +2015,17 @@ namespace QuickBooksSharp.Entities
     }
     public class Estimate : SalesTransaction
     {
+#if NET6_0_OR_GREATER
+public DateOnly? ExpirationDate { get; set; }
+#else
         public DateTime? ExpirationDate { get; set; }
+#endif
         public string? AcceptedBy { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? AcceptedDate { get; set; }
+#else
         public DateTime? AcceptedDate { get; set; }
+#endif
         public IntuitAnyType? EstimateEx { get; set; }
     }
     public class EmailDeliveryInfo : IntuitEntity
@@ -2013,7 +2045,11 @@ namespace QuickBooksSharp.Entities
         public ReferenceType GroupItemRef { get; set; } = default!;
         public decimal? Quantity { get; set; }
         public UOMRef? UOMRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
         public Line[]? Line { get; set; }
         public IntuitAnyType? GroupLineDetailEx { get; set; }
     }
@@ -2059,14 +2095,22 @@ namespace QuickBooksSharp.Entities
     }
     public class DiscountLineDetail : DiscountOverride
     {
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
         public ReferenceType? ClassRef { get; set; }
         public ReferenceType? TaxCodeRef { get; set; }
         public IntuitAnyType? DiscountLineDetailEx { get; set; }
     }
     public class DescriptionLineDetail
     {
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
         public ReferenceType? TaxCodeRef { get; set; }
         public IntuitAnyType? DescriptionLineDetailEx { get; set; }
     }
@@ -2082,18 +2126,30 @@ namespace QuickBooksSharp.Entities
         public bool? Active { get; set; }
         public AcquiredAsEnum? AcquiredAs { get; set; }
         public string? PurchaseDesc { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? PurchaseDate { get; set; }
+#else
         public DateTime? PurchaseDate { get; set; }
+#endif
         public decimal? PurchaseCost { get; set; }
         public string? Vendor { get; set; }
         public ReferenceType? AssetAccountRef { get; set; }
         public string? SalesDesc { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? SalesDate { get; set; }
+#else
         public DateTime? SalesDate { get; set; }
+#endif
         public decimal? SalesPrice { get; set; }
         public decimal? SalesExpense { get; set; }
         public string? Location { get; set; }
         public string? PONumber { get; set; }
         public string? SerialNumber { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? WarrantyExpDate { get; set; }
+#else
         public DateTime? WarrantyExpDate { get; set; }
+#endif
         public string? Description { get; set; }
         public string? Notes { get; set; }
         public int? AssetNum { get; set; }
@@ -2119,7 +2175,11 @@ namespace QuickBooksSharp.Entities
     }
     public class SalesItemLineDetail : ItemLineDetail
     {
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
         public decimal? TaxInclusiveAmt { get; set; }
         public decimal? DiscountRate { get; set; }
         public decimal? DiscountAmt { get; set; }
@@ -2203,7 +2263,11 @@ namespace QuickBooksSharp.Entities
         public decimal? NetAmountTaxable { get; set; }
         public decimal? TaxInclusiveAmount { get; set; }
         public decimal? OverrideDeltaAmount { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
         public IntuitAnyType? TaxLineDetailEx { get; set; }
     }
     public class ReimburseLineDetail : ItemLineDetail
@@ -2252,7 +2316,11 @@ namespace QuickBooksSharp.Entities
     public class PaymentLineDetail
     {
         public ReferenceType ItemRef { get; set; } = default!;
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
         public ReferenceType? ClassRef { get; set; }
         public decimal? Balance { get; set; }
         public decimal? HomeBalance { get; set; }
@@ -2262,7 +2330,11 @@ namespace QuickBooksSharp.Entities
     public class SubTotalLineDetail
     {
         public ReferenceType? ItemRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? ServiceDate { get; set; }
+#else
         public DateTime? ServiceDate { get; set; }
+#endif
     }
     public class EntityTypeRef
     {
@@ -2295,7 +2367,11 @@ namespace QuickBooksSharp.Entities
         public string? AcctNumExtn { get; set; }
         public string? BankNum { get; set; }
         public decimal? OpeningBalance { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? OpeningBalanceDate { get; set; }
+#else
         public DateTime? OpeningBalanceDate { get; set; }
+#endif
         public decimal? CurrentBalance { get; set; }
         public decimal? CurrentBalanceWithSubAccounts { get; set; }
         public ReferenceType? CurrencyRef { get; set; }
@@ -2375,7 +2451,11 @@ namespace QuickBooksSharp.Entities
     {
         public ReferenceType? PayerRef { get; set; }
         public ReferenceType? SalesTermRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DueDate { get; set; }
+#else
         public DateTime? DueDate { get; set; }
+#endif
         public PhysicalAddress? RemitToAddr { get; set; }
         public PhysicalAddress? ShipAddr { get; set; }
         public PhysicalAddress? VendorAddr { get; set; }
@@ -2399,8 +2479,16 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? RemitToRef { get; set; }
         public ReferenceType? ARAccountRef { get; set; }
         public ReferenceType? ClassRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DueDate { get; set; }
+#else
         public DateTime? DueDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? BilledDate { get; set; }
+#else
         public DateTime? BilledDate { get; set; }
+#endif
         public decimal? TotalAmt { get; set; }
         public IntuitAnyType? StatementChargeEx { get; set; }
     }
@@ -2518,7 +2606,11 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? DepositToAccountRef { get; set; }
         public ReferenceType? SalesTaxCodeRef { get; set; }
         public ReferenceType? PurchaseTaxCodeRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? InvStartDate { get; set; }
+#else
         public DateTime? InvStartDate { get; set; }
+#endif
         public decimal? BuildPoint { get; set; }
         public bool? PrintGroupedItems { get; set; }
         public bool? SpecialItem { get; set; }
@@ -2604,8 +2696,16 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? ClassRef { get; set; }
         public ReferenceType? ReimbursableInfoRef { get; set; }
         public ReferenceType? SalesTermRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DueDate { get; set; }
+#else
         public DateTime? DueDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? ExpectedDate { get; set; }
+#else
         public DateTime? ExpectedDate { get; set; }
+#endif
         public PhysicalAddress? VendorAddr { get; set; }
         public ReferenceType? ShipTo { get; set; }
         public ReferenceType? DropShipToEntity { get; set; }
@@ -2661,7 +2761,11 @@ namespace QuickBooksSharp.Entities
         public SymbolPositionEnum? SymbolPosition { get; set; }
         public bool? UserDefined { get; set; }
         public decimal? ExchangeRate { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? AsOfDate { get; set; }
+#else
         public DateTime? AsOfDate { get; set; }
+#endif
         public IntuitAnyType? CurrencyEx { get; set; }
     }
     public class CompanyCurrency : IntuitEntity
@@ -2676,7 +2780,11 @@ namespace QuickBooksSharp.Entities
         public string? SourceCurrencyCode { get; set; }
         public string? TargetCurrencyCode { get; set; }
         public decimal? Rate { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? AsOfDate { get; set; }
+#else
         public DateTime? AsOfDate { get; set; }
+#endif
         public IntuitAnyType? ExchangeRateEx { get; set; }
     }
     public class SalesRep : IntuitEntity
@@ -2725,7 +2833,11 @@ namespace QuickBooksSharp.Entities
     public class TimeActivity : IntuitEntity
     {
         public string? TimeZone { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? TxnDate { get; set; }
+#else
         public DateTime? TxnDate { get; set; }
+#endif
         public TimeActivityTypeEnum? NameOf { get; set; }
         public ReferenceType? EmployeeRef { get; set; }
         public ReferenceType? VendorRef { get; set; }
@@ -2779,7 +2891,11 @@ namespace QuickBooksSharp.Entities
         public string? From { get; set; }
         public bool? Active { get; set; }
         public bool? Done { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? ReminderDate { get; set; }
+#else
         public DateTime? ReminderDate { get; set; }
+#endif
         public IntuitAnyType? TaskEx { get; set; }
     }
     public class UserAlert : IntuitEntity
@@ -2790,7 +2906,11 @@ namespace QuickBooksSharp.Entities
         public string? Type { get; set; }
         public DateTimeOffset? ReminderDate { get; set; }
         public DateTimeOffset? ExpireDate { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DueDate { get; set; }
+#else
         public DateTime? DueDate { get; set; }
+#endif
         public string? URL { get; set; }
         public string? Filter { get; set; }
         public NameValue[]? NameValue { get; set; }
@@ -2835,7 +2955,11 @@ namespace QuickBooksSharp.Entities
         public MonthEnum? FirstMonthOfFiscalYear { get; set; }
         public MonthEnum? TaxYearMonth { get; set; }
         public string? TaxForm { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? BookCloseDate { get; set; }
+#else
         public DateTime? BookCloseDate { get; set; }
+#endif
         public ContactInfo[]? OtherContactInfo { get; set; }
         public string? CustomerTerminology { get; set; }
     }
@@ -2850,7 +2974,11 @@ namespace QuickBooksSharp.Entities
         public bool? TrackingOnInventoryAdjustmentEnabled { get; set; }
         public bool? TrackingOnBuildAssemblyEnabled { get; set; }
         public bool? FIFOEnabled { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? FIFOEffectiveDate { get; set; }
+#else
         public DateTime? FIFOEffectiveDate { get; set; }
+#endif
         public bool? RowShelfBinEnabled { get; set; }
         public bool? BarcodeEnabled { get; set; }
     }
@@ -3018,10 +3146,26 @@ namespace QuickBooksSharp.Entities
         public int? RemindDays { get; set; }
         public int? DaysBefore { get; set; }
         public int? MaxOccurrences { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? StartDate { get; set; }
+#else
         public DateTime? StartDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? EndDate { get; set; }
+#else
         public DateTime? EndDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? NextDate { get; set; }
+#else
         public DateTime? NextDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? PreviousDate { get; set; }
+#else
         public DateTime? PreviousDate { get; set; }
+#endif
     }
     public class RecurringInfo
     {
@@ -3032,8 +3176,16 @@ namespace QuickBooksSharp.Entities
     }
     public class OLBTxnDetail
     {
+#if NET6_0_OR_GREATER
+public DateOnly? PostDate { get; set; }
+#else
         public DateTime? PostDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? TxnDate { get; set; }
+#else
         public DateTime? TxnDate { get; set; }
+#endif
         public decimal? Amount { get; set; }
         public string? ReferenceNumber { get; set; }
         public string? TxnStatus { get; set; }
@@ -3044,7 +3196,11 @@ namespace QuickBooksSharp.Entities
         public int? maxResults { get; set; }
         public int? totalCount { get; set; }
         public ReferenceType? AccountId { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? LastPostingDate { get; set; }
+#else
         public DateTime? LastPostingDate { get; set; }
+#endif
         public DateTimeOffset? TxnsDownloadTime { get; set; }
         public OLBTxnDetail[]? OLBTxnDetail { get; set; }
     }
@@ -3068,8 +3224,16 @@ namespace QuickBooksSharp.Entities
     public class Budget : IntuitEntity
     {
         public string? Name { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? StartDate { get; set; }
+#else
         public DateTime? StartDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? EndDate { get; set; }
+#else
         public DateTime? EndDate { get; set; }
+#endif
         public BudgetTypeEnum? BudgetType { get; set; }
         public BudgetEntryTypeEnum? BudgetEntryType { get; set; }
         public bool? Active { get; set; }
@@ -3077,7 +3241,11 @@ namespace QuickBooksSharp.Entities
     }
     public class BudgetDetail
     {
+#if NET6_0_OR_GREATER
+public DateOnly? BudgetDate { get; set; }
+#else
         public DateTime? BudgetDate { get; set; }
+#endif
         public decimal? Amount { get; set; }
         public ReferenceType? AccountRef { get; set; }
         public ReferenceType? CustomerRef { get; set; }
@@ -3103,18 +3271,42 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? RemitToRef { get; set; }
         public ReferenceType? ARAccountRef { get; set; }
         public ReferenceType? ClassRef { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DueDate { get; set; }
+#else
         public DateTime? DueDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? BilledDate { get; set; }
+#else
         public DateTime? BilledDate { get; set; }
+#endif
         public decimal? TotalAmt { get; set; }
         public IntuitAnyType? ChargeCreditEx { get; set; }
     }
     public class TaxReturn : IntuitEntity
     {
         public bool? UpcomingFiling { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? StartDate { get; set; }
+#else
         public DateTime? StartDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? EndDate { get; set; }
+#else
         public DateTime? EndDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? FileDate { get; set; }
+#else
         public DateTime? FileDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? AgencyPaymentDate { get; set; }
+#else
         public DateTime? AgencyPaymentDate { get; set; }
+#endif
         public decimal? AgencyPaymentAmount { get; set; }
         public decimal? NetTaxAmountDue { get; set; }
         public decimal? FlatRateSavingsAmountDue { get; set; }
@@ -3122,14 +3314,22 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? AgencyRef { get; set; }
         public TaxReturnStatusEnum? TaxReturnStatus { get; set; }
         public string? TaxReturnEFilingFailureReason { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? EFileErrorFixByDate { get; set; }
+#else
         public DateTime? EFileErrorFixByDate { get; set; }
+#endif
         public AgencyPaymentMethodEnum? AgencyPaymentMethod { get; set; }
         public string? TaxReturnCode { get; set; }
     }
     public class StatusInfo
     {
         public string? status { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? statusDate { get; set; }
+#else
         public DateTime? statusDate { get; set; }
+#endif
         public string? callToAction { get; set; }
     }
     public class TaxClassification : IntuitEntity
@@ -3143,7 +3343,11 @@ namespace QuickBooksSharp.Entities
     }
     public class TaxPayment : IntuitEntity
     {
+#if NET6_0_OR_GREATER
+public DateOnly? PaymentDate { get; set; }
+#else
         public DateTime? PaymentDate { get; set; }
+#endif
         public ReferenceType? PaymentAccountRef { get; set; }
         public decimal? PaymentAmount { get; set; }
         public string? Description { get; set; }
@@ -3167,7 +3371,11 @@ namespace QuickBooksSharp.Entities
         public CustomFieldTypeEnum Type { get; set; } = default!;
         public string? StringValue { get; set; }
         public bool? BooleanValue { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? DateValue { get; set; }
+#else
         public DateTime? DateValue { get; set; }
+#endif
         public decimal? NumberValue { get; set; }
     }
     public class AttachableRef
@@ -3200,9 +3408,21 @@ namespace QuickBooksSharp.Entities
     }
     public class DateTypeCustomFieldDefinition : CustomFieldDefinition
     {
+#if NET6_0_OR_GREATER
+public DateOnly? DefaultDate { get; set; }
+#else
         public DateTime? DefaultDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? MinDate { get; set; }
+#else
         public DateTime? MinDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? MaxDate { get; set; }
+#else
         public DateTime? MaxDate { get; set; }
+#endif
     }
     public class BooleanTypeCustomFieldDefinition : CustomFieldDefinition
     {
@@ -3395,7 +3615,11 @@ namespace QuickBooksSharp.Entities
         public CreditChargeInfo? CCDetail { get; set; }
         public ReferenceType? PriceLevelRef { get; set; }
         public decimal? Balance { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? OpenBalanceDate { get; set; }
+#else
         public DateTime? OpenBalanceDate { get; set; }
+#endif
         public decimal? BalanceWithJobs { get; set; }
         public decimal? CreditLimit { get; set; }
         public string? AcctNum { get; set; }
@@ -3448,7 +3672,11 @@ namespace QuickBooksSharp.Entities
         public PhysicalAddress[]? OtherAddr { get; set; }
         public string? TaxCountry { get; set; }
         public string? TaxIdentifier { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? TaxIdEffectiveDate { get; set; }
+#else
         public DateTime? TaxIdEffectiveDate { get; set; }
+#endif
         public string? BusinessNumber { get; set; }
         public ReferenceType? ParentRef { get; set; }
         public ReferenceType? VendorTypeRef { get; set; }
@@ -3456,7 +3684,11 @@ namespace QuickBooksSharp.Entities
         public ReferenceType? PrefillAccountRef { get; set; }
         public decimal? Balance { get; set; }
         public decimal? BillRate { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? OpenBalanceDate { get; set; }
+#else
         public DateTime? OpenBalanceDate { get; set; }
+#endif
         public decimal? CreditLimit { get; set; }
         public string? AcctNum { get; set; }
         public bool? Vendor1099 { get; set; }
@@ -3496,10 +3728,22 @@ namespace QuickBooksSharp.Entities
         public PhysicalAddress[]? OtherAddr { get; set; }
         public bool? BillableTime { get; set; }
         public decimal? BillRate { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? BirthDate { get; set; }
+#else
         public DateTime? BirthDate { get; set; }
+#endif
         public gender? Gender { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? HiredDate { get; set; }
+#else
         public DateTime? HiredDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? ReleasedDate { get; set; }
+#else
         public DateTime? ReleasedDate { get; set; }
+#endif
         public TimeEntryUsedForPaychecksEnum? UseTimeEntry { get; set; }
         public IntuitAnyType? EmployeeEx { get; set; }
         public decimal? CostRate { get; set; }
@@ -3507,9 +3751,21 @@ namespace QuickBooksSharp.Entities
     public class JobInfo
     {
         public JobStatusEnum? Status { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? StartDate { get; set; }
+#else
         public DateTime? StartDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? ProjectedEndDate { get; set; }
+#else
         public DateTime? ProjectedEndDate { get; set; }
+#endif
+#if NET6_0_OR_GREATER
+public DateOnly? EndDate { get; set; }
+#else
         public DateTime? EndDate { get; set; }
+#endif
         public string? Description { get; set; }
         public ReferenceType? JobTypeRef { get; set; }
     }
@@ -3546,7 +3802,11 @@ namespace QuickBooksSharp.Entities
         public bool? TaxTrackedOnSales { get; set; }
         public ReferenceType? TaxTrackedOnSalesAccountRef { get; set; }
         public bool? TaxOnTax { get; set; }
+#if NET6_0_OR_GREATER
+public DateOnly? LastFileDate { get; set; }
+#else
         public DateTime? LastFileDate { get; set; }
+#endif
         public IntuitAnyType? TaxAgencyExt { get; set; }
         public string? TaxAgencyConfig { get; set; }
     }

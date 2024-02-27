@@ -99,7 +99,7 @@ namespace QuickBooksSharp.CodeGen
                 "anyURI" => "string",
                 "positiveInteger" => "uint",
                 "boolean" => "bool",
-                "date" => "DateTime",
+                "date" => "DateOnly",
                 "dateTime" => "DateTimeOffset",
                 "anyType" => "object",
                 _ => typeName
@@ -272,19 +272,38 @@ namespace QuickBooksSharp.CodeGen
                         string safeName = GetSafePropertyName(pty.Name);
                         if (pty.Name != safeName)
                             writer.WriteLine($"[JsonPropertyName(\"{pty.Name}\")]");
-                        string ptyDecl = string.Empty;
+
                         if (c.Name == "BatchItemRequest")
-                            ptyDecl += pty.Name == "IntuitObject" ? "[JsonIgnore]\r\n" : "[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]\r\n";
-                        ptyDecl += $"public {GetSafeClassName(pty.TypeName)}";
-                        if (pty.IsArray)
-                            ptyDecl += "[]";
-                        if (pty.IsNullable)
-                            ptyDecl += "?";
-                        ptyDecl += $" {safeName} ";
-                        ptyDecl += pty.Code ?? "{ get; set; }";
-                        if (!pty.IsNullable && pty.Code == null)
-                            ptyDecl += " = default!; ";
-                        writer.WriteLine(ptyDecl);
+                            writer.WriteLine(pty.Name == "IntuitObject" ? "[JsonIgnore]" : "[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]");
+
+                        static string GetPropertyDeclaration(PropertyModel pty, string safeName, string typeName)
+                        {
+                            string ptyDecl = string.Empty;
+                            ptyDecl += $"public {typeName}";
+                            if (pty.IsArray)
+                                ptyDecl += "[]";
+                            if (pty.IsNullable)
+                                ptyDecl += "?";
+                            ptyDecl += $" {safeName} ";
+                            ptyDecl += pty.Code ?? "{ get; set; }";
+                            if (!pty.IsNullable && pty.Code == null)
+                                ptyDecl += " = default!; ";
+
+                            return ptyDecl;
+                        }
+                        string typeName = GetSafeClassName(pty.TypeName);
+                        if (typeName != nameof(DateOnly))
+                            writer.WriteLine(GetPropertyDeclaration(pty, safeName, typeName));
+                        else
+                        {
+                            //DateOnly type is only support on .NET6+
+                            writer.WriteLine("#if NET6_0_OR_GREATER");
+                            writer.WriteLine(GetPropertyDeclaration(pty, safeName, typeName));
+                            writer.WriteLine("#else");
+                            writer.WriteLine(GetPropertyDeclaration(pty, safeName, "DateTime"));
+                            writer.WriteLine("#endif");
+                        }
+
                     }
 
                     writer.WriteLine("}");
