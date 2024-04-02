@@ -123,6 +123,43 @@ namespace QuickBooksSharp.Tests
         }
 
         [TestMethod]
+        public async Task CreateDeleteInvoice()
+        {
+            var queryCustomerRes = await _service.QueryAsync<Customer>("SELECT * FROM Customer MAXRESULTS 1");
+            var queryAccountRes = await _service.QueryAsync<Account>("SELECT * FROM Account MAXRESULTS 1");
+
+            var resCreate = await _service.PostAsync(new Invoice
+            {
+                CustomerRef = new ReferenceType
+                {
+                    value = queryCustomerRes.Response.Entities[0].Id
+                },
+                Line = new[]
+                 {
+                     new Line
+                     {
+                         Amount = 100.0m,
+                         DetailType = LineDetailTypeEnum.SalesItemLineDetail,
+                         SalesItemLineDetail = new SalesItemLineDetail
+                         {
+                             ItemAccountRef = new ReferenceType
+                             {
+                                 value = queryAccountRes.Response.Entities[0].Id
+                             }
+                         }
+                     }
+                 }
+            });
+            Assert.IsNotNull(resCreate);
+            Assert.IsNull(resCreate.Fault);
+            Assert.IsNotNull(resCreate.Time);
+            Assert.IsNotNull(resCreate.Response);
+            Assert.IsNotNull(resCreate.Response.Id);
+
+            var resDelete = await _service.PostAsync(new Invoice { Id = resCreate.Response.Id, SyncToken = resCreate.Response.SyncToken }, OperationEnum.delete);
+        }
+
+        [TestMethod]
         public async Task QueryEntitiesCount()
         {
             await Task.WhenAll(_entityTypes

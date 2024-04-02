@@ -118,14 +118,15 @@ namespace QuickBooksSharp
         }
 
         /// <inheritdoc/>
-        public async Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e, OperationEnum include = OperationEnum.Unspecified) where TEntity : IntuitEntity
+        public async Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e, OperationEnum operation = OperationEnum.Unspecified, OperationEnum include = OperationEnum.Unspecified) where TEntity : IntuitEntity
         {
             var url = new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TEntity)));
 
+            if (operation != OperationEnum.Unspecified)
+                url = url.SetQueryParam("operation", operation);
+
             if (include != OperationEnum.Unspecified)
-            {
                 url = url.SetQueryParam("include", include);
-            }
 
             var res = await _client.PostAsync<IntuitResponse>(url, e);
             return new IntuitResponse<TEntity>
