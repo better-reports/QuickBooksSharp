@@ -22,7 +22,7 @@ namespace QuickBooksSharp
         /// <param name="operation">Defines the operation to be executed in QuickBooks.</param>
         /// <param name="include">Defines the "include" query parameter. For example: Required when voiding a payment</param>
         /// <returns></returns>
-        Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e, OperationEnum operation = OperationEnum.Unspecified, OperationEnum include = OperationEnum.Unspecified) where TEntity : IntuitEntity;
+        Task<IntuitResponse<TEntity>> PostAsync<TEntity>(TEntity e, OperationEnum? operation = null, OperationEnum? include = null) where TEntity : IntuitEntity;
 
         Task<IntuitResponse<QueryResponse<TEntity>>> QueryAsync<TEntity>(string query) where TEntity : IntuitEntity;
 
