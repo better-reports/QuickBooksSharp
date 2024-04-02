@@ -478,7 +478,7 @@ namespace QuickBooksSharp.Tests
                 PrivateNote = "Payment voided by QuickBooksSharp"
             };
 
-            var voidPaymentResponse = await _service.PostAsync(voidPayment, OperationEnum.@void);
+            var voidPaymentResponse = await _service.PostAsync(voidPayment, OperationEnum.update, OperationEnum.@void);
 
             Assert.IsNotNull(voidPaymentResponse.Response);
         }
