@@ -92,6 +92,11 @@ customer.sparse = false;
 result = await dataService.PostAsync(customer);
 ```
 
+## Delete entities
+```csharp
+  var result = await dataService.PostAsync(new Invoice { Id = "123", SyncToken = syncToken }, OperationEnum.delete);
+```
+
 ## Querying entities
 ```csharp
 var result = await dataService.QueryAsync<Customer>("SELECT * FROM Customer")
