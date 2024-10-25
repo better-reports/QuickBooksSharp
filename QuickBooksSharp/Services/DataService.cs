@@ -161,6 +161,8 @@ namespace QuickBooksSharp
         {
             if (t == typeof(CreditCardPaymentTxn))
                 return "creditcardpayment";
+            else if (t == typeof(TaxService)) // TaxService doesn't appear to have a GET endpoint
+                return "taxservice/taxcode";
 
             return t.Name.ToLowerInvariant();
         }
