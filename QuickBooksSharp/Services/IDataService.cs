@@ -34,5 +34,7 @@ namespace QuickBooksSharp
         /// <param name="invoiceId">Unique identifier for this object</param>
         /// <returns>This resource returns the specified object in the response body as an Adobe Portable Document Format (PDF) file. The resulting PDF file is formatted according to custom form styles in the company settings.</returns>
         Task<Stream> GetInvoicePDFAsync(string invoiceId);
+
+        Task<TaxService> PostTaxServiceAsync(TaxService taxService);
     }
 }

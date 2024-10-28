@@ -166,5 +166,12 @@ namespace QuickBooksSharp
 
             return t.Name.ToLowerInvariant();
         }
+
+        public async Task<TaxService> PostTaxServiceAsync(TaxService taxService)
+        {
+            var url = new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TaxService)));
+
+            return await _client.PostAsync<TaxService>(url, taxService);
+        }
     }
 }
