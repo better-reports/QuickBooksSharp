@@ -140,8 +140,20 @@ namespace QuickBooksSharp
             };
         }
 
-        [Obsolete("Use GetInvoicePDFAsync")]
-        public async Task<Stream> GetInvoicePDF(string invoiceId) => await GetInvoicePDFAsync(invoiceId);
+        private async Task<TEntity> PostWithEntityResultAsync<TEntity>(TEntity e)
+        {
+            var url = new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TaxService)));
+
+            return await _client.PostAsync<TEntity>(url, e);
+        }
+
+        /// <remarks>
+        /// Unlike other entities, TaxService is a special case where the return type is not an IntuitResponse but the entity itself.
+        /// </remarks>
+        public async Task<TaxService> PostTaxServiceAsync(TaxService taxService)
+        {
+            return await PostWithEntityResultAsync(taxService);
+        }
 
         /// <inheritdoc/>
         public async Task<Stream> GetInvoicePDFAsync(string invoiceId)
@@ -161,17 +173,10 @@ namespace QuickBooksSharp
         {
             if (t == typeof(CreditCardPaymentTxn))
                 return "creditcardpayment";
-            else if (t == typeof(TaxService)) // TaxService doesn't appear to have a GET endpoint
+            else if (t == typeof(TaxService))
                 return "taxservice/taxcode";
 
             return t.Name.ToLowerInvariant();
-        }
-
-        public async Task<TaxService> PostTaxServiceAsync(TaxService taxService)
-        {
-            var url = new Url(_serviceUrl).AppendPathSegment(GetEntityName(typeof(TaxService)));
-
-            return await _client.PostAsync<TaxService>(url, taxService);
         }
     }
 }
