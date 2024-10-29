@@ -22,7 +22,10 @@ namespace QuickBooksSharp.Tests
 
         public static void PersistNewRefreshToken(string refreshToken) => Environment.SetEnvironmentVariable("QUICKBOOKS_SHARP_REFRESH_TOKEN", refreshToken, EnvironmentVariableTarget.User);
 
-        private static string GetEnvVar(string name) => Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.User) ?? Environment.GetEnvironmentVariable(name);
+        private static string GetEnvVar(string name) => 
+            Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.User) 
+                ?? Environment.GetEnvironmentVariable(name)
+                ?? throw new Exception($"Environment {name} is not defined");
 
     }
 }
