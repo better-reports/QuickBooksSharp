@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuickBooksSharp.Entities;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -481,6 +482,58 @@ namespace QuickBooksSharp.Tests
             var voidPaymentResponse = await _service.PostAsync(voidPayment, OperationEnum.update, OperationEnum.@void);
 
             Assert.IsNotNull(voidPaymentResponse.Response);
+        }
+
+        [TestMethod]
+        public async Task CreateTaxCodeAndRateAsync()
+        {
+            var taxAgencyName = "Test Tax Agency";
+            var taxAgency = await GetTaxAgencyAsync(taxAgencyName);
+            taxAgency ??= await CreateTaxAgency(taxAgencyName);
+
+            var guid = Guid.NewGuid();
+            var taxCodeName = $"Test Tax Code {guid}";
+            var taxRateName = $"Test Tax Rate {guid}";
+            var taxRate = 10;
+
+            var taxServiceResponse = await _service.PostTaxServiceAsync(new TaxService
+            {
+                TaxCode = taxCodeName,
+                TaxRateDetails = new List<TaxRateDetails>
+                {
+                    new()
+                    {
+                        RateValue = taxRate,
+                        TaxAgencyId = taxAgency.Id,
+                        TaxRateName = taxRateName
+                    }
+                }.ToArray() 
+            });
+
+            Assert.IsNotNull(taxServiceResponse.TaxCodeId);
+            Assert.AreEqual(taxServiceResponse.TaxCode, taxCodeName);
+
+            Assert.IsNotNull(taxServiceResponse.TaxRateDetails);
+            Assert.AreEqual(taxServiceResponse.TaxRateDetails[0].TaxRateName, taxRateName);
+            Assert.IsNotNull(taxServiceResponse.TaxRateDetails[0].TaxRateId);
+            Assert.AreEqual(taxServiceResponse.TaxRateDetails[0].RateValue, taxRate);
+        }
+
+        private async Task<TaxAgency> GetTaxAgencyAsync(string taxAgencyName)
+        {
+            var result = await _service.QueryAsync<TaxAgency>("SELECT * FROM TaxAgency");
+            var taxAgencies = result.Response.Entities.ToList();
+            return taxAgencies.Find(ta => ta.DisplayName == taxAgencyName);
+        }
+
+        private async Task<TaxAgency> CreateTaxAgency(string taxAgencyName)
+        {
+            var result = await _service.PostAsync(new TaxAgency
+            {
+                DisplayName = taxAgencyName,
+                Active = true
+            });
+            return result.Response;
         }
     }
 }
