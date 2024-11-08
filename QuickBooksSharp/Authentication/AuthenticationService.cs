@@ -24,7 +24,7 @@ namespace QuickBooksSharp
         {
             return new Url("https://appcenter.intuit.com/connect/oauth2")
                         .SetQueryParam("client_id", clientId)
-                        .SetQueryParam("scope", string.Join(' ', scopes))
+                        .SetQueryParam("scope", string.Join(" ", scopes))
                         .SetQueryParam("redirect_uri", redirectUrl)
                         .SetQueryParam("response_type", "code")
                         .SetQueryParam("state", state)
