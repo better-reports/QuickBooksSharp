@@ -12,9 +12,9 @@ https://www.nuget.org/packages/QuickBooksSharp/
 
 `Install-Package QuickBooksSharp`
 
-- TargetFramework = netstandard2.1
+- TargetFramework = netstandard2.0
 - The object model is generated via the XSD.
-- Minor version is currently pinned to version 65
+- Minor version is currently pinned to version 73
 
 ## OAuth authentication
 

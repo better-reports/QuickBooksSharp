@@ -17,12 +17,13 @@ namespace QuickBooksSharp.CodeGen
         /// -Unzip into the xsd/3.{MinorVersion} folder
         /// -Update version local below 
         /// -Update QuickBooksUrl.cs MinorVersion
+        /// -Update README.md
         /// -Run program
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            string version = "3.65";
+            string version = "3.73";
             string currentDir = Directory.GetCurrentDirectory();
             string solutionPath = currentDir.Substring(0, currentDir.IndexOf("QuickBooksSharp"));
             string xsdPath = Path.Combine(solutionPath, $"QuickBooksSharp/QuickBooksSharp.CodeGen/xsd/{version}");

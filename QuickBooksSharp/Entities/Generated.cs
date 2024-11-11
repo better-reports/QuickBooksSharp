@@ -476,6 +476,15 @@ namespace QuickBooksSharp.Entities
         DutiesAndTaxes,
         BalWithGovtAuthorities,
         TaxRoundoffGainOrLoss,
+        OtherDebtors,
+        RentARoomReliefRentsReceived,
+        UkTaxesWithheld,
+        ForeignTaxesIncurred,
+        PremiumsReceived,
+        PremiumsPaid,
+        FinanceCostsRestricted,
+        CarriedForwardRelief,
+        RentARoomReliefReliefClaimed,
     }
     public enum APCreditCardOperationEnum
     {
@@ -1565,6 +1574,7 @@ namespace QuickBooksSharp.Entities
         Vendor,
         VendorCredit,
         CustomFieldDefinition,
+        ChangeOrder,
     }
     public enum ReportBasisEnum
     {
@@ -1908,6 +1918,9 @@ public DateOnly? TxnDate { get; set; }
         public TxnApprovalInfo? TxnApprovalInfo { get; set; }
         public ReferenceType? RecurDataRef { get; set; }
         public RecurringInfo? RecurringInfo { get; set; }
+        public ReferenceType? ProjectRef { get; set; }
+        public decimal? TotalCostAmount { get; set; }
+        public decimal? HomeTotalCostAmount { get; set; }
     }
     public class TxnTaxDetail
     {
@@ -1982,6 +1995,9 @@ public DateOnly? ShipDate { get; set; }
         public bool? AllowOnlinePayPalPayment { get; set; }
         public ETransactionStatusEnum? EInvoiceStatus { get; set; }
         public DateTimeOffset? ECloudStatusTimeStamp { get; set; }
+        public int? CfdiUse { get; set; }
+        public string? Exportation { get; set; }
+        public MXGlobalInfo? GlobalInfo { get; set; }
         public string? invoiceStatus { get; set; }
         public string? callToAction { get; set; }
         public StatusInfo[]? invoiceStatusLog { get; set; }
@@ -2002,6 +2018,12 @@ public DateOnly? InvoiceLinkExpiryDate { get; set; }
         public bool? GratuityEnabled { get; set; }
         public FinancingProductTypeEnum? FinancingProductType { get; set; }
         public SubscriptionPaymentsSettingEnum? SubscriptionPaymentsSetting { get; set; }
+    }
+    public class MXGlobalInfo
+    {
+        public string? Periodicity { get; set; }
+        public string? Month { get; set; }
+        public string? Year { get; set; }
     }
     public class ConvenienceFeeDetail : IntuitEntity
     {
@@ -2081,6 +2103,9 @@ public DateOnly? ServiceDate { get; set; }
         public ItemAdjustmentLineDetail? ItemAdjustmentLineDetail { get; set; }
         public CustomField[]? CustomField { get; set; }
         public IntuitAnyType? LineEx { get; set; }
+        public ReferenceType? ProjectRef { get; set; }
+        public decimal? CostAmount { get; set; }
+        public decimal? HomeCostAmount { get; set; }
     }
     public class Tag : IntuitEntity
     {
@@ -2163,6 +2188,7 @@ public DateOnly? WarrantyExpDate { get; set; }
         public ReferenceType? ItemRef { get; set; }
         public ReferenceType? ClassRef { get; set; }
         public decimal? UnitPrice { get; set; }
+        public decimal? UnitCostPrice { get; set; }
         public decimal? RatePercent { get; set; }
         public ReferenceType? PriceLevelRef { get; set; }
         public MarkupInfo? MarkupInfo { get; set; }
@@ -2847,6 +2873,8 @@ public DateOnly? TxnDate { get; set; }
         public ReferenceType? ItemRef { get; set; }
         public ReferenceType? ClassRef { get; set; }
         public ReferenceType? PayrollItemRef { get; set; }
+        public ReferenceType? ProjectRef { get; set; }
+        public int? TimeChargeId { get; set; }
         public BillableStatusEnum? BillableStatus { get; set; }
         public bool? Taxable { get; set; }
         public decimal? HourlyRate { get; set; }
@@ -3644,6 +3672,7 @@ public DateOnly? OpenBalanceDate { get; set; }
         public string? ClientCompanyId { get; set; }
         public string? ClientEntityId { get; set; }
         public string? Source { get; set; }
+        public string? TaxRegime { get; set; }
     }
     public class User : IntuitEntity
     {
@@ -3747,6 +3776,7 @@ public DateOnly? ReleasedDate { get; set; }
         public TimeEntryUsedForPaychecksEnum? UseTimeEntry { get; set; }
         public IntuitAnyType? EmployeeEx { get; set; }
         public decimal? CostRate { get; set; }
+        public string? Notes { get; set; }
     }
     public class JobInfo
     {
