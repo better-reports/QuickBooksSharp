@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net6.0;</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net8.0;</TargetFrameworks>
 		<Authors>Better Reports</Authors>
 		<Company>Better Reports</Company>
 		<Product></Product>
@@ -9,7 +9,7 @@
 		<PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
 		<Description>Modern .NET Client for QuickBooks Online API</Description>
-		<Version>3.2.0</Version>
+		<Version>3.3.0</Version>
 		<Nullable>enable</Nullable>
 		<PackageTags>quickbooks online intuit qbo accounting</PackageTags>
 		<PackageReleaseNotes>DateOnly properties generated for .NET6+</PackageReleaseNotes>
