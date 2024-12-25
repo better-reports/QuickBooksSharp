@@ -24,8 +24,8 @@ var authService = new AuthenticationService();
 var scopes = new[] { "com.intuit.quickbooks.accounting" };
 string redirectUrl = "https://myapp.com/quickbooks/authresult";
 string state = Guid.NewGuid().ToString();
-string url = authService.GenerateAuthorizationPromptUrl(clientId, scopes, redirectUrl, state);
-// Redirect the user to redirectUrl so that they can approve the connection
+string authUrl = authService.GenerateAuthorizationPromptUrl(clientId, scopes, redirectUrl, state);
+// Redirect the user to authUrl so that they can approve the connection
 ```
 
 ### Exchange code for token
