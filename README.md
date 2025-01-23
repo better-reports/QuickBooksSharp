@@ -6,15 +6,13 @@ This project was created because the [official .NET client](https://github.com/i
 
 https://developer.intuit.com/app/developer/qbo/docs/develop
 
+API version: 3.75
+
 ![Build](https://github.com/better-reports/QuickBooksSharp/actions/workflows/ci.yml/badge.svg)
 
 https://www.nuget.org/packages/QuickBooksSharp/
 
 `Install-Package QuickBooksSharp`
-
-- TargetFramework = netstandard2.0
-- The object model is generated via the XSD.
-- Version is currently pinned to version 3.75
 
 ## OAuth authentication
 
