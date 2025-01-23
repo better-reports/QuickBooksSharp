@@ -10,4 +10,12 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="xsd\3.75\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuickBooksSharp\QuickBooksSharp.csproj" />
+  </ItemGroup>
+
 </Project>

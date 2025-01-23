@@ -696,6 +696,11 @@ namespace QuickBooksSharp.Entities
         Expense,
         Other,
     }
+    public enum PaymentExtendedTypeEnum
+    {
+        Unspecified = 0,
+        Prepayment,
+    }
     public enum BillPaymentTypeEnum
     {
         Unspecified = 0,
@@ -2549,6 +2554,7 @@ public DateOnly? BilledDate { get; set; }
         public decimal? TotalAmt { get; set; }
         public decimal? UnappliedAmt { get; set; }
         public bool? ProcessPayment { get; set; }
+        public PaymentExtendedTypeEnum? PaymentExtendedType { get; set; }
         public IntuitAnyType? PaymentEx { get; set; }
     }
     public class PaymentMethod : IntuitEntity
@@ -3162,6 +3168,7 @@ public DateOnly? FIFOEffectiveDate { get; set; }
         public string? ThumbnailFileAccessUri { get; set; }
         public string? ThumbnailTempDownloadUri { get; set; }
         public IntuitAnyType? AttachableEx { get; set; }
+        public string? documentId { get; set; }
     }
     public class RecurringScheduleInfo
     {

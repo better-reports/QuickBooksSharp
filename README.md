@@ -14,7 +14,7 @@ https://www.nuget.org/packages/QuickBooksSharp/
 
 - TargetFramework = netstandard2.0
 - The object model is generated via the XSD.
-- Minor version is currently pinned to version 73
+- Version is currently pinned to version 3.75
 
 ## OAuth authentication
 

@@ -15,7 +15,6 @@ namespace QuickBooksSharp.CodeGen
         /// <summary>
         /// -Download latest minor version XSD from https://developer.intuit.com/app/developer/qbo/docs/develop/explore-the-quickbooks-online-api/minor-versions
         /// -Unzip into the xsd/3.{MinorVersion} folder
-        /// -Update version local below 
         /// -Update QuickBooksUrl.cs MinorVersion
         /// -Update README.md
         /// -Run program
@@ -23,10 +22,9 @@ namespace QuickBooksSharp.CodeGen
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            string version = "3.73";
             string currentDir = Directory.GetCurrentDirectory();
             string solutionPath = currentDir.Substring(0, currentDir.IndexOf("QuickBooksSharp"));
-            string xsdPath = Path.Combine(solutionPath, $"QuickBooksSharp/QuickBooksSharp.CodeGen/xsd/{version}");
+            string xsdPath = Path.Combine(solutionPath, $"QuickBooksSharp/QuickBooksSharp.CodeGen/xsd/{QuickBooksUrl.Version}");
             string outFilePath = Path.Combine(solutionPath, "QuickBooksSharp/QuickBooksSharp/Entities/Generated.cs");
             var schemas = Directory.GetFiles(xsdPath)
                                      .Select(filePath => XmlSchema.Read(new StringReader(File.ReadAllText(filePath)), null))
