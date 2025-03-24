@@ -76,6 +76,18 @@ namespace QuickBooksSharp.Tests
         }
 
         [TestMethod]
+        public async Task QueryCustomerCount()
+        {
+            var res = await _service.QueryCountAsync("SELECT COUNT(*) FROM Customer");
+            Assert.IsNotNull(res);
+            Assert.IsNull(res.Fault);
+            Assert.IsNotNull(res.Time);
+            Assert.IsNotNull(res.Response);
+            Assert.IsNull(res.Response.Fault);
+            Assert.IsNotNull(res.Response.TotalCount);
+        }
+
+        [TestMethod]
         public async Task CreateUpdateParseUpdateCustomer()
         {
             string uniquifier = DateTime.Now.Ticks.ToString();

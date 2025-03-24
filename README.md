@@ -102,6 +102,11 @@ var result = await dataService.QueryAsync<Customer>("SELECT * FROM Customer")
 var customers = res.Response.Entities;
 ```
 
+```csharp
+var result = await dataService.QueryCountAsync("SELECT COUNT(*) FROM Customer");
+var count = res.Response.TotalCount;
+```
+
 ## Querying reports
 ```csharp
 var report = await dataService.GetReportAsync("ProfitAndLoss", new()

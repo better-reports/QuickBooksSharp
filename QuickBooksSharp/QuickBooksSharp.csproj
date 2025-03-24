@@ -9,7 +9,7 @@
 		<PackageProjectUrl>https://github.com/better-reports/QuickBooksSharp</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/better-reports/QuickBooksSharp</RepositoryUrl>
 		<Description>Modern .NET Client for QuickBooks Online API</Description>
-		<Version>3.4.0</Version>
+		<Version>3.5.0</Version>
 		<Nullable>enable</Nullable>
 		<PackageTags>quickbooks online intuit qbo accounting</PackageTags>
 		<PackageReleaseNotes>DateOnly properties generated for .NET6+</PackageReleaseNotes>

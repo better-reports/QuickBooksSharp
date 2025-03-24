@@ -22,6 +22,25 @@ namespace QuickBooksSharp
             _serviceUrl = QuickBooksUrl.Build(useSandbox, realmId);
         }
 
+        public async Task<IntuitResponse<QueryCountResponse>> QueryCountAsync(string queryCount)
+        {
+            var res = await QueryAsync<IntuitEntity>(queryCount);
+            return new IntuitResponse<QueryCountResponse>
+            {
+                RequestId = res.RequestId,
+                Time = res.Time,
+                Status = res.Status,
+                Warnings = res.Warnings,
+                Fault = res.Fault,
+                Response = new QueryCountResponse
+                {
+                    Fault = res.Response?.Fault,
+                    Warnings = res.Response?.Warnings,
+                    TotalCount = res.Response?.TotalCount
+                }
+            };
+        }
+
         public async Task<IntuitResponse<QueryResponse<TEntity>>> QueryAsync<TEntity>(string query) where TEntity : IntuitEntity
         {
             var res = await _client.GetAsync<IntuitResponse>(new Url(_serviceUrl).AppendPathSegment("query")
