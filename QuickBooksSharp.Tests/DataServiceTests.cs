@@ -188,7 +188,7 @@ namespace QuickBooksSharp.Tests
                 try
                 {
                     string entityName = t == typeof(QbTask) ? "Task" : t.Name;
-                    var res = await _service.QueryAsync<IntuitEntity>($"SELECT COUNT(*) FROM {entityName}");
+                    var res = await _service.QueryCountAsync($"SELECT COUNT(*) FROM {entityName}");
                     Assert.IsNotNull(res);
                     Assert.IsNull(res.Fault);
                     Assert.IsNotNull(res.Time);
@@ -208,6 +208,10 @@ namespace QuickBooksSharp.Tests
         {
             var entities = new ConcurrentQueue<IntuitEntity>();
             await Task.WhenAll(_entityTypes
+                 .Where(t2 => !new[]
+                                {
+                                    typeof(Employee),//API error complaing about inactive employee
+                                }.Contains(t2))
                 .Select(async t =>
             {
                 try
